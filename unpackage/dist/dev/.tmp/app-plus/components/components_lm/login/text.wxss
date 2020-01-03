@@ -1,0 +1,16 @@
+.data-v-4516115e:root{
+	--colMain: #FD8109;
+	--col-333: #333333;
+	--col-666: #666666;
+	--col-999: #999999;
+	--col-fff: #FFFFFF;
+	--col-ccc: #CCCCCC;
+}
+.text-app.data-v-4516115e {
+  width: 750rpx;
+  padding: 160rpx 0;
+  text-align: center;
+  font-size: 48rpx;
+  color: var(--col--333);
+}
+

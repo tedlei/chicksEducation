@@ -12,9 +12,3 @@
   display: flex;
 }
 
-.fx{
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-}
-

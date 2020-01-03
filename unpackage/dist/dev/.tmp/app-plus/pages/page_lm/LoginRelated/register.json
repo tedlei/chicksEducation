@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "top-text": "/components/components_lm/login/text"
+  }
+}

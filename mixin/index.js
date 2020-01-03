@@ -114,6 +114,13 @@ const Api = {
 	pop(param){
 		param = param || {delta: 1}
 		uni.navigateBack(param)
+	},
+	
+	/**
+	 * 消息提示
+	 */
+	message(title){
+		uni.showToast({title,icon:'none'})
 	}
 }
 

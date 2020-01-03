@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/page_lzj/search/search",
-    "pages/page_lm/register/verifyLogin"
+    "pages/page_lm/LoginRelated/verifyLogin",
+    "pages/page_lm/LoginRelated/register"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -17,6 +18,6 @@
     "autoclose": false
   },
   "appname": "chicksEducation",
-  "compilerVersion": "2.4.2",
+  "compilerVersion": "2.4.6",
   "usingComponents": {}
 }

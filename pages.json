@@ -14,9 +14,9 @@
 				
 /* ------------------------------------------------------------------------------------- */
 		{
-			"path":"pages/page_lm/register/verifyLogin",
+			"path":"pages/page_lm/LoginRelated/verifyLogin",
 			"style":{
-				"navigationBarTitleText": "登陆",
+				"navigationBarTitleText": "",
 				"app-plus": {
 					"bounce": "none", //关闭窗口回弹效果
 					"titleNView": {
@@ -32,6 +32,12 @@
 						]
 					}
 				}
+			}
+		},
+		{
+			"path":"pages/page_lm/LoginRelated/register",
+			"style":{
+				"navigationBarTitleText": ""
 			}
 		}
     ],

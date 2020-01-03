@@ -1,59 +1,116 @@
 <template>
-	<view>
+	<view class="section fx">
 		<headerNav></headerNav>
 		<uSwiper></uSwiper>
 		<view class="class_nav fx">
 			<view v-for="(item, i) in class_nav_data" :key="i">
-				<text class="iconfont">{{item.icon}}</text>
+				<image :src="item.image"></image>
 				<text class="name">{{item.name}}</text>
 			</view>
 		</view>
+		<view class="information fx">
+			<text class="information_one">动态资讯</text>
+			<text class="information_two fx fxCenter">热门</text>
+		</view>
+		<image class="section_image" :src="informationImage.pic" mode=""></image>
+		<uCategory :dataList="dataList"></uCategory>
 	</view>
 </template>
 
 <script>
 	import headerNav from '../../components/components_lzj/index/header/header.vue'
 	import uSwiper from '../../components/components_lzj/index/swiper/swiper.vue'
+	import uCategory from '../../components/components_lzj/index/hotTopic/category.vue'
 	export default {
-		components: {headerNav, uSwiper},
+		components: {headerNav, uSwiper, uCategory},
 		data() {
 			return {
+				dataList: [],
+				informationImage: {},
 				class_nav_data: [
 					{
-						icon: '\ue63b',
+						image: '../../static/image/kecheng.png',
 						name: '课程'
 					},
 					{
-						icon: '\ue63b',
+						image: '../../static/image/xuexiao.png',
 						name: '学校'
 					},
 					{
-						icon: '\ue63b',
+						image: '../../static/image/mingshi.png',
 						name: '名师'
 					},
 					{
-						icon: '\ue63b',
+						image: '../../static/image/zixue.png',
 						name: '资讯'
 					},
 					{
-						icon: '\ue63b',
+						image: '../../static/image/fenlei.png',
 						name: '分类'
 					}
-				
 				] 
 			}
+		},
+		onLoad() {
+			this.getIformation();
+		},
+		methods: {
+			/**
+			 * 获取热门资讯广告位
+			 */
+			async getIformation(){
+				this.informationImage = (await this.getAdvertisingData(5))[0];
+			}
 		}
+		
 	}
 </script>
 
 <style scoped lang="less">
-	.class_nav{
-		justify-content: space-around;
-		.iconfont{
-			display: block;
+	@import url('../../static/css/var.css');
+	.section{
+		flex-direction: column;
+		align-items: center;
+		.class_nav{
+			justify-content: space-around;
+			width: 100vw;
+			padding-top: 18rpx;
+			text-align: center;
+			image{
+				display: block;
+				width: 114rpx;
+				height: 114rpx;
+			}
+			.name{
+				color: var(--col-333);
+			}
 		}
-		.name{
-			color: var(--col333);
+		.information{
+			align-items: center;
+			width:690rpx;
+			height:60rpx;
+			margin: 28rpx 0 40rpx;
+			background: var(--col-fff);
+			opacity:1;
+			border-radius: 50rpx;
+			.information_one{
+				margin: 0 24rpx;
+				font-size:28rpx;
+				font-weight: 700;
+				color: var(--col-333);
+			}
+			.information_two{
+				width: 48rpx;
+				height: 28rpx;
+				font-size:20rpx;
+				background-color: rgba(253,129,9,0.2);
+				color: var(--colMain);
+				border-radius:4rpx;
+			}
+		}
+		.section_image{
+			width: 690rpx;
+			height: 152rpx;
 		}
 	}
 </style>

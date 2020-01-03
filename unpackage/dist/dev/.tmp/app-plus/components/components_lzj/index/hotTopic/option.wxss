@@ -1,0 +1,33 @@
+.data-v-950bbfa2:root{
+	--colMain: #FD8109;
+	--col-333: #333333;
+	--col-666: #666666;
+	--col-999: #999999;
+	--col-fff: #FFFFFF;
+	--col-ccc: #CCCCCC;
+}
+.option.data-v-950bbfa2 {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 336rpx;
+}
+.option image.data-v-950bbfa2 {
+  width: 100%;
+  height: 268rpx;
+}
+.option .course_name.data-v-950bbfa2 {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  color: var(--col-333);
+  font-size: 26rpx;
+  white-space: nowrap;
+}
+.option .course_price.data-v-950bbfa2 {
+  font-size: 26rpx;
+  color: #FD4309;
+}
+

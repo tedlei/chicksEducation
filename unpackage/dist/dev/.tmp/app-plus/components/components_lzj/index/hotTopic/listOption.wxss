@@ -1,0 +1,34 @@
+.data-v-a2ef4326:root{
+	--colMain: #FD8109;
+	--col-333: #333333;
+	--col-666: #666666;
+	--col-999: #999999;
+	--col-fff: #FFFFFF;
+	--col-ccc: #CCCCCC;
+}
+.box.data-v-a2ef4326 {
+  width: 690rpx;
+}
+.box .head.data-v-a2ef4326 {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.box .head .title.data-v-a2ef4326 {
+  color: var(--col-333);
+}
+.box .head .more.data-v-a2ef4326 {
+  font-size: 24rpx;
+  color: var(--col-666);
+}
+.box .list.data-v-a2ef4326 {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+}
+

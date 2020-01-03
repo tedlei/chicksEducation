@@ -20,12 +20,22 @@
 	/*每个页面公共css */
 	@font-face {
 		font-family: "iconfont";
-		src: url('https://at.alicdn.com/t/font_1472826_5taes7ruhs4.ttf') format('truetype');
+		src: url('https://at.alicdn.com/t/font_1472826_w1bms62an4k.ttf') format('truetype');
 	}
 	.iconfont{
 		font-family: iconfont;
 	}
 	.fx{ 
 		display: flex;
+	}
+	.fxCenter{
+		justify-content: center;
+		align-items: center;
+	}
+	view{
+		font-size: 32rpx;
+	}
+	body{
+		background-color: #F5F5F5;
 	}
 </style>

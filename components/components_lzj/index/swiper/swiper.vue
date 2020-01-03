@@ -1,7 +1,7 @@
 <template>
-	<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-		<swiper-item v-for="(item, index) in swiperImages" :key="index" class="swiper">
-			<image :src="item"></image>
+	<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper">
+		<swiper-item v-for="(item, index) in swiperImages" :key="index">
+			<image :src="item.pic"></image>
 		</swiper-item>
 	</swiper>
 </template>
@@ -10,23 +10,23 @@
 	export default {
 		data() {
 			return {
-				swiperImages: [
-					'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/06/ChMkJl4BcxiIC3kJAASB9yN2nOYAAv6zwLHqt0ABIIP059.jpg',
-					'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/06/ChMkJl4BcxiIC3kJAASB9yN2nOYAAv6zwLHqt0ABIIP059.jpg',
-					'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/06/ChMkJl4BcxiIC3kJAASB9yN2nOYAAv6zwLHqt0ABIIP059.jpg',
-					'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/06/ChMkJl4BcxiIC3kJAASB9yN2nOYAAv6zwLHqt0ABIIP059.jpg',
-					'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/06/ChMkJl4BcxiIC3kJAASB9yN2nOYAAv6zwLHqt0ABIIP059.jpg'
-				]
+				swiperImages: []
 			}
 		},
+		created() {
+			this.getSwiperImages();
+		},
 		methods: {
-			
+			async getSwiperImages(){
+				this.swiperImages = await this.getAdvertisingData(4);
+			}
 		}
 	}
 </script>
 
 <style scoped lang="less">
 	.swiper{
+		width: 100vw;
 		image{
 			width: 100vw;
 		}

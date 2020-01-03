@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "u-option": "/components/components_lzj/index/hotTopic/option"
+  },
+  "component": true
+}

@@ -9,12 +9,29 @@ const Api = {
 		this.prototype.setItem = Api.setItem;
 		this.prototype.push = Api.push;
 		this.prototype.pop = Api.pop;
+		this.prototype.getAdvertisingData = Api.getAdvertisingData;
 	},
 	/**
 	 * 网络请求 默认 GET 
 	 * @param {Object} param
 	 */
-	fetch(param){
+	fetch(param, port){
+		if (typeof port === 'undefined') port = 1;
+		port = port - 1;
+		let ipList = [
+			'http://112.74.18.182:9101/cnjy-search-web/',
+			'http://112.74.16.235:9102/cnjy-user-web/',
+			'http://112.74.16.235:9103/cnjy-curriculum-web/',
+			'http://120.24.45.159:9104/cnjy-school-web/',
+			'http://120.24.45.159:9105/cnjy-teacher-web/',
+		];
+		let url = param.url;
+		if (/^\//.test(url)) url = url.slice(1);
+		if (port > -1) {
+			url = ipList[port] + param.url
+		}
+		param.url = url;
+	
 		if (param.method === 'POST') {
 			param.header = param.header || {'content-type': 'application/json'}
 		}
@@ -121,6 +138,23 @@ const Api = {
 	 */
 	message(title){
 		uni.showToast({title,icon:'none'})
+	},
+	
+	/**
+	 * 获取广告位数据 1 
+	 */
+	getAdvertisingData(categoryId) {
+		return new Promise(resolve => {
+			this.fetch({
+				method: 'GET',
+				url: 'content/cateId.do',
+				data: {
+					categoryId
+				}
+			}, 2).then(([rej, res]) => {
+				resolve(res.data);
+			});
+		})
 	}
 }
 

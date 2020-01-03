@@ -1,0 +1,1 @@
+<view class="_div"><block wx:for="{{titleArr}}" wx:for-item="item" wx:for-index="idx" wx:key="idx"><list-option vue-id="{{'1-'+idx}}" value="{{item}}" selectArrValue="{{selectArr[idx]}}" bind:__l="__l"></list-option></block></view>

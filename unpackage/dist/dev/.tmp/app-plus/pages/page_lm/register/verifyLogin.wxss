@@ -65,4 +65,14 @@
   border-color: #FD5C0E;
   color: #fff;
 }
+.vlog-app .vlBtn {
+  width: 630rpx;
+  height: 80rpx;
+  background: #e5e5e5;
+  border-radius: 10rpx;
+  line-height: 80rpx;
+}
+.vlog-app .vlBtn uni-button:after {
+  border: 0;
+}
 

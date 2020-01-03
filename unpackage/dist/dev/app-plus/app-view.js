@@ -1224,6 +1224,9 @@ Z([3,'服务协议'])
 Z([3,'、'])
 Z(z[39])
 Z([3,'隐私保护政策'])
+Z([3,'vlBtn'])
+Z([3,'primary'])
+Z([3,'登录'])
 })(__WXML_GLOBAL__.ops_cached.$gwx_6);return __WXML_GLOBAL__.ops_cached.$gwx_6
 }
 function gz$gwx_7(){
@@ -1480,6 +1483,10 @@ var eLC=_oz(z,43,e,s,gg)
 _(tKC,eLC)
 _(xAC,tKC)
 _(oVB,xAC)
+var bMC=_mz(z,'button',['class',44,'type',1],[],e,s,gg)
+var oNC=_oz(z,46,e,s,gg)
+_(bMC,oNC)
+_(oVB,bMC)
 _(r,oVB)
 return r
 }
@@ -1487,11 +1494,11 @@ e_[x[5]]={f:m5,j:[],i:[],ti:[],ic:[]}
 d_[x[6]]={}
 var m6=function(e,s,r,gg){
 var z=gz$gwx_7()
-var oNC=_n('view')
-_rz(z,oNC,'class',0,e,s,gg)
-var xOC=_oz(z,1,e,s,gg)
-_(oNC,xOC)
-_(r,oNC)
+var oPC=_n('view')
+_rz(z,oPC,'class',0,e,s,gg)
+var fQC=_oz(z,1,e,s,gg)
+_(oPC,fQC)
+_(r,oPC)
 return r
 }
 e_[x[6]]={f:m6,j:[],i:[],ti:[],ic:[]}
@@ -1634,7 +1641,7 @@ __wxAppCode__['components/uni-status-bar/uni-status-bar.wxml']=$gwx('./component
 __wxAppCode__['pages/index/index.wxss']=undefined;    
 __wxAppCode__['pages/index/index.wxml']=$gwx('./pages/index/index.wxml');
 
-__wxAppCode__['pages/page_lm/register/verifyLogin.wxss']=setCssToHead([".",[1],"vlog-app .",[1],"vlImg { width: ",[0,326],"; height: ",[0,118],"; padding: ",[0,130]," ",[0,212],"; }\n.",[1],"vlog-app .",[1],"vlViIn { width: ",[0,630],"; height: ",[0,92],"; margin: auto; border-bottom: ",[0,2]," solid #e5e5e5; font-size: ",[0,36],"; line-height: ",[0,92],"; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlIntext { color: #333333; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlInput { -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; height: 100%; margin-left: ",[0,32],"; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlInYzm { width: ",[0,200],"; height: ",[0,80],"; background: #e5e5e5; opacity: 1; border-radius: ",[0,5],"; text-align: center; line-height: ",[0,80],"; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlInYzm wx-text { font-size: ",[0,32],"; color: #999999; }\n.",[1],"vlog-app .",[1],"inMagin { margin-top: ",[0,24],"; }\n.",[1],"vlog-app .",[1],"vlRa { width: ",[0,630],"; margin: ",[0,20]," auto; font-size: ",[0,24],"; color: #333333; -webkit-box-align: center; -webkit-align-items: center; align-items: center; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"vlRadio { width: ",[0,30],"; height: ",[0,30],"; border: ",[0,1]," solid #707070; border-radius: 50%; text-align: center; line-height: ",[0,30],"; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"vlRadio .",[1],"iconfont { font-size: ",[0,30],"; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"vlRaNav { color: #2AB0EA; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"bgcolor { background: #FD5C0E; border-color: #FD5C0E; color: #fff; }\n",],undefined,{path:"./pages/page_lm/register/verifyLogin.wxss"});    
+__wxAppCode__['pages/page_lm/register/verifyLogin.wxss']=setCssToHead([".",[1],"vlog-app .",[1],"vlImg { width: ",[0,326],"; height: ",[0,118],"; padding: ",[0,130]," ",[0,212],"; }\n.",[1],"vlog-app .",[1],"vlViIn { width: ",[0,630],"; height: ",[0,92],"; margin: auto; border-bottom: ",[0,2]," solid #e5e5e5; font-size: ",[0,36],"; line-height: ",[0,92],"; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlIntext { color: #333333; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlInput { -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; height: 100%; margin-left: ",[0,32],"; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlInYzm { width: ",[0,200],"; height: ",[0,80],"; background: #e5e5e5; opacity: 1; border-radius: ",[0,5],"; text-align: center; line-height: ",[0,80],"; }\n.",[1],"vlog-app .",[1],"vlViIn .",[1],"vlInYzm wx-text { font-size: ",[0,32],"; color: #999999; }\n.",[1],"vlog-app .",[1],"inMagin { margin-top: ",[0,24],"; }\n.",[1],"vlog-app .",[1],"vlRa { width: ",[0,630],"; margin: ",[0,20]," auto; font-size: ",[0,24],"; color: #333333; -webkit-box-align: center; -webkit-align-items: center; align-items: center; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"vlRadio { width: ",[0,30],"; height: ",[0,30],"; border: ",[0,1]," solid #707070; border-radius: 50%; text-align: center; line-height: ",[0,30],"; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"vlRadio .",[1],"iconfont { font-size: ",[0,30],"; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"vlRaNav { color: #2AB0EA; }\n.",[1],"vlog-app .",[1],"vlRa .",[1],"bgcolor { background: #FD5C0E; border-color: #FD5C0E; color: #fff; }\n.",[1],"vlog-app .",[1],"vlBtn { width: ",[0,630],"; height: ",[0,80],"; background: #e5e5e5; border-radius: ",[0,10],"; line-height: ",[0,80],"; }\n.",[1],"vlog-app .",[1],"vlBtn wx-uni-button:after { border: 0; }\n",],undefined,{path:"./pages/page_lm/register/verifyLogin.wxss"});    
 __wxAppCode__['pages/page_lm/register/verifyLogin.wxml']=$gwx('./pages/page_lm/register/verifyLogin.wxml');
 
 __wxAppCode__['pages/page_lzj/search/search.wxss']=undefined;    

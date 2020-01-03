@@ -23,6 +23,7 @@
 			<text>、</text>
 			<navigator class="vlRaNav" url="">隐私保护政策</navigator>
 		</view>
+		<button type="primary" class="vlBtn">登录</button>
 	</view>
 </template>
 
@@ -123,6 +124,17 @@ export default {
 			background: #FD5C0E;
 			border-color: #FD5C0E;
 			color: #fff;
+		}
+	}
+	.vlBtn{
+		width:630upx;
+		height:80upx;
+		background:rgba(229,229,229,1);
+		border-radius:10upx;
+		line-height: 80upx;
+		uni-button:after{
+			border:0;
+			
 		}
 	}
 }

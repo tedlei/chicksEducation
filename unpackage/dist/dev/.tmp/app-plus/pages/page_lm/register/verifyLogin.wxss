@@ -1,0 +1,53 @@
+.vlog-app .vlImg {
+  width: 326rpx;
+  height: 118rpx;
+  padding: 130rpx 212rpx;
+}
+.vlog-app .vlViIn {
+  width: 630rpx;
+  height: 92rpx;
+  margin: auto;
+  border-bottom: 2rpx solid #e5e5e5;
+  font-size: 36rpx;
+  line-height: 92rpx;
+}
+.vlog-app .vlViIn .vlIntext {
+  color: #333333;
+}
+.vlog-app .vlViIn .vlInput {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  height: 100%;
+  margin-left: 32rpx;
+}
+.vlog-app .vlViIn .vlInYzm {
+  width: 200rpx;
+  height: 80rpx;
+  background: #e5e5e5;
+  opacity: 1;
+  border-radius: 5rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+.vlog-app .vlViIn .vlInYzm text {
+  font-size: 32rpx;
+  color: #999999;
+}
+.vlog-app .inMagin {
+  margin-top: 24rpx;
+}
+.vlog-app .vlRa {
+  width: 630rpx;
+  margin: 10rpx auto;
+  font-size: 24rpx;
+  color: #333333;
+}
+.vlog-app .vlRa .vlRadio {
+  width: 30rpx;
+  height: 30rpx;
+  border: 1rpx solid #707070;
+  border-radius: 50%;
+  background: #fff;
+}
+

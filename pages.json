@@ -9,9 +9,48 @@
 		{
 			"path": "pages/page_lzj/search/search",
 			"style": {
-
+			}
+		},
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		{
+			"path":"pages/page_lm/register/verifyLogin",
+			"style":{
+				"navigationBarTitleText": "登陆",
+				"app-plus": {
+					"bounce": "none", //关闭窗口回弹效果
+					"titleNView": {
+						"buttons": [ //原生标题栏按钮配置,
+							{
+							"type":"none",
+							"text":"注册",
+							"float":"right",
+							"color":"#333333",
+							"fontSize":"18px",
+							"width":"60px"
+							}
+						]
+					}
+				}
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -1,26 +1,25 @@
-.header_position.data-v-efc4430e {
+.header_position.data-v-1c975c8c {
   white-space: nowrap;
   margin: 0 20rpx;
   color: #FFFFFF;
 }
-.search.data-v-efc4430e {
+.search.data-v-1c975c8c {
   position: relative;
   text-indent: 68rpx;
   color: #ccc;
 }
-.search .iconfont.data-v-efc4430e {
+.search .iconfont.data-v-1c975c8c {
   position: absolute;
   top: -14rpx;
   left: -20px;
 }
-.search .search_input.data-v-efc4430e {
+.search .search_input.data-v-1c975c8c {
   width: 280px;
   height: 28px;
   background: #fff;
   border-radius: 14px;
 }
-view.data-v-efc4430e {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+view.data-v-1c975c8c {
+  box-sizing: border-box;
 }
 

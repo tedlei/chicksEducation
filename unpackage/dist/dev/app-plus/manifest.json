@@ -95,7 +95,7 @@
     },
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "2.4.2",
+      "compilerVersion": "2.4.6",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",

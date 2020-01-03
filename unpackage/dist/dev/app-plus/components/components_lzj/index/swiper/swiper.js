@@ -1,2 +1,0 @@
-setCssToHead([".",[1],"swiper wx-image.",[1],"data-v-198732c8 { width: 100vw; }\n",],undefined,{path:"./components/components_lzj/index/swiper/swiper.wxss"})();
-document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./components/components_lzj/index/swiper/swiper.wxml') } }));

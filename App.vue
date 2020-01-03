@@ -8,6 +8,10 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		created() {
+			// this.push({url:'pages/page_lm/register/verifyLogin'})
+			
 		}
 	}
 </script>

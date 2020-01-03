@@ -1,0 +1,11 @@
+.class_nav.data-v-c50400ec {
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.class_nav .iconfont.data-v-c50400ec {
+  display: block;
+}
+.class_nav .name.data-v-c50400ec {
+  color: var(--col333);
+}
+

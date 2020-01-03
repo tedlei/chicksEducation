@@ -11,18 +11,8 @@
 			"style": {
 			}
 		},
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
+/* ------------------------------------------------------------------------------------- */
 		{
 			"path":"pages/page_lm/register/verifyLogin",
 			"style":{
@@ -44,13 +34,6 @@
 				}
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

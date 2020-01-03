@@ -1,10 +1,10 @@
 <template>
 	<view>
 		<uni-nav-bar status-bar="true" backgroundColor="#FD8109" >
-			<view slot="left" class="header_position">
+			<navigator slot="left" class="header_position" :url="'/pages/page_lzj/search/search'">
 				<text>重庆</text>
 				<text class="iconfont">&#xe771;</text>
-			</view>
+			</navigator>
 			<view class="search" @tap="search">
 				<text class="iconfont">&#xe610;</text>
 				<input type="text" class="search_input" value="" placeholder="请输入关键字" disabled="true" />
@@ -21,6 +21,9 @@
 			
 		},
 		methods:{
+			selectCity(){
+				
+			},
 			search(){
 				this.push({url: '/pages/page_lzj/search/search'});
 			}
@@ -29,15 +32,16 @@
 </script>
 
 <style scoped lang="less">
+	@import url('../../../../static/css/var.css');
 	.header_position{
 		white-space: nowrap;
 		margin: 0 20rpx;
-		color: #FFFFFF;
+		color: var(--col-fff);
 	}
 	.search{
 		position: relative;
 		text-indent: 68rpx;
-		color: #ccc;
+		color: var(--col-ccc);
 		.iconfont{
 			position: absolute;
 			top: -14rpx;

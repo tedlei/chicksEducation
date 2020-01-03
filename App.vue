@@ -10,13 +10,13 @@
 			console.log('App Hide')
 		},
 		created() {
-			this.push({url:'pages/page_lm/register/verifyLogin'})
+			// this.push({url:'pages/page_lm/register/verifyLogin'})
 			
 		}
 	}
 </script>
 
-<style>
+<style lang="less">
 	/*每个页面公共css */
 	@font-face {
 		font-family: "iconfont";
@@ -24,5 +24,8 @@
 	}
 	.iconfont{
 		font-family: iconfont;
+	}
+	.fx{ 
+		display: flex;
 	}
 </style>

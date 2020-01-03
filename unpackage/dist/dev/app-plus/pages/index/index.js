@@ -1,1 +1,2 @@
+setCssToHead([".",[1],"class_nav.",[1],"data-v-c50400ec { -webkit-justify-content: space-around; justify-content: space-around; }\n.",[1],"class_nav .",[1],"iconfont.",[1],"data-v-c50400ec { display: block; }\n.",[1],"class_nav .",[1],"name.",[1],"data-v-c50400ec { color: var(--col333); }\n",],undefined,{path:"./pages/index/index.wxss"})();
 document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/index/index.wxml') } }));

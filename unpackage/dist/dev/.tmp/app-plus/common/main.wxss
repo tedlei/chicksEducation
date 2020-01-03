@@ -1,29 +1,15 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*每个页面公共css */
 @font-face {
-	font-family: "iconfont";
-	src: url('https://at.alicdn.com/t/font_1472826_5taes7ruhs4.ttf') format('truetype');
+  font-family: "iconfont";
+  src: url('https://at.alicdn.com/t/font_1472826_5taes7ruhs4.ttf') format('truetype');
 }
-.iconfont{
-	font-family: iconfont;
+.iconfont {
+  font-family: iconfont;
+}
+.fx {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
 }
 
 .fx{

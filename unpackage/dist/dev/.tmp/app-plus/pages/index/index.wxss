@@ -1,0 +1,16 @@
+.swiper image.data-v-198732c8 {
+  width: 100vw;
+}
+
+.class_nav.data-v-28ea9d92 {
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+}
+.class_nav .iconfont.data-v-28ea9d92 {
+  display: block;
+}
+.class_nav .name.data-v-28ea9d92 {
+  color: var(--col333);
+}
+

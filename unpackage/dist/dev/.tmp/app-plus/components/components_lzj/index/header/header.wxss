@@ -1,0 +1,34 @@
+.data-v-d6bcb608:root{
+	--colMain: #FD8109;
+	--col-333: #333333;
+	--col-666: #666666;
+	--col-999: #999999;
+	--col-fff: #FFFFFF;
+	--col-ccc: #CCCCCC;
+}
+.header_position.data-v-d6bcb608 {
+  white-space: nowrap;
+  margin: 0 20rpx;
+  color: var(--col-fff);
+}
+.search.data-v-d6bcb608 {
+  position: relative;
+  text-indent: 68rpx;
+  color: var(--col-ccc);
+}
+.search .iconfont.data-v-d6bcb608 {
+  position: absolute;
+  top: -14rpx;
+  left: -20px;
+}
+.search .search_input.data-v-d6bcb608 {
+  width: 280px;
+  height: 28px;
+  background: #fff;
+  border-radius: 14px;
+}
+view.data-v-d6bcb608 {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+

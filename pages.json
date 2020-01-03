@@ -11,7 +11,11 @@
 			"style": {
 
 			}
-		}
+		},
+		{
+            "path" : "components/components_lzj/index/swiper/swiper",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

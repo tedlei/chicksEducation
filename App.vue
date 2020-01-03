@@ -12,7 +12,7 @@
 	}
 </script>
 
-<style>
+<style lang="less">
 	/*每个页面公共css */
 	@font-face {
 		font-family: "iconfont";
@@ -20,5 +20,8 @@
 	}
 	.iconfont{
 		font-family: iconfont;
+	}
+	.fx{ 
+		display: flex;
 	}
 </style>

@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/page_lzj/search/search"
+    "pages/page_lzj/search/search",
+    "components/components_lzj/index/swiper/swiper"
   ],
   "window": {
     "navigationBarTextStyle": "black",

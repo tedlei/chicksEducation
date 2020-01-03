@@ -39,15 +39,30 @@
 }
 .vlog-app .vlRa {
   width: 630rpx;
-  margin: 10rpx auto;
+  margin: 20rpx auto;
   font-size: 24rpx;
   color: #333333;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
 }
 .vlog-app .vlRa .vlRadio {
   width: 30rpx;
   height: 30rpx;
   border: 1rpx solid #707070;
   border-radius: 50%;
-  background: #fff;
+  text-align: center;
+  line-height: 30rpx;
+}
+.vlog-app .vlRa .vlRadio .iconfont {
+  font-size: 30rpx;
+}
+.vlog-app .vlRa .vlRaNav {
+  color: #2AB0EA;
+}
+.vlog-app .vlRa .bgcolor {
+  background: #FD5C0E;
+  border-color: #FD5C0E;
+  color: #fff;
 }
 

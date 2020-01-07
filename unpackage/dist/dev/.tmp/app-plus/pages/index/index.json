@@ -1,8 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "usingComponents": {
-    "header-nav": "/components/components_lzj/index/header/header",
-    "u-swiper": "/components/components_lzj/index/swiper/swiper",
-    "u-category": "/components/components_lzj/index/hotTopic/category"
-  }
-}

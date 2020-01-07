@@ -1,7 +1,7 @@
 <template>
 	<view class="box">
 		<view class="head fx">
-			<text class="title">小学热门推荐课程</text>
+			<text class="title">{{value}}</text>
 			<view class="more">
 				<text>更多</text>
 				<text class="iconfont">&#xe601;</text>
@@ -48,8 +48,8 @@
 				}).then(([rej, result])=>{
 					let res = result.data;
 					// 取res数组中的前五项数据 大于5则filter过滤反之直接赋值
-					this.listData = res.length > 6 ? res.filter((item, index)=>{
-						return index < 6;
+					this.listData = res.length > 4 ? res.filter((item, index)=>{
+						return index < 4;
 					}) : res;
 				});
 			}
@@ -57,18 +57,18 @@
 	}
 </script>
 
-<style scoped lang="less">
-	@import url('../../../../static/css/var.css');
+<style scoped lang="scss">
 	.box{
 		width: 690rpx;
 		.head{
 			justify-content: space-between;
+			padding: 30rpx 0;
 			.title{
-				color: var(--col-333);
+				color: $col-333;
 			}
 			.more{
 				font-size: 24rpx;
-				color: var(--col-666);
+				color: $col-666;
 			}
 		}
 		.list{

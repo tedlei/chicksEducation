@@ -1,7 +1,7 @@
 /*每个页面公共css */
 @font-face {
   font-family: "iconfont";
-  src: url('https://at.alicdn.com/t/font_1472826_w1bms62an4k.ttf') format('truetype');
+  src: url('https://at.alicdn.com/t/font_1472826_ujpta4di21n.ttf') format('truetype');
 }
 .iconfont {
   font-family: iconfont;
@@ -11,6 +11,14 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+view {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 32rpx;
+}
+page {
+  background-color: #F5F5F5;
 }
 .fxCenter {
   -webkit-box-pack: center;
@@ -22,17 +30,7 @@
       -ms-flex-align: center;
           align-items: center;
 }
-view {
-  font-size: 32rpx;
-}
-page {
-  background-color: #F5F5F5;
-}
-
-.fx {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+.pointer:active {
+  opacity: 0.2;
 }
 

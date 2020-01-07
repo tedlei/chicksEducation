@@ -31,17 +31,16 @@
 	}
 </script>
 
-<style scoped lang="less">
-	@import url('../../../../static/css/var.css');
+<style scoped lang="scss">
 	.header_position{
 		white-space: nowrap;
 		margin: 0 20rpx;
-		color: var(--col-fff);
+		color: $col-fff;
 	}
 	.search{
 		position: relative;
 		text-indent: 68rpx;
-		color: var(--col-ccc);
+		color: $col-ccc;
 		.iconfont{
 			position: absolute;
 			top: -14rpx;
@@ -50,11 +49,8 @@
 		.search_input{
 			width:280px;
 			height:28px;
-			background:#fff;
+			background-color: $col-fff;
 			border-radius: 14px;
 		}
-	}
-	view{
-		box-sizing: border-box;
 	}
 </style>

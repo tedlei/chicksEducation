@@ -93,6 +93,7 @@
         }
       }
     },
+    "arguments": "{\"name\":\"\",\"query\":\"\",\"id\":0,\"pathName\":\"pages/index/index\"}",
     "allowsInlineMediaPlayback": true,
     "uni-app": {
       "compilerVersion": "2.4.2",

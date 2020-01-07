@@ -13,7 +13,14 @@
 			<text class="information_two fx fxCenter">热门</text>
 		</view>
 		<image class="section_image" :src="informationImage.pic" mode=""></image>
-		<uCategory :dataList="dataList"></uCategory>
+		<!-- 热门课程 -->
+		<uHotCurriclum></uHotCurriclum>
+		<!-- 热门学校 -->
+		<uHotSchool></uHotSchool>
+		<!-- 热门课程推荐 -->
+		<!-- <uCategory></uCategory> -->
+		<!-- 底部 -->
+		<!-- <uFooter></uFooter> -->
 	</view>
 </template>
 
@@ -21,11 +28,13 @@
 	import headerNav from '../../components/components_lzj/index/header/header.vue'
 	import uSwiper from '../../components/components_lzj/index/swiper/swiper.vue'
 	import uCategory from '../../components/components_lzj/index/hotTopic/category.vue'
+	import uHotCurriclum from '../../components/components_lzj/index/hotTopic/hotCurriclum.vue'
+	import uHotSchool from '../../components/components_lzj/index/hotTopic/hotSchool.vue'
+	
 	export default {
-		components: {headerNav, uSwiper, uCategory},
+		components: {headerNav, uSwiper, uCategory, uHotCurriclum, uHotSchool},
 		data() {
 			return {
-				dataList: [],
 				informationImage: {},
 				class_nav_data: [
 					{
@@ -66,8 +75,7 @@
 	}
 </script>
 
-<style scoped lang="less">
-	@import url('../../static/css/var.css');
+<style scoped lang="scss">
 	.section{
 		flex-direction: column;
 		align-items: center;
@@ -82,7 +90,7 @@
 				height: 114rpx;
 			}
 			.name{
-				color: var(--col-333);
+				color: $col-333;
 			}
 		}
 		.information{
@@ -90,21 +98,21 @@
 			width:690rpx;
 			height:60rpx;
 			margin: 28rpx 0 40rpx;
-			background: var(--col-fff);
+			background: $col-fff;
 			opacity:1;
 			border-radius: 50rpx;
 			.information_one{
 				margin: 0 24rpx;
 				font-size:28rpx;
 				font-weight: 700;
-				color: var(--col-333);
+				color: $col-333;
 			}
 			.information_two{
 				width: 48rpx;
 				height: 28rpx;
 				font-size:20rpx;
 				background-color: rgba(253,129,9,0.2);
-				color: var(--colMain);
+				color: $col-main;
 				border-radius:4rpx;
 			}
 		}

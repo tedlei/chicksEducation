@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App'
 import Api  from './mixin'
-import './static/css/global.less'
 
 Vue.config.productionTip = false;
 

@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .mpc_app{
 	width:336rpx;
 	box-shadow:0px 3px 6px rgba(0,0,0,0.06);
@@ -69,7 +69,7 @@ export default {
 	.mapName{
 		padding:14rpx 16rpx;
 		font-size: 26rpx;
-		color: var(--col-333);
+		color: $col-333;
 		overflow: hidden;
 		text-overflow:ellipsis;
 		white-space: nowrap;
@@ -92,11 +92,11 @@ export default {
 		.mpcTcBtn{
 			width:200rpx;
 			height:60rpx;
-			background:var(--col-fff);
+			background:$col-fff;
 			border-radius:30rpx;
 			text-align: center;
 			line-height: 60rpx;
-			color:var(--col-999);
+			color:$col-999;
 		}
 		.topTcBtn{
 			background: #eee;

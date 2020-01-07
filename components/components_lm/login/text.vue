@@ -17,13 +17,13 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-@import url('../../../static/css/var.css');
+<style scoped lang="scss">
+
 .text-app{
 	width: 750upx;
 	padding:160rpx 0;
 	text-align: center;
 	font-size: 48rpx;
-	color:var(--col--333);
+	color:$col-333;
 }
 </style>

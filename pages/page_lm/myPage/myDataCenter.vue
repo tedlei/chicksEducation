@@ -5,7 +5,7 @@
 </template>
 
 <script>
-	import '../../../static/css/var.css'
+	
 	import mpl from '../../../components/components_lm/myPage/myPageList.vue'
 export default {
 	components:{mpl},
@@ -24,10 +24,9 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-	@import url('../../../static/css/var.css');
+<style scoped lang="scss">
 .mdc_app{
-	background: var(--col-fff);
+	background: $col-fff;
 	
 }
 </style>

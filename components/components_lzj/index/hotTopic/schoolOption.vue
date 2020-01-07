@@ -1,11 +1,10 @@
 <template>
 	<view class="option fx">
-		<image :src="value.courseImage" mode=""></image>
-		<text class="course_name">{{value.courseName}}</text>
-		<text class="course_price">{{'价格：' + value.coursePrice + '元'}}</text>
+		<image :src="value.schoolImage || require('../../../../static/image/default.png')" mode=""></image>
+		<text class="course_name">{{value.organizationName}}</text>
 		
 		<!-- 主推等字样 -->
-		<text v-if="showCurriclum" class="courseCategory">{{courseCategoryData[value.courseCategory]}}</text>
+		<text class="courseCategory">热门</text>
 	</view>
 </template>
 
@@ -13,10 +12,10 @@
 	export default{
 		// 传入cuClass 为true 则为课程  false为学校 
 		// showCurriclum 是否显示主推等字样
-        props: ['value', 'showCurriclum'],
+        props: ['value'],
         data() {
             return {
-                courseCategoryData: ['普通', '主推', '热门']
+
             }
         },
         methods:{
@@ -36,14 +35,11 @@
 		}
 		.course_name{
 			overflow: hidden;
+			margin-top: 14rpx;
 			text-overflow: ellipsis;
 			color: $col-333;
 			font-size:26rpx;
 			white-space: nowrap;
-		}
-		.course_price{
-			font-size:26rpx;
-			color: #FD4309;
 		}
 		.courseCategory{
 			position: absolute;

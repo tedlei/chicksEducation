@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import '../../../static/css/var.css'
+
 import TopText from '../../../components/components_lm/login/text.vue'
 export default {
 	components:{TopText},
@@ -157,8 +157,8 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-@import url('../../../static/css/var.css');
+<style scoped lang="scss">
+
 .reg-app{
 	.vlViIn{
 		width: 630rpx;
@@ -168,7 +168,7 @@ export default {
 		font-size: 36rpx;
 		line-height: 92rpx;
 		.vlIntext{
-			color:var(--col-333);
+			color:$col-333;
 		}
 		.vlInput{
 			flex:1;
@@ -185,13 +185,13 @@ export default {
 			line-height: 80rpx;
 			text{
 				font-size: 32rpx;
-				color:var(--col-999);
+				color:$col-999;
 			}
 		}
 		.btnBgcolor{
-			background: var(--colMain);
+			background: $col-main;
 			text{
-				color: var(--col-fff);
+				color: $col-fff;
 			}
 		}
 	}
@@ -202,12 +202,12 @@ export default {
 		width: 630rpx;
 		margin:20rpx auto;
 		font-size: 24rpx;
-		color: var(--col-333);
+		color: $col-333;
 		align-items: center;
 		.vlRadio{
 			width: 30rpx;
 			height: 30rpx;
-			border:1rpx solid var(--col-999);
+			border:1rpx solid $col-999;
 			border-radius: 50%;
 			text-align: center;
 			line-height: 30rpx;
@@ -220,9 +220,9 @@ export default {
 			color: #2AB0EA;
 		}
 		.bgcolor{
-			background: var(--colMain);
-			border-color: var(--colMain);
-			color: var(--col-fff);
+			background: $col-main;
+			border-color: $col-main;
+			color: $col-fff;
 		}
 	}
 	.vlBtn{
@@ -234,11 +234,11 @@ export default {
 		text-align: center;
 		line-height: 80rpx;
 		font-size: 36rpx;
-		color:var(--col-999);
+		color:$col-999;
 	}
 	.btnBgcolor{
-		background: var(--colMain);
-		color: var(--col-fff);
+		background: $col-main;
+		color: $col-fff;
 	}
 }
 </style>

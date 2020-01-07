@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import '../../../static/css/var.css'
+	
 	export default {
 		data() {
 			return {
@@ -89,14 +89,13 @@
 	}
 </script>
 
-<style scoped lang="less">
-	@import url('../../../static/css/var.css');
+<style scoped lang="scss">
 
 	.uphead_app {
 		position: fixed;
 		width: 750rpx;
 		height: 100%;
-		background: var(--col-666);
+		background: $col-666;
 		flex-direction: column;
 		justify-content: center;
 
@@ -124,7 +123,7 @@
 			text-align: center;
 			line-height: 90rpx;
 			font-size: 36rpx;
-			color: var(--col-fff);
+			color: $col-fff;
 		}
 
 		.upHoverBtn {

@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .mpl_app{
 	.mdc_ul{
 		padding: 44rpx 28rpx;

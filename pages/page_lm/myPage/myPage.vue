@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import '../../../static/css/var.css'
+
 export default {
 	data() {
 		return {
@@ -60,19 +60,19 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-@import url('../../../static/css/var.css');
+<style scoped lang="scss">
+
 .mp-app{
 	.mpatop{
 		width: 750rpx;
 		height: 440rpx;
 		padding-top: 50rpx;
-		background: var(--colMain);
+		background: $col-main;
 		position: relative;
 		.mpaTopText{
 			font-size: 36rpx;
 			text-align: center;
-			color: var(--col-fff);
+			color: $col-fff;
 		}
 		.mpaTopImg{
 			width: 750rpx;
@@ -98,7 +98,7 @@ export default {
 				margin-left: 60rpx;
 				padding-top: 66rpx;
 				font-size: 40rpx;
-				color: var(--col-fff);
+				color: $col-fff;
 				.mpanikeText{
 					margin-top:32rpx;
 					font-size: 28rpx;

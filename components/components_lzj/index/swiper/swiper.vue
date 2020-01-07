@@ -24,7 +24,7 @@
 	}
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 	.swiper{
 		width: 100vw;
 		image{

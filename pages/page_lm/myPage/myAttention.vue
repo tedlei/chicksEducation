@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import '../../../static/css/var.css'
+
 import myPageCom from '../../../components/components_lm/myPage/myPageCom.vue'
 export default {
 	components:{myPageCom},
@@ -185,20 +185,20 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-@import url('../../../static/css/var.css');
+<style scoped lang="scss">
+
 .myatt_app{
 	position: fixed;
 	height: 100%;
 	width: 750rpx;
 	padding: 34rpx 28rpx;
 	padding-bottom: 0;
-	background: var(--col-fff);
+	background: $col-fff;
 	flex-direction: column;
 	box-sizing: border-box;
 	.myattUl{
 		font-size: 36rpx;
-		color: var(--col-333);
+		color: $col-333;
 		height: 60rpx;
 		.myattLi+.myattLi{
 			margin-left: 58rpx;

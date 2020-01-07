@@ -1,31 +1,31 @@
 <template>
 	<view class="reg-app">
-		<TopText title="注册"></TopText>
+		<TopText :title="passType==='reg'?'注册':'找回密码'"></TopText>
 		<view class="vlViIn fx">
 			<text class="vlIntext">手机号</text>
-			<input class="vlInput " type="text" v-model="phone" placeholder='请输入手机号码'/>
+			<input class="vlInput " type="number" maxlength="11" v-model="phone" placeholder='请输入手机号码'/>
 			<!-- focus -->
-			<text v-show="phone" class="iconfont" @click="topClear('phone')">&#xe600;</text>
+			<text v-show="phone" class="iconfont" @tap="topClear('phone')">&#xe600;</text>
 		</view>
 		<view class="vlViIn fx inMagin">
 			<text class="vlIntext">验证码</text>
 			<input class="vlInput" type="number" maxlength="6" v-model="verifyCode" placeholder="请输入验证码"/>
-			<view class="vlInYzm" :class="num<=0?'btnBgcolor':''"  @click="topGetVerify()">
+			<view class="vlInYzm" :class="num<=0?'btnBgcolor':''"  @tap="topGetVerify()">
 				<text>{{num<=0?"获取验证码":"重新获取"+num+"s"}}</text>
 			</view>
 		</view>
 		<view class="vlViIn fx inMagin">
 			<text class="vlIntext">密码</text>
 			<input class="vlInput" type="password" v-model="pass" placeholder="请输入密码"/>
-			<text v-show="pass" class="iconfont" @click="topClear('pass')">&#xe600;</text>
+			<text v-show="pass" class="iconfont" @tap="topClear('pass')">&#xe600;</text>
 		</view>
 		<view class="vlViIn fx inMagin">
 			<text class="vlIntext">确认密码</text>
-			<input class="vlInput" type="password" v-model="affirmass" placeholder="请输入确认密码"/>
-			<text v-show="affirmass" class="iconfont" @click="topClear('affirmass')">&#xe600;</text>
+			<input class="vlInput" type="password" v-model="affirpass" placeholder="请输入确认密码"/>
+			<text v-show="affirpass" class="iconfont" @tap="topClear('affirpass')">&#xe600;</text>
 		</view>
-		<view class="vlRa fx">
-			<view class="vlRadio" @click="topAgree" :class="isAgree?'bgcolor':''">
+		<view class="vlRa fx" v-if="passType==='reg'">
+			<view class="vlRadio" @tap="topAgree" :class="isAgree?'bgcolor':''">
 				<text v-show="isAgree" class="iconfont">&#xe63e;</text>
 			</view>
 			<text style="margin-left: 18rpx;">我已经阅读并同意</text>
@@ -33,23 +33,31 @@
 			<text>、</text>
 			<navigator hover-class="none" class="vlRaNav" url="">隐私保护政策</navigator>
 		</view>
-		<view class="vlBtn" :class="false?'btnBgcolor':''">注册</view>
+		<view class="vlBtn" :class="islogBtn?'btnBgcolor':''" @tap="topRes(passType,islogBtn)">
+			{{passType==='reg'?'注册':'完成'}}
+		</view>
 	</view>
 </template>
 
 <script>
+import '../../../static/css/var.css'
 import TopText from '../../../components/components_lm/login/text.vue'
 export default {
 	components:{TopText},
 	data() {
 		return {
+			passType:'reg',
 			phone:'',  //手机号
 			verifyCode:''  ,//验证码
 			pass:''  ,//密码
-			affirmass:"",   //确认密码
+			affirpass:"",   //确认密码
 			isAgree:false,  //协议
 			num:0   
 		}
+	},
+	onLoad(option) {
+		let pt = option.passType;
+		if(pt) this.passType = pt;
 	},
 	methods: {
 		//点击清除按钮时
@@ -58,8 +66,15 @@ export default {
 		},
 		//获取验证码
 		topGetVerify(){
+			let phone = this.phone;
+			if(!phone||phone.length<11){
+				this.message('电话号码为空或格式不正确')
+				this.phone = '';
+				return
+			}
 			if(this.num<=0){
 				this.num = 60;
+				this.getVerify(phone);
 				let seti = setInterval(()=>{
 					this.num --;
 					if(this.num<=0){
@@ -68,17 +83,82 @@ export default {
 				},1000)
 			}
 		},
+		
+		//获取验证码
+		getVerify(phone){
+			let url = "/message/phone.do";
+			let data = {phone}
+			this.fetch({url,data},2).then(res=>{
+				let {message,success} = res[1].data;
+				this.message(message);
+				if(!success){
+					this.num = 0;
+				}
+			})
+		},
+		
 		//同意协议
 		topAgree(){
 			this.isAgree = !this.isAgree;
+		},
+		
+		//点击注册时 
+		topRes(boo){
+			if(!boo)return
+			let phone = this.phone;
+			let vc = this.verifyCode;
+			let pass = this.pass;
+			let ap = this.affirpass;
+			if(!vc&&vc.length!==6) {
+				this.message('验证码为空或格式不正确');
+				return
+			}
+			if(!pass&&pass.length<6) {
+				this.message('密码为空或格式不正确');
+				return
+			}
+			if(!pass&&pass.length<6) {
+				this.message('确认密码为空或格式不正确');
+				return
+			}
+			if(pass!==ap) {
+				this.message('密码和确切密码不一致');
+				this.affirpass = '';
+				return
+			}
+			let url = '/user/save.do';
+			let data ={phone,password:pass}
+			this.fetch({url,data,method:'post'},2).then(res=>{
+				let {message,success} = res[1].data
+				this.message(message)
+				if(success){
+					uni.redirectTo({url:'/pages/page_lm/LoginRelated/verifyLogin?loginpattern=pass'})
+				}
+			})
 		}
+	
 		
 		
+	},
+	computed:{
+		islogBtn(){
+			let phone = this.phone;
+			let vc = this.verifyCode;
+			let pass = this.pass;
+			let ap = this.affirpass;
+			let ia = this.isAgree;
+			if(!phone||!vc||!pass||!ap||!ia) return false;
+			return true;
+		}
+	},
+	onBackPress() {
+		this.hideKey();
 	}
 }
 </script>
 
 <style scoped lang="less">
+@import url('../../../static/css/var.css');
 .reg-app{
 	.vlViIn{
 		width: 630rpx;
@@ -88,7 +168,7 @@ export default {
 		font-size: 36rpx;
 		line-height: 92rpx;
 		.vlIntext{
-			color:rgba(51,51,51,1);
+			color:var(--col-333);
 		}
 		.vlInput{
 			flex:1;
@@ -105,7 +185,7 @@ export default {
 			line-height: 80rpx;
 			text{
 				font-size: 32rpx;
-				color:rgba(153,153,153,1);
+				color:var(--col-999);
 			}
 		}
 		.btnBgcolor{
@@ -122,12 +202,12 @@ export default {
 		width: 630rpx;
 		margin:20rpx auto;
 		font-size: 24rpx;
-		color: #333333;
+		color: var(--col-333);
 		align-items: center;
 		.vlRadio{
 			width: 30rpx;
 			height: 30rpx;
-			border:1rpx solid rgba(112,112,112,1);
+			border:1rpx solid var(--col-999);
 			border-radius: 50%;
 			text-align: center;
 			line-height: 30rpx;

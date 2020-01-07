@@ -39,6 +39,48 @@
 			"style":{
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path":"pages/page_lm/myPage/myPage",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path":"pages/page_lm/myPage/uploadHead",
+			"style":{
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor":"#666",
+				"app-plus": {
+					"bounce": "none", //关闭窗口回弹效果
+					"titleNView": {
+						"buttons": [ //原生标题栏按钮配置,
+							{
+							"type":"none",
+							"text":"确认",
+							"float":"right",
+							"color":"#fff",
+							"fontSize":"18px",
+							"width":"40px"
+							}
+						]
+					}
+				}
+			}
+		},
+		{
+			"path":"pages/page_lm/myPage/myAttention",
+			"style":{
+				"navigationBarTitleText": "我的关注",
+				"navigationBarBackgroundColor":"#F5F5F5"
+			}
+		},
+		{
+			"path":"pages/page_lm/myPage/myDataCenter",
+			"style":{
+				"navigationBarTitleText": "我的预约",
+				"navigationBarBackgroundColor":"#F5F5F5"
+			}
 		}
     ],
 	"globalStyle": {

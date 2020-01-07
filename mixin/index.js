@@ -10,12 +10,14 @@ const Api = {
 		this.prototype.push = Api.push;
 		this.prototype.pop = Api.pop;
 		this.prototype.getAdvertisingData = Api.getAdvertisingData;
+		this.prototype.message = Api.message;
+		this.prototype.hideKey = Api.hideKey;
 	},
 	/**
 	 * 网络请求 默认 GET 
 	 * @param {Object} param
 	 */
-	fetch(param, port){
+	fetch(param, port,isImage){
 		if (typeof port === 'undefined') port = 1;
 		port = port - 1;
 		let ipList = [
@@ -31,7 +33,6 @@ const Api = {
 			url = ipList[port] + param.url
 		}
 		param.url = url;
-	
 		if (param.method === 'POST') {
 			param.header = param.header || {'content-type': 'application/json'}
 		}
@@ -138,6 +139,13 @@ const Api = {
 	 */
 	message(title){
 		uni.showToast({title,icon:'none'})
+	},
+	
+	/**
+	 * 隐藏键盘
+	 */
+	hideKey(){
+		plus.key.hideSoftKeybord();
 	},
 	
 	/**

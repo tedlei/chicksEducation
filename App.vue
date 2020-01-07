@@ -11,7 +11,8 @@
 		},
 		created() {
 			this.push({url:'/pages/page_lm/LoginRelated/verifyLogin'})
-			
+			// this.push({url:'/pages/page_lm/LoginRelated/register'})
+			// this.push({url:'/pages/page_lm/myPage/myPage'})
 		}
 	}
 </script>
@@ -20,7 +21,7 @@
 	/*每个页面公共css */
 	@font-face {
 		font-family: "iconfont";
-		src: url('https://at.alicdn.com/t/font_1472826_w1bms62an4k.ttf') format('truetype');
+		src: url('https://at.alicdn.com/t/font_1472826_3szdkj1kh5f.ttf') format('truetype');
 	}
 	.iconfont{
 		font-family: iconfont;

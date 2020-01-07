@@ -1,1 +1,0 @@
-<swiper class="swiper data-v-198732c8" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{1000}}"><block wx:for="{{swiperImages}}" wx:for-item="item" wx:for-index="index" wx:key="index"><swiper-item class="data-v-198732c8"><image src="{{item.pic}}" class="data-v-198732c8"></image></swiper-item></block></swiper>

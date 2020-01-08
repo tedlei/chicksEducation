@@ -53,7 +53,7 @@ export default {
 	onLoad(option){
 		let lp = option.loginpattern;
 		if(lp) this.loginpattern = lp;
-		if(this.getItem('userInfo')){
+		if(this.getItemSync('userInfo')){
 			this.push({url:'/pages/page_lm/myPage/myPage'})
 		}
 	},
@@ -139,7 +139,7 @@ export default {
 				let {data,msg,success} = res[1].data;
 				this.message(msg);
 				if(success){
-					this.setItem('userInfo',data);
+					this.setItemSync('userInfo',data);
 					this.push({url:'/pages/page_lm/myPage/myPage'})
 					// this.push({url:'/pages/index/index'})
 				}

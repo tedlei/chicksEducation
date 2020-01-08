@@ -2,7 +2,7 @@
 	<view class="courseCategory fx">
 		<view class="leftNav">
 			<view v-for="(item,index) in courseClassificationList" :key="index" class="leftNavOption">
-				<view class="fx fxCenter leftNavOption_tit pointer" 
+				<view class="fx fxCenter leftNavOption_tit active" 
 					:class="index === showNumber ?  'checked' : ''" 
 					@tap="cutShowNumber(index)">{{item.tit}}</view>
 				<view v-show="index === showNumber"

@@ -20,7 +20,7 @@
 			}
 		},
 		onLoad(){
-			this.userInfo = this.getItem('userInfo');
+			this.userInfo = this.getItemSync('userInfo');
 		},
 		methods: {
 			//上传头像
@@ -87,7 +87,7 @@
 					if(success){
 						userInfo.user.head = head;
 						// 更新本地数据
-						this.setItem('userInfo', userInfo);
+						this.setItemSync('userInfo', userInfo);
 						uni.$emit('updateHead')
 						setTimeout(()=>{
 							this.pop()

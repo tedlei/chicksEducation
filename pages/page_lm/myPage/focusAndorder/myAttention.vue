@@ -42,7 +42,7 @@ export default {
 	onLoad(e){
 		this.isgz = e.type;
 		if(e.type==='gz')this.selectList.push('学校')
-		this.userInfo = this.getItem('userInfo');
+		this.userInfo = this.getItemSync('userInfo');
 		this.getData()
 	},
 	methods: {
@@ -99,7 +99,7 @@ export default {
 		//获取教师或课程列表
 		getTeacherList(num){
 			this.attentionList = [];
-			let userInfo = this.getItem('userInfo');
+			let userInfo = this.getItemSync('userInfo');
 			let IP = 5;
 			let url = '/appointment/findAppoin.do';
 			let data = {userid:userInfo.user.id,pageNum:''+this.pageNum,pageSize:''+this.pageSize};

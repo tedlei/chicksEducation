@@ -1,7 +1,6 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -12,7 +11,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style>
 	/* #ifndef APP-PLUS-NVUE */
 	/*每个页面公共css */
 		@font-face {
@@ -25,12 +24,20 @@
 	.fx{
 		display: flex;
 	}
-	view{
+	ul, li, view{
 		box-sizing: border-box;
 		font-size: 32rpx;
 	}
 	body{
 		background-color: #F5F5F5;
+	}
+	navigator:active{
+		opacity: 0.4;
+	}
+	.ellipsis{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	/* #endif */
 	
@@ -39,8 +46,8 @@
 		align-items: center;
 	}
 	
-	.pointer:active{
-		opacity: 0.2;
+	.active:active{
+		opacity: 0.4;
 	}
 	.pfAllScreen{
 		position: fixed;

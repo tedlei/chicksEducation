@@ -52,12 +52,11 @@ export default {
 	methods: {
 		//获取用户对象
 		getUsre(){
-			let userInfo = this.getItem('userInfo');
+			this.userInfo = this.getItemSync('userInfo');
 			if(userInfo) this.userInfo = userInfo
 			else{
 				uni.reLaunch({url:'/pages/page_lm/LoginRelated/verifyLogin'})
 			}
-			console.log(this.userInfo)
 		},
 		//跳转到修改头像
 		topUploadHead(){

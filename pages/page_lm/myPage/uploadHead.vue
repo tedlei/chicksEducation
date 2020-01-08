@@ -81,7 +81,6 @@
 						phone: userInfo.user.phone
 					}
 				}, 2).then((res)=>{
-					console.log(res[1].data)
 					let {message,success} = res[1].data;
 					this.message(message);
 					if(success){

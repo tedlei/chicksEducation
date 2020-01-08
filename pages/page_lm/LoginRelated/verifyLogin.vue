@@ -155,7 +155,6 @@ export default {
 		
 		//点击返回键
 		topBack(){
-			console.log(134)
 			this.pop()
 		}
 	},

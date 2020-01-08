@@ -7,6 +7,9 @@ const Api = {
 		this.prototype.getTimer = Api.getTimer;
 		this.prototype.getItem = Api.getItem;
 		this.prototype.setItem = Api.setItem;
+		this.prototype.getItemSync = Api.getItemSync;
+		this.prototype.setItemSync = Api.setItemSync;
+		this.prototype.removeItem = Api.removeItem;
 		this.prototype.push = Api.push;
 		this.prototype.pop = Api.pop;
 		this.prototype.getAdvertisingData = Api.getAdvertisingData;
@@ -14,6 +17,11 @@ const Api = {
 		this.prototype.hideKey = Api.hideKey;
 		this.prototype.getAdvertisingData = Api.getAdvertisingData;
 		this.prototype.getRandomData = Api.getRandomData;
+		
+		
+		// vuex相关
+		this.prototype.updateStoreState = Api.updateStoreState;
+		this.prototype.getStoreGetter = Api.getStoreGetter;
 	},
 	/**
 	 * 网络请求 默认 GET 
@@ -90,26 +98,70 @@ const Api = {
 		return ymd + ' ' + hms;
 	},
 	/**
-	 * 获取本地存储数据
+	 * 同步获取本地存储数据
+	 * @param {String} key
+	 * @param {Function} callback
+	 */
+	getItem(key, callback = (data)=>{}){
+		uni.getStorage({
+			key,
+			success: (res) => {
+				let result = res.data;
+				if (/^(\[|\{)/.test(result)){
+					result = this.parse(result);
+				}
+				callback.call(this, result);
+			},
+			fail: (rej) => {
+				callback.call(this, null);
+			}
+		});
+	},
+	/**
+	 * 同步获取本地存储数据
 	 * @param {String} key
 	 */
-	getItem(key){
-		let result = uni.getStorageSync(key)
+	getItemSync(key){
+		let result = uni.getStorageSync(key);
 		if (/^(\[|\{)/.test(result)){
-			result = this.parse(result)
+			result = this.parse(result);
 		}
 		return result
 	},
 	/**
-	 * 设置本地存储
+	 * 异步置本地存储
+	 * @param {String} key
+	 * @param {Any} value
+	 * @param {Function} callback
+	 */
+	setItem(key, value, callback = ()=>{}){
+		uni.setStorage({
+			key,
+			data: value,
+			success: callback
+		});
+	},
+	/**
+	 * 同步设置本地存储
 	 * @param {String} key
 	 * @param {Object} value
 	 */
-	setItem(key, value){
+	setItemSync(key, value){
 		if (typeof value === 'object'){
 			value = this.stringify(value);
 		}
 		uni.setStorageSync(key, value);
+	},
+	/**
+	 * 异步移除
+	 */
+	removeItem(key, callback = (res)=>{}){
+		uni.removeStorage({
+		    key,
+		    success: (res) => {
+		        callback.call(this, res);
+		    }
+		});
 	},
 	/**
 	 * 页面跳转
@@ -181,6 +233,20 @@ const Api = {
 			result.push(origin[rd]);
 			origin.splice(rd, 1);
 		}
+	},
+	/**
+	 * @param {String} mutationsApiName	mutations 中的方法名
+	 * @param {Any} newValue
+	 */
+	updateStoreState(mutationsApiName, newValue){
+		this.$store.commit(mutationsApiName, newValue);
+	},
+	/**
+	 * 获取定位vuex计算属性中的值
+	 * @param {String} name
+	 */
+	getStoreGetter(name){
+		return this.$store.getters[name]();
 	}
 }
 

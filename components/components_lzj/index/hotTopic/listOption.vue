@@ -15,6 +15,7 @@
 
 <script>
 	import uOption from './option.vue'
+	
 	export default {
 		components: {uOption},
 		data(){
@@ -22,7 +23,7 @@
 				listData: []
 			}
 		},
-		props: ['value', 'selectArrValue'],
+		props: ['value', 'selectArrValue', 'isUpdateData'],
 		created() {
 			this.initialize();
 		},
@@ -32,7 +33,7 @@
 			 */
 			initialize(){
 				// 获取地址 并拼接
-				let position = this.getItem('position');
+				let position = this.getStoreGetter('location');
 				
 				let val = this.selectArrValue;
 				if (val === '其他热门推荐课程') val = 'other';
@@ -52,6 +53,13 @@
 						return index < 4;
 					}) : res;
 				});
+			}
+		},
+		watch: {
+			isUpdateData(v){
+				if (v) {
+					this.initialize();
+				}
 			}
 		}
 	}

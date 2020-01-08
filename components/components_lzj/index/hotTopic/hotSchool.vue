@@ -22,10 +22,11 @@
 		components: {uSchoolOption},
 		data(){
 			return {
-				// 热门课程数据
+				// 热门学校数据
 				popularSchool: []
 			}
 		},
+		props: ['isUpdateData'],
 		created() {
 			this.getPopularSchoolData();
 		},
@@ -35,8 +36,17 @@
 			 */
 			async getPopularSchoolData(){
 				let result = await this.getAdvertisingData(2);
-				this.getRandomData(result, this.popularSchool, 2);
+				let arr = [];
+				this.getRandomData(result, arr, 2);
+				this.popularSchool = arr;
 			},
+		},
+		watch: {
+			isUpdateData(v){
+				if (v) {
+					this.getPopularSchoolData();
+				}
+			}
 		}
 	}
 </script>

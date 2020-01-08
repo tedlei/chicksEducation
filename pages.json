@@ -9,6 +9,18 @@
 		{
 			"path": "pages/page_lzj/search/search",
 			"style": {
+				"navigationStyle":"custom",
+				"app-plus": {
+					"subNVues": [
+						{
+							"id": "searchHeader",
+							"path": "pages/page_lzj/search/header",
+							"type": "navigationBar",
+							"style": {
+							}
+						}
+					]
+				}
 			}
 		},
 		{
@@ -34,9 +46,23 @@
 			}
 		},
 		{
-			// 原生窗体底部导航栏
-			"path": "paltform/app-plus/subNVue/footer",
-			"style": {
+		    "path" : "pages/page_lzj/location/location",
+		    "style" : {
+				"navigationBarTitleText":"切换城市",
+				"navigationBarBackgroundColor":"#FD8109",
+				"navigationBarTextStyle":"white",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [
+							{
+								"float":"right",
+								"text": "确认",
+								"fontSize":"14px"
+							}
+						]
+					},
+					"subNVues": []
+				}
 			}
 		},
 				
@@ -136,7 +162,8 @@
 		"list": [
 			{
 				"name": "", //模式名称
-				"path": "pages/index/index", //启动页面，必选
+				"path": "pages/index/index", //启动页面，必选 
+				// "path": "pages/page_lzj/search/search", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]

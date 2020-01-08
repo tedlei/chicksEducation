@@ -44,7 +44,7 @@ export default {
 		}
 	},
 	onLoad() {
-		this.userInfo = this.getItem('userInfo');
+		this.userInfo = this.getItemSync('userInfo');
 	},
 	methods: {
 		//跳转到修改头像

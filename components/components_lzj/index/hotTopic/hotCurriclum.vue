@@ -25,6 +25,7 @@
 				popularCourse: []
 			}
 		},
+		props: ['isUpdateData'],
 		created() {
 			this.getPopularCourseData();
 		},
@@ -34,8 +35,17 @@
 			 */
 			async getPopularCourseData(){
 				let res = await this.getAdvertisingData(3);
-				this.getRandomData(res, this.popularCourse, 4);
+				let arr = [];
+				this.getRandomData(res, arr, 4);
+				this.popularCourse = arr;
 			},
+		},
+		watch: {
+			isUpdateData(v){
+				if (v) {
+					this.getPopularCourseData();
+				}
+			}
 		}
 	}
 </script>

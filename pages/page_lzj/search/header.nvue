@@ -1,0 +1,131 @@
+<template>
+	<view class="search_header">
+		<text class="iconfont2 back active" @tap="back">&#xe651;</text>
+		<view calss="search_input_parent">
+			<input type="text" 
+				class="search_input" 
+				v-model="input"
+				placeholder="请输入关键字" 
+				ref="input" />
+			<text class="iconfont2 search_icon">&#xe610;</text>
+		</view>
+		<view class="finish">
+			<text class="finish_text active" @tap="viewResult">搜索</text>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data(){
+			return {
+				input: ''
+			}
+		},
+		created() {
+			let domModule = weex.requireModule('dom');
+			domModule.addRule('fontFace', {
+			    'fontFamily': "iconfont2",
+			    'src': "url('https://at.alicdn.com/t/font_1472826_ujpta4di21n.ttf')"
+			});
+		},
+		mounted() {
+			setTimeout(()=>{
+				this.$refs.input.focus();
+			}, 400);
+		},
+		methods: {
+			back(){
+				uni.navigateBack({
+					delta: 1
+				});
+				plus.key.hideSoftKeybord();
+			},
+			viewResult(){
+				let input = this.input;
+				if (!input.trim().length) {
+					uni.showToast({
+						icon: 'none',
+						title: "搜索内容不能为空"
+					})
+					return
+				}
+				
+				uni.$emit('getSearchResult', {input: input});
+				
+				this.back();
+				
+				// 添加历史关键字
+				uni.getStorage({
+					key: 'historyKeyword',
+					success: (res) => {
+						this.addHistoruKeyword(res.data, input);
+					},
+					fail: () => {
+						this.addHistoruKeyword([], input);
+					}
+				})
+			},
+			addHistoruKeyword(historyKeyword, input){
+				historyKeyword.unshift(input);
+				uni.setStorage({
+					key: "historyKeyword",
+					data: historyKeyword
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	.iconfont2{
+		font-family: iconfont2;
+	}
+	.search_header{
+		flex: 1;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		padding-top: 20px;
+		background-color: #F5F5F5;
+	}
+	.search_input_parent{
+		position: relative;
+	}
+	.search_input{
+		width:250px;
+		height:28px;
+		padding-left: 30px;
+		padding-right: 10px;
+		background-color:rgba(255,255,255,1);
+		font-size: 14px;
+		border-top-right-radius: 14px;
+		border-top-left-radius: 14px;
+		border-bottom-right-radius: 14px;
+		border-bottom-left-radius: 14px;
+	}
+	.search_icon{
+		position: absolute;
+		top: 14px;
+		color: #999999;
+		font-size: 14px;
+		transform: translateY(-50%) translateX(10px);
+	}
+	.back{
+		color: #666666;
+	}
+	.finish{
+		justify-content: center;
+		align-items: center;
+		width:60px;
+		height:28px;
+		background-image:linear-gradient(92deg,rgba(253,84,9,1) 0%,rgba(128,128,128,1) 60%);
+		border-top-right-radius: 14px;
+		border-top-left-radius: 14px;
+		border-bottom-right-radius: 14px;
+		border-bottom-left-radius: 14px;
+	}
+	.finish_text{
+		color: #FFFFFF;
+	}
+</style>

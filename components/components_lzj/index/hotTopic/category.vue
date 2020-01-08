@@ -3,7 +3,8 @@
        <listOption :value="item" 
 				    v-for="(item, idx) in titleArr" 
 					:selectArrValue="selectArr[idx]" 
-					:key="idx"/>
+					:key="idx"
+					:isUpdateData.sync="isUpdateData"/>
     </div>
 </template>
 
@@ -11,6 +12,7 @@
     import listOption from './listOption.vue'
     export default {
         components: {listOption},
+		props: ['isUpdateData'],
         data(){
             return {
                 selectArr: ['小学辅导', '中学辅导', '艺术培训', '学历提升', '职业培训', 'other'],

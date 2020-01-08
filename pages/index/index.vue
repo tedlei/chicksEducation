@@ -14,13 +14,11 @@
 		</view>
 		<image class="section_image" :src="informationImage.pic" mode=""></image>
 		<!-- 热门课程 -->
-		<uHotCurriclum></uHotCurriclum>
+		<uHotCurriclum :isUpdateData.sync="isUpdateData"></uHotCurriclum>
 		<!-- 热门学校 -->
-		<uHotSchool></uHotSchool>
+		<uHotSchool :isUpdateData.sync="isUpdateData"></uHotSchool>
 		<!-- 热门课程推荐 -->
-		<!-- <uCategory></uCategory> -->
-		<!-- 底部 -->
-		<!-- <uFooter></uFooter> -->
+		<uCategory :isUpdateData.sync="isUpdateData"></uCategory>
 	</view>
 </template>
 
@@ -30,14 +28,19 @@
 	import uCategory from '../../components/components_lzj/index/hotTopic/category.vue'
 	import uHotCurriclum from '../../components/components_lzj/index/hotTopic/hotCurriclum.vue'
 	import uHotSchool from '../../components/components_lzj/index/hotTopic/hotSchool.vue'
-	
 	export default {
-		components: {headerNav, uSwiper, uCategory, uHotCurriclum, uHotSchool},
+		components: {
+			headerNav,
+			uSwiper,
+			uCategory,
+			uHotCurriclum,
+			uHotSchool
+		},
 		data() {
 			return {
+				isUpdateData: false,
 				informationImage: {},
-				class_nav_data: [
-					{
+				class_nav_data: [{
 						image: '../../static/image/kecheng.png',
 						name: '课程'
 					},
@@ -57,66 +60,87 @@
 						image: '../../static/image/fenlei.png',
 						name: '分类'
 					}
-				] 
+				]
 			}
 		},
 		onLoad() {
 			this.getIformation();
+			
+			// 获取搜索关键字
+			uni.$on('getSearchResult', this.getSearchResult);
 		},
 		methods: {
 			/**
 			 * 获取热门资讯广告位
 			 */
-			async getIformation(){
+			async getIformation() {
 				this.informationImage = (await this.getAdvertisingData(5))[0];
+			},
+			/**
+			 * 根据搜索内容 查询数据
+			 */
+			getSearchResult(data){
+				// console.log(data, 7777777777);
 			}
+		},
+		onShow() {
+			this.isUpdateData = true;
+			let timer = setTimeout(()=>{
+				this.isUpdateData = false;
+				clearTimeout(timer);
+			}, 1000)
 		}
-		
 	}
 </script>
 
 <style scoped lang="scss">
-	.section{
+	.section {
 		flex-direction: column;
 		align-items: center;
-		.class_nav{
+		.class_nav {
 			justify-content: space-around;
 			width: 100vw;
 			padding-top: 18rpx;
 			text-align: center;
-			image{
+
+			image {
 				display: block;
 				width: 114rpx;
 				height: 114rpx;
 			}
-			.name{
+
+			.name {
 				color: $col-333;
 			}
 		}
-		.information{
+
+		.information {
 			align-items: center;
-			width:690rpx;
-			height:60rpx;
+			width: 690rpx;
+			height: 60rpx;
 			margin: 28rpx 0 40rpx;
 			background: $col-fff;
-			opacity:1;
+			opacity: 1;
 			border-radius: 50rpx;
-			.information_one{
+
+			.information_one {
 				margin: 0 24rpx;
-				font-size:28rpx;
+				font-size: 28rpx;
 				font-weight: 700;
 				color: $col-333;
 			}
-			.information_two{
+
+			.information_two {
 				width: 48rpx;
 				height: 28rpx;
-				font-size:20rpx;
-				background-color: rgba(253,129,9,0.2);
+				font-size: 20rpx;
+				background-color: rgba(253, 129, 9, 0.2);
 				color: $col-main;
-				border-radius:4rpx;
+				border-radius: 4rpx;
 			}
 		}
-		.section_image{
+
+		.section_image {
 			width: 690rpx;
 			height: 152rpx;
 		}

@@ -1,5 +1,5 @@
 export default {
-	showNumber: 2,
+	showNumber: 0,
 	courseClassificationList: [{
 			tit: '学前辅导',
 			option: [{

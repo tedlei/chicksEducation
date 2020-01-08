@@ -1,40 +1,44 @@
 <template>
-	<view class="vlog-app">
-		<image v-if="loginpattern==='code'" class="vlImg" src="../../../static/image/logo.png" mode=""></image>
-		<TopText v-else title="密码登陆"></TopText>
-		<view class="vlViIn fx">
-			<text class="vlIntext">{{loginpattern==="code"?"手机号":"账号"}}</text>
-			<input 
-				class="vlInput " 
-				type="text" 
-				v-model="phone" 
-				:placeholder="'请输入手机号'+(loginpattern==='code'?'码':'或账号')" />
-			<!-- focus -->
-			<text v-show="phone" class="iconfont" @tap="topClear('phone')">&#xe600;</text>
-		</view>
-		<view class="vlViIn fx inMagin" v-if="loginpattern==='code'">
-			<text class="vlIntext">验证码</text>
-			<input class="vlInput" type="number" maxlength="6" v-model="verifyCode" placeholder="请输入验证码"/>
-			<view class="vlInYzm" :class="num<=0?'btnBgcolor':''"  @tap="topGetVerify()">
-				<text>{{num<=0?"获取验证码":"重新获取"+num+"s"}}</text>
+	<view class="vlog-app pfAllScreen fx">
+		<headPage @topBack="topBack" @topSave="tzRegPage" title=' ' :login="true"></headPage>
+		<view class="vlogBg">
+			<image v-if="loginpattern==='code'" class="vlImg" src="../../../static/image/logo.png" mode=""></image>
+			<TopText v-else title="密码登陆"></TopText>
+			<view class="vlViIn fx">
+				<text class="vlIntext">{{loginpattern==="code"?"手机号":"账号"}}</text>
+				<input :focus='getFocus'
+					class="vlInput " 
+					type="text" 
+					v-model="phone" 
+					:placeholder="'请输入手机号'+(loginpattern==='code'?'码':'或账号')" />
+				<!-- focus -->
+				<text v-show="phone" class="iconfont" @tap="topClear('phone')">&#xe600;</text>
 			</view>
+			<view class="vlViIn fx inMagin" v-if="loginpattern==='code'">
+				<text class="vlIntext">验证码</text>
+				<input class="vlInput" type="number" maxlength="6" v-model="verifyCode" placeholder="请输入验证码"/>
+				<view class="vlInYzm" :class="num<=0?'btnBgcolor':''"  @tap="topGetVerify()">
+					<text>{{num<=0?"获取验证码":"重新获取"+num+"s"}}</text>
+				</view>
+			</view>
+			<view class="vlViIn fx inMagin" v-else>
+				<text class="vlIntext" cursor-spacing = "0">密码</text>
+				<input class="vlInput" type="password" v-model="pass" placeholder="请输入密码"/>
+				<text v-show="pass" class="iconfont" @tap="topClear('pass')">&#xe600;</text>
+			</view>
+			<view class="vlBtn" :class="islogBtn?'btnBgcolor':''" @tap="topLog(islogBtn)">登录</view>
+			<view class="vlqh" v-if="loginpattern==='code'" @tap="topPassLogin"><text>密码登录</text></view>
+			<view class="vlqh" v-else @tap="tzRegPage('pass')">忘记了？找回密码</view>
 		</view>
-		<view class="vlViIn fx inMagin" v-else>
-			<text class="vlIntext" cursor-spacing = "0">密码</text>
-			<input class="vlInput" type="password" v-model="pass" placeholder="请输入密码"/>
-			<text v-show="pass" class="iconfont" @tap="topClear('pass')">&#xe600;</text>
-		</view>
-		<view class="vlBtn" :class="islogBtn?'btnBgcolor':''" @tap="topLog(islogBtn)">登录</view>
-		<view class="vlqh" v-if="loginpattern==='code'" @tap="topPassLogin"><text>密码登录</text></view>
-		<view class="vlqh" v-else @tap="tzRegPage('pass')">忘记了？找回密码</view>
 	</view>
 </template>
 
 <script>
 
 import TopText from '../../../components/components_lm/login/text.vue'
+import headPage from '../../../components/components_lm/headPage.vue'
 export default {
-	components:{TopText},
+	components:{TopText,headPage},
 	data() {
 		return {
 			phone:'',   //手机号
@@ -43,6 +47,7 @@ export default {
 			isAgree:false,   //同意协议
 			loginpattern:'code',   //登录模式
 			num:0,   //获取验证码时间
+			getFocus:true,
 		}
 	},
 	onLoad(option){
@@ -92,12 +97,15 @@ export default {
 		
 		//点击密码登录
 		topPassLogin(){
-			this.phone = '';
-			this.verifyCode = '';
-			this.pass ='';
-			this.isAgree = false;
-			this.num = 0;
-			this.loginpattern = this.loginpattern==="code"?"pass":"code";
+			let aa = this.loginpattern==="code"?"pass":"code";
+			this.push({url:'/pages/page_lm/LoginRelated/verifyLogin?loginpattern='+aa})
+			// this.phone = '';
+			// this.verifyCode = '';
+			// this.pass ='';
+			// this.isAgree = false;
+			// this.num = 0;
+			// this.loginpattern = this.loginpattern==="code"?"pass":"code";
+			// this.getFocus = true;
 		},
 		
 		//简单加密
@@ -143,21 +151,17 @@ export default {
 			this.hideKey();
 			let url = '/pages/page_lm/LoginRelated/register?passType='+str;
 			this.push({url})
+		},
+		
+		//点击返回键
+		topBack(){
+			console.log(134)
+			this.pop()
 		}
 	},
 	onNavigationBarButtonTap(e) {
 		this.loginpattern='code';
 		this.tzRegPage('reg');
-	},
-	
-	//点击返回时
-	onBackPress(){
-		this.hideKey();
-		if(this.loginpattern==="pass"){
-			this.topPassLogin();
-			return true;
-		}
-		return false;
 	},
 	computed:{
 		islogBtn(){
@@ -180,6 +184,11 @@ export default {
 <style scoped lang="scss">
 
 .vlog-app{
+	padding-top: 54rpx;
+	flex-direction:column;
+	.vlogBg{
+		flex: 1;
+		background-color: $col-fff;
 	.vlImg{
 		width: 326rpx;
 		height: 118rpx;
@@ -275,6 +284,7 @@ export default {
 			display: inline-block;
 			padding: 20rpx 30rpx;
 		}
+	}
 	}
 }
 </style>

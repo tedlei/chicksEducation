@@ -1,0 +1,59 @@
+<template>
+	<view class="mdc_app">
+		<mpl 
+		 v-for="(item,i) of dataList" :key='i' 
+		 :item = "item"
+		 :user = "userInfo.user"
+		 @topUpdate="topUpdate"></mpl>
+	</view>
+</template>
+
+<script>
+import mpl from '../../../../components/components_lm/myPage/myPageList.vue'
+export default {
+	components:{mpl},
+	data() {
+		return {
+			dataList:[
+				{title:'手机号',key:'phone',isIcon:true},
+				{title:'账户名',key:'name',isIcon:true},
+				{title:'昵称',key:'nickName'},
+				{title:'生日',key:'',fun:'birthday'},
+				{title:'地区',key:'',fun:'region'},
+				{title:'详细地址',key:'detailedDddress'},
+				{title:'邮箱',key:'email'},
+				{title:'QQ',key:'qq'},
+			],
+			userInfo:null,
+		}
+	},
+	onLoad() {
+		this.getUsre();
+		this.once.call(this,'updateUser','getUsre')
+	},
+	methods: {
+		//获取用户对象
+		getUsre(){
+			this.userInfo = this.getItem('userInfo');
+		},
+		
+		//对象序列化
+		stringify(obj){
+			return JSON.stringify(obj)
+		},
+		
+		//跳转修改
+		topUpdate(item,user){
+			if(item.isIcon)return
+			this.push({url:'/pages/page_lm/myPage/personalData/updateData?itemStr='+this.stringify(item)+'&userStr='+this.stringify(user)})
+		}
+	}
+}
+</script>
+
+<style scoped lang="scss">
+.mdc_app{
+	background: $col-fff;
+	
+}
+</style>

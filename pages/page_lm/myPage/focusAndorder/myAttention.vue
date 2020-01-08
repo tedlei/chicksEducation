@@ -1,5 +1,5 @@
 <template>
-	<view class="myatt_app fx">
+	<view class="myatt_app pfAllScreen fx">
 		<view class="myattUl fx">
 			<view class="myattLi" 
 				:class="selectNum===i?'selColoe':''" 
@@ -24,7 +24,7 @@
 
 <script>
 
-import myPageCom from '../../../components/components_lm/myPage/myPageCom.vue'
+import myPageCom from '../../../../components/components_lm/myPage/myPageCom.vue'
 export default {
 	components:{myPageCom},
 	data() {
@@ -188,9 +188,6 @@ export default {
 <style scoped lang="scss">
 
 .myatt_app{
-	position: fixed;
-	height: 100%;
-	width: 750rpx;
 	padding: 34rpx 28rpx;
 	padding-bottom: 0;
 	background: $col-fff;

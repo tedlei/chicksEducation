@@ -10,10 +10,13 @@ const Api = {
 		this.prototype.push = Api.push;
 		this.prototype.pop = Api.pop;
 		this.prototype.getAdvertisingData = Api.getAdvertisingData;
-		this.prototype.message = Api.message;
-		this.prototype.hideKey = Api.hideKey;
 		this.prototype.getAdvertisingData = Api.getAdvertisingData;
 		this.prototype.getRandomData = Api.getRandomData;
+		
+		/*---------------------------------------------------*/
+		this.prototype.message = Api.message;
+		this.prototype.hideKey = Api.hideKey;
+		this.prototype.once = Api.once;
 	},
 	/**
 	 * 网络请求 默认 GET 
@@ -147,7 +150,21 @@ const Api = {
 	 * 隐藏键盘
 	 */
 	hideKey(){
-		plus.key.hideSoftKeybord();
+		// #ifdef APP-PLUS
+			plus.key.hideSoftKeybord();
+		// #endif
+	},
+	
+	/**
+	 * 调用指定页面方法
+	 * @param {Object} eventName   监听事件名
+	 * @param {Object} funName  要调用的页面方法
+	 */
+	once(eventName,funName){
+		let _then = this;
+		uni.$once(eventName, function(data){
+			_then[funName](data);
+		})
 	},
 	
 	/**

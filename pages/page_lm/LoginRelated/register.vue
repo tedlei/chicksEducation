@@ -1,10 +1,9 @@
 <template>
-	<view class="reg-app">
+	<view class="reg-app pfAllScreen">
 		<TopText :title="passType==='reg'?'注册':'找回密码'"></TopText>
 		<view class="vlViIn fx">
 			<text class="vlIntext">手机号</text>
-			<input class="vlInput " type="number" maxlength="11" v-model="phone" placeholder='请输入手机号码'/>
-			<!-- focus -->
+			<input class="vlInput" focus type="number" maxlength="11" v-model="phone" placeholder='请输入手机号码'/>
 			<text v-show="phone" class="iconfont" @tap="topClear('phone')">&#xe600;</text>
 		</view>
 		<view class="vlViIn fx inMagin">
@@ -132,13 +131,11 @@ export default {
 				let {message,success} = res[1].data
 				this.message(message)
 				if(success){
-					uni.redirectTo({url:'/pages/page_lm/LoginRelated/verifyLogin?loginpattern=pass'})
+					this.pop();
+					// uni.redirectTo({url:'/pages/page_lm/LoginRelated/verifyLogin?loginpattern=pass'})
 				}
 			})
 		}
-	
-		
-		
 	},
 	computed:{
 		islogBtn(){
@@ -160,6 +157,7 @@ export default {
 <style scoped lang="scss">
 
 .reg-app{
+	background-color: $col-fff;
 	.vlViIn{
 		width: 630rpx;
 		height: 92rpx;

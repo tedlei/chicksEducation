@@ -8,9 +8,6 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
-		},
-		created() {
-			// this.push({url:'pages/page_lm/register/verifyLogin'})
 		}
 	}
 </script>
@@ -44,5 +41,12 @@
 	
 	.pointer:active{
 		opacity: 0.2;
+	}
+	.pfAllScreen{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top:0;
+		left: 0;
 	}
 </style>

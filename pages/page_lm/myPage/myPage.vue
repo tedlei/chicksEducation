@@ -1,5 +1,5 @@
 <template>
-	<view class="mp-app">
+	<view class="mp-app pfAllScreen fx">
 		<view class="mpatop">
 			<view class="mpaTopText"><text>我的</text></view>
 			<view class="mpaTopImg fx">
@@ -9,20 +9,22 @@
 						></image>
 				</view>
 				<view class="mpanike">
-					<text>像风一样自由飞翔</text>
-					<view class="mpanikeText"><text>账户名：15823961672</text></view>
+					<view class="mpaNick">{{userInfo&&userInfo.user.nickName}}</view>
+					<view class="mpaNick mpanikeText"><text>账户名：{{userInfo&&userInfo.user.name}}</text></view>
 				</view>
 			</view>
 		</view>
-		<view class="mpaLi fx" v-for="(item,i) of myList" 
-			:key='i' 
-			hover-class="mpaTop" 
-			@tap="topViewList(item.url)">
-			<view style="width: 260rpx;">
-				<text style="margin-left: 40rpx;" class="iconfont">{{item.icon}}</text>
-				<text style="margin-left: 30rpx;">{{item.title}}</text>
+		<view class="mpMain">
+			<view class="mpaLi fx" v-for="(item,i) of myList" 
+				:key='i' 
+				hover-class="mpaTop" 
+				@tap="topViewList(item.url)">
+				<view style="width: 260rpx;">
+					<text style="margin-left: 40rpx;" class="iconfont">{{item.icon}}</text>
+					<text style="margin-left: 30rpx;">{{item.title}}</text>
+				</view>
+				<text style="margin-left: 430rpx;" class="iconfont">&#xe601;</text>
 			</view>
-			<text style="margin-left: 430rpx;" class="iconfont">&#xe601;</text>
 		</view>
 		
 	</view>
@@ -34,19 +36,29 @@ export default {
 	data() {
 		return {
 			myList:[
-				{title:'我的关注',icon:'\ue6af',url:'/pages/page_lm/myPage/myAttention?type=gz'},
-				{title:'我的预约',icon:'\ue622',url:'/pages/page_lm/myPage/myAttention?type=yy'},
-				{title:'个人资料',icon:'\ue621',url:'/pages/page_lm/myPage/myDataCenter'},
+				{title:'我的关注',icon:'\ue6af',url:'/pages/page_lm/myPage/focusAndorder/myAttention?type=gz'},
+				{title:'我的预约',icon:'\ue622',url:'/pages/page_lm/myPage/focusAndorder/myAttention?type=yy'},
+				{title:'个人资料',icon:'\ue621',url:'/pages/page_lm/myPage/personalData/myDataCenter'},
 				{title:'卡券',icon:'\ue623',url:''},
-				{title:'设置',icon:'\ue620',url:''},
+				{title:'设置',icon:'\ue620',url:'/pages/page_lm/myPage/settings/setting'},
 			],
 			userInfo:null, 
 		}
 	},
 	onLoad() {
-		this.userInfo = this.getItem('userInfo');
+		this.getUsre();
+		this.once.call(this,'updateHead','getUsre')
 	},
 	methods: {
+		//获取用户对象
+		getUsre(){
+			let userInfo = this.getItem('userInfo');
+			if(userInfo) this.userInfo = userInfo
+			else{
+				uni.reLaunch({url:'/pages/page_lm/LoginRelated/verifyLogin'})
+			}
+			console.log(this.userInfo)
+		},
 		//跳转到修改头像
 		topUploadHead(){
 			this.push({url:'/pages/page_lm/myPage/uploadHead'});
@@ -63,6 +75,7 @@ export default {
 <style scoped lang="scss">
 
 .mp-app{
+	flex-direction: column;
 	.mpatop{
 		width: 750rpx;
 		height: 440rpx;
@@ -95,10 +108,16 @@ export default {
 				}
 			}
 			.mpanike{
+				width: 340rpx;
 				margin-left: 60rpx;
 				padding-top: 66rpx;
-				font-size: 40rpx;
 				color: $col-fff;
+				.mpaNick{
+					font-size: 40rpx;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
 				.mpanikeText{
 					margin-top:32rpx;
 					font-size: 28rpx;
@@ -106,11 +125,15 @@ export default {
 			}
 		}
 	}
-	.mpaLi{
-		width: 750rpx;
-		height: 126rpx;
-		align-items: center;
-		border-bottom: 2rpx solid #e5e5e5;
+	.mpMain{
+		flex: 1;
+		background-color: $col-fff;
+		.mpaLi{
+			width: 750rpx;
+			height: 126rpx;
+			align-items: center;
+			border-bottom: 2rpx solid #e5e5e5;
+		}
 	}
 	.mpaTop{
 		background: #eee;

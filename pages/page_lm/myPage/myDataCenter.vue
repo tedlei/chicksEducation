@@ -16,7 +16,6 @@ export default {
 	},
 	onLoad() {
 		this.userInfo = this.getItemSync('userInfo');
-		console.log(this.userInfo)
 	},
 	methods: {
 

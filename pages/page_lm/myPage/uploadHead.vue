@@ -1,5 +1,5 @@
 <template>
-	<view class="uphead_app fx">
+	<view class="uphead_app pfAllScreen fx">
 		<view class="upImg">
 			<image :src="imgSrc||userInfo.user.head" v-if="imgSrc||userInfo"></image>
 		</view>
@@ -29,7 +29,19 @@
 					count: 1,
 					sourceType: ['album', 'camera'],
 					success: (chooseImageRes) => {
-						const tempFilePaths = chooseImageRes.tempFilePaths;
+						const {tempFilePaths,tempFiles} = chooseImageRes;
+						let {name,size} = tempFiles[0]
+						let arr = name.split('.')
+						let imgType = arr[arr.length-1];
+						if(imgType!=='jpg'&&imgType!=='jpeg'&&imgType!=='png'){
+							this.message('图片仅支持 jpg、png格式图片');
+							return
+						}
+						if(size/1000/1000>1){
+							this.message('上传图片不能大于1MB');
+							return
+						}
+						
 						uni.uploadFile({
 							url: 'http://112.74.18.182:9101/cnjy-search-web/upload.do', //仅为示例，非真实的接口地址
 							filePath: tempFilePaths[0],
@@ -69,15 +81,15 @@
 						phone: userInfo.user.phone
 					}
 				}, 2).then((res)=>{
-					console.log(res[1].data)
 					let {message,success} = res[1].data;
 					this.message(message);
 					if(success){
 						userInfo.user.head = head;
 						// 更新本地数据
 						this.setItemSync('userInfo', userInfo);
+						uni.$emit('updateHead')
 						setTimeout(()=>{
-							uni.switchTab({url:'/pages/page_lm/myPage/myPage'})
+							this.pop()
 						},1000)
 					}
 				});
@@ -92,13 +104,9 @@
 <style scoped lang="scss">
 
 	.uphead_app {
-		position: fixed;
-		width: 750rpx;
-		height: 100%;
 		background: $col-666;
 		flex-direction: column;
 		justify-content: center;
-
 		.upImg {
 			width: 750rpx;
 			height: 750rpx;

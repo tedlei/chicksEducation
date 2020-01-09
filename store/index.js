@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 let userInfo = null;
-let location = uni.getStorageSync('position');
+
 const store = new Vuex.Store({
 	state: {
 		updatePosition: false

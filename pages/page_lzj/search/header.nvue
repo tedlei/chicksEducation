@@ -77,7 +77,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.iconfont2{
 		font-family: iconfont2;
 	}

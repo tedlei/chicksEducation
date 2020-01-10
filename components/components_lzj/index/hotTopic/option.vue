@@ -1,6 +1,6 @@
 <template>
 	<view class="option fx">
-		<image :src="value.courseImage" mode=""></image>
+		<image :src="value.courseImage"></image>
 		<text class="course_name">{{value.courseName}}</text>
 		<text class="course_price">{{'价格：' + value.coursePrice + '元'}}</text>
 		

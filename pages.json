@@ -3,7 +3,21 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"app-plus": {
+					"subNVues":[
+						{
+							//自定义头
+							"id": "sasdafadsfdsafsda",
+							"path": "paltform/app-plus/subNVue/footer",
+							"style": {
+								"position": "dock",
+								"dock": "bottom",
+								"height": "48px"
+							}
+						}
+					]
+				}
 			}
 		},
 		{
@@ -163,21 +177,7 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"app-plus": {
-			"subNVues":[
-				{
-					//自定义头
-					"id": "nav",
-					"path": "paltform/app-plus/subNVue/footer",
-					"style": {
-						"position": "dock",
-						"dock": "bottom",
-						"height": "48px"
-					}
-				}
-			]
-		}
+		"backgroundColor": "#F8F8F8"
 	},
 	"condition" : { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)

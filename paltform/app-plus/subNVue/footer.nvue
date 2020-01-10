@@ -1,22 +1,22 @@
 <template>
 	<view class="footer">
 		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe62f;</text>
+			<text class="iconfont2 text">&#xe623;</text>
 			<text class="interval"></text>
 			<text class="text">首页</text>
 		</view>
 		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe62f;</text>
+			<text class="iconfont2 text">&#xe623;</text>
 			<text class="interval"></text>
 			<text class="text">发现</text>
 		</view>
 		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe62f;</text>
+			<text class="iconfont2 text">&#xe623;</text>
 			<text class="interval"></text>
 			<text class="text">消息</text>
 		</view>
 		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe62f;</text>
+			<text class="iconfont2 text">&#xe623;</text>
 			<text class="interval"></text>
 			<text class="text">我的</text>
 		</view>
@@ -34,17 +34,18 @@
 			
 		},
 		created() {
+			
 			// 引入icon图标
 			const domModule = weex.requireModule('dom')
 			domModule.addRule('fontFace', {
 			    'fontFamily': "iconfont2",
-			    'src': "url('https://at.alicdn.com/t/font_1598678_taa23uzbh5p.ttf')"
+			    'src': "url('https://at.alicdn.com/t/font_1472826_ujpta4di21n.ttf')"
 			});
 		}
 	}
 </script>
 
-<style scoped>
+<style>
 	.iconfont2{
 		font-family: iconfont2;
 	}

@@ -10,7 +10,9 @@
 			</navigator>
 		</view>
 		<view class="list fx">
-			<uOption :showCurriclum="true" v-for="(value, i) in popularCourse" :cuClass="true" :value="value" :key="i"></uOption>
+			<uOption :showCurriclum="true" 
+					v-for="(value, i) in popularCourse"
+					:value="value" :key="i"></uOption>
 		</view>
 	</view>
 </template>

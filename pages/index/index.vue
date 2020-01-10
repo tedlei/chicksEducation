@@ -1,45 +1,72 @@
 <template>
-	<view class="section fx">
+	<view >
 		<headerNav></headerNav>
-		<uSwiper></uSwiper>
-		<view class="class_nav fx">
-			<view v-for="(item, i) in class_nav_data" :key="i">
-				<image :src="item.image"></image>
-				<text class="name">{{item.name}}</text>
-			</view>
+		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
+			<uTableBar @onSelect="onSelect" :settingNum="listClassNumber"></uTableBar>
 		</view>
-		<view class="information fx">
-			<text class="information_one">动态资讯</text>
-			<text class="information_two fx fxCenter">热门</text>
-		</view>
-		<image class="section_image" :src="informationImage.pic" mode=""></image>
-		<!-- 热门课程 -->
-		<uHotCurriclum :isUpdateData.sync="isUpdateData"></uHotCurriclum>
-		<!-- 热门学校 -->
-		<uHotSchool :isUpdateData.sync="isUpdateData"></uHotSchool>
-		<!-- 热门课程推荐 -->
-		<uCategory :isUpdateData.sync="isUpdateData"></uCategory>
+		<swiper class="swiper_main" :current="listClassNumber">
+			<swiper-item @touchmove.stop="()=>{}">
+				<scroll-view class="scroll-y" :scroll-y="true" @scroll="emitScroll">
+					<view class="section fx">
+						<view class="header-nav"></view>
+						<uSwiper></uSwiper>
+						<view class="index_nav">
+							<view class="class_nav fx">
+								<view v-for="(item, i) in class_nav_data" :key="i">
+									<image :src="item.image"></image>
+									<text class="name">{{item.name}}</text>
+								</view>
+							</view>
+						</view>
+									
+						<!-- 主体内容 -->
+						<uMian :isUpdateData.sync="isUpdateData"></uMian>
+					</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item @touchmove.stop="()=>{}" class="swItem">
+				<scroll-view class="scroll-y " :scroll-y="true">
+					<view style="background-color: #007AFF;">11111111111111</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item @touchmove.stop="()=>{}" class="swItem">
+				<scroll-view class="scroll-y" :scroll-y="true">
+					<view>22222222222222222</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item @touchmove.stop="()=>{}" class="swItem">
+				<scroll-view class="scroll-y" :scroll-y="true">
+					<view>33333333333333333</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item @touchmove.stop="()=>{}" class="swItem">
+				<scroll-view class="scroll-y" :scroll-y="true">
+					<view>444444444444444</view>
+				</scroll-view>
+			</swiper-item>
+		</swiper>
 	</view>
 </template>
 
 <script>
 	import headerNav from '../../components/components_lzj/index/header/header.vue'
 	import uSwiper from '../../components/components_lzj/index/swiper/swiper.vue'
-	import uCategory from '../../components/components_lzj/index/hotTopic/category.vue'
-	import uHotCurriclum from '../../components/components_lzj/index/hotTopic/hotCurriclum.vue'
-	import uHotSchool from '../../components/components_lzj/index/hotTopic/hotSchool.vue'
+	import uTableBar from '../../components/components_lm/listPage/tableBer.vue'
+	import uMian from '../../components/components_lzj/index/main/main.vue'
+	
 	export default {
 		components: {
 			headerNav,
 			uSwiper,
-			uCategory,
-			uHotCurriclum,
-			uHotSchool
+			uMian,
+			uTableBar
 		},
 		data() {
 			return {
+				top: 0,
+				hideTableBar: false,
+				listClassNumber: 0,
 				isUpdateData: false,
-				informationImage: {},
 				class_nav_data: [{
 						image: '../../static/image/kecheng.png',
 						name: '课程'
@@ -64,28 +91,64 @@
 			}
 		},
 		onLoad() {
-			this.getIformation();
-			
+
 			// 获取搜索关键字
 			uni.$on('getSearchResult', this.getSearchResult);
 		},
 		methods: {
 			/**
-			 * 获取热门资讯广告位
-			 */
-			async getIformation() {
-				this.informationImage = (await this.getAdvertisingData(5))[0];
-			},
-			/**
 			 * 根据搜索内容 查询数据
 			 */
-			getSearchResult(data){
+			getSearchResult(data) {
 				// console.log(data, 7777777777);
+			},
+			/**
+			 * 监听轮播图是否被头部导航栏完全遮挡
+			 */
+			selectorQuery: (() => {
+				let query = null;
+				return function() {
+					if (!query) query = uni.createSelectorQuery().in(this);
+					return query;
+				}
+			})(),
+			keepOut: (()=>{
+				let num = 0;
+				return async function(){
+					num++;
+					if (!(num % 2)) return;
+					this.selectorQuery().select('.index_nav').fields({
+						rect: true
+					}, data => {
+						this.hideTableBar = false;
+						let top = data.top - 68;
+						if (top < 0 && top > -36) {
+							this.top = Math.abs(top)*32/36;
+						} else {
+							this.hideTableBar = true;
+							if (top >= 0) {
+								this.top = 0;
+							} else this.top = 32;
+						}
+					}).exec();
+				}
+			})(),
+			/**
+			 * 监听页面滚动
+			 */
+			emitScroll(e) {
+				this.keepOut();
+			},
+			/**
+			 * 更新切换序号
+			 */
+			onSelect(i){
+				this.listClassNumber = i;
 			}
 		},
 		onShow() {
 			this.isUpdateData = true;
-			let timer = setTimeout(()=>{
+			let timer = setTimeout(() => {
 				this.isUpdateData = false;
 				clearTimeout(timer);
 			}, 1000)
@@ -94,55 +157,45 @@
 </script>
 
 <style scoped lang="scss">
-	.section {
-		flex-direction: column;
-		align-items: center;
-		.class_nav {
-			justify-content: space-around;
-			width: 100vw;
-			padding-top: 18rpx;
-			text-align: center;
-
-			image {
-				display: block;
-				width: 114rpx;
-				height: 114rpx;
-			}
-
-			.name {
-				color: $col-333;
-			}
-		}
-
-		.information {
+	.u-table-bar{
+		position: fixed;
+		left: 0;
+		z-index: 9;
+	}
+	.swiper_main{
+		width: 100vw;
+		height: calc(100vh - 68px);
+		.section {
+			position: relative;
+			flex-direction: column;
 			align-items: center;
-			width: 690rpx;
-			height: 60rpx;
-			margin: 28rpx 0 40rpx;
-			background: $col-fff;
-			opacity: 1;
-			border-radius: 50rpx;
-
-			.information_one {
-				margin: 0 24rpx;
-				font-size: 28rpx;
-				font-weight: 700;
-				color: $col-333;
+			.class_nav{
+				justify-content: space-around;
+				width: 100vw;
+				padding-top: 18rpx;
+				text-align: center;
+				image {
+					display: block;
+					width: 114rpx;
+					height: 114rpx;
+				}
+				.name {
+					color: $col-333;
+				}
 			}
-
-			.information_two {
-				width: 48rpx;
-				height: 28rpx;
-				font-size: 20rpx;
-				background-color: rgba(253, 129, 9, 0.2);
-				color: $col-main;
-				border-radius: 4rpx;
+			.shade{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 750rpx;
+				height: 100%;
 			}
 		}
-
-		.section_image {
-			width: 690rpx;
-			height: 152rpx;
+		.swItem{
+			margin-top: 32px;
 		}
+	}
+	.scroll-y {
+		height: calc(100vh - 68px);
 	}
 </style>

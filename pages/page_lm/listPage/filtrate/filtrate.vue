@@ -28,7 +28,7 @@ export default {
 	},
 	onLoad() {
 		let condList = filtList.condList
-		condList[3].type = ccl["0_3_0"];
+		condList[3].type = condList[3].type.concat(ccl["0_3_0"]);
 		for(let obj of condList){
 			if(obj.classify==='curriculum'){
 				obj.isShow = true

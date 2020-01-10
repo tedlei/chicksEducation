@@ -63,10 +63,11 @@
 		},
 		data() {
 			return {
-				top: 0,
-				hideTableBar: false,
-				listClassNumber: 0,
-				isUpdateData: false,
+				top: 0,	// 分类导航栏top值
+				searchConenxt: '', // 搜索内容
+				hideTableBar: false,	// 是否隐藏分类导航栏
+				listClassNumber: 0,	// 显示类别序号
+				isUpdateData: false,	// 是否更新首页数据
 				class_nav_data: [{
 						image: '../../static/image/kecheng.png',
 						name: '课程'
@@ -100,7 +101,7 @@
 			 * 根据搜索内容 查询数据
 			 */
 			getSearchResult(data) {
-				// console.log(data, 7777777777);
+				this.searchConenxt = data.input;
 			},
 			/**
 			 * 监听轮播图是否被头部导航栏完全遮挡

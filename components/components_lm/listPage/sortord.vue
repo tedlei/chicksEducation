@@ -9,7 +9,7 @@
 				</view>
 			</view>
 		</template>
-		{{aa(topListNum)}}
+		{{isPrice(topListNum)}}
 	</view>
 </template> 	
 
@@ -37,7 +37,7 @@ export default {
 			}
 			this.name = str;
 			let price = this.selList.price
-			let sort = price.sort;
+			let sort = price?price.sort:'';
 			let obj = {popular:'1',sort:''};
 			if(str==='hot')obj.popular = '2'
 			if(str==='price'){
@@ -46,12 +46,12 @@ export default {
 				obj.popular = '';
 				obj.sort = val;
 			}else{
-				price.sort = '';
+				if(price)price.sort = '';
 				obj.sort = '';
 			}
 			this.$emit('clickSortord',obj);
 		},
-		aa(){
+		isPrice(){
 			let num = this.topListNum;
 			let sl = this.selList;
 			if(this.topListNum!==1){

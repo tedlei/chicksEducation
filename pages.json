@@ -3,21 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationStyle": "custom",
-				"app-plus": {
-					"subNVues":[
-						{
-							//自定义头
-							"id": "sasdafadsfdsafsda",
-							"path": "paltform/app-plus/subNVue/footer",
-							"style": {
-								"position": "dock",
-								"dock": "bottom",
-								"height": "48px"
-							}
-						}
-					]
-				}
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -42,8 +28,6 @@
 		    "path" : "pages/page_lzj/courseCategory/courseCategory",
 		    "style" : {
 				"navigationBarTitleText":"课程分类",
-				"navigationBarBackgroundColor": "#FD8109",
-				"navigationBarTextStyle": "#FFFFFF",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [
@@ -55,16 +39,13 @@
 							}
 						]
 					}
-				},
-				"subNVues": []
+				}
 			}
 		},
 		{
 		    "path" : "pages/page_lzj/location/location",
 		    "style" : {
 				"navigationBarTitleText":"切换城市",
-				"navigationBarBackgroundColor":"#FD8109",
-				"navigationBarTextStyle":"white",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [
@@ -78,6 +59,18 @@
 					"subNVues": []
 				}
 			}
+		},
+		{  /* 消息页 */
+			"path":"pages/page_lzj/message/message",
+			"style":{
+				"navigationBarTitleText":"消息",
+				"app-plus":{
+					"bounce":"none"
+				}
+			}
+		},
+		{
+			"path":"pages/page_lzj/message/chat"
 		},
 				
 /* ------------------------------------------------------------------------------------- */
@@ -127,12 +120,12 @@
 					"titleNView": {
 						"buttons": [ //原生标题栏按钮配置,
 							{
-							"type":"none",
-							"text":"确认",
-							"float":"right",
-							"color":"#fff",
-							"fontSize":"18px",
-							"width":"40px"
+								"type":"none",
+								"text":"确认",
+								"float":"right",
+								"color":"#fff",
+								"fontSize":"18px",
+								"width":"40px"
 							}
 						]
 					}
@@ -183,22 +176,82 @@
 			"style":{
 				"navigationStyle":"custom"
 			}
+		},
+		{  /* 发现页 */
+			"path":"pages/page_lzj/find/find",
+			"style":{
+				"navigationStyle":"custom"
+			}
 		}
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#FD8109"
 	},
-	"condition" : { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
+	"tabBar": {
+	    "color": "#7A7E83",
+	    "selectedColor": "#3cc51f",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/image/tabBal/index.png",
+				"selectedIconPath": "static/image/tabBal/IndexSelect.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/page_lzj/find/find",
+				"iconPath": "static/image/tabBal/findLeft.png",
+				"selectedIconPath": "static/image/tabBal/findSelect.png",
+				"text": "发现"
+			},
+			{
+				"pagePath": "pages/page_lzj/message/message",
+				"iconPath": "static/image/tabBal/messageLeft.png",
+				"selectedIconPath": "static/image/tabBal/messageSelect.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/page_lm/myPage/myPage",
+				"iconPath": "static/image/tabBal/my.png",
+				"selectedIconPath": "static/image/tabBal/mySelect.png",
+				"text": "我的"
+			}
+		]
+	},
+	"condition":{
+		"current": 5,
 		"list": [
 			{
-				"name": "", //模式名称
-				"path": "pages/index/index", //启动页面，必选
-				// "path": "pages/page_lzj/search/search", //启动页面，必选
-				"query": "" //启动参数，在页面的onLoad函数里面得到
+				"name":"index",
+				"path":"pages/index/index",
+				"query":""
+			},
+			{
+				"name":"find",
+				"path":"pages/page_lzj/find/find",
+				"query":""
+			},
+			{
+				"name":"message",
+				"path":"pages/page_lzj/message/message",
+				"query":""
+			},
+			{
+				"name":"my",
+				"path":"pages/page_lm/myPage/myPage",
+				"query":""
+			},
+			{
+				"name":"messageDetail",
+				"path":"pages/page_lzj/message/chat",
+				"query":""
+			},
+			{
+				"name":"messageDetail",
+				"path":"pages/page_lzj/search/search",
+				"query":""
 			}
 		]
 	}

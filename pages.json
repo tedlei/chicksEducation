@@ -79,24 +79,6 @@
 			"style":{
 				"navigationStyle":"custom"
 			}
-			// "style":{
-			// 	"navigationBarTitleText": "",
-			// 	"app-plus": {
-			// 		"bounce": "none", //关闭窗口回弹效果
-			// 		"titleNView": {
-			// 			"buttons": [ //原生标题栏按钮配置,
-			// 				{
-			// 				"type":"none",
-			// 				"text":"注册",
-			// 				"float":"right",
-			// 				"color":"#333333",
-			// 				"fontSize":"18px",
-			// 				"width":"60px"
-			// 				}
-			// 			]
-			// 		}
-			// 	}
-			// }
 		},
 		{  /*注册页面*/
 			"path":"pages/page_lm/LoginRelated/register",
@@ -171,12 +153,37 @@
 				"navigationStyle":"custom"
 			}
 		},
-		{  /*首页 列表页*/
-			"path":"pages/page_lm/listPage/listPage",
+		{   /*筛选*/
+			"path":"pages/page_lm/listPage/filtrate/filtrate",
 			"style":{
 				"navigationStyle":"custom"
 			}
 		},
+		{  /*首页 课程详情*/
+			"path":"pages/page_lm/detailPage/currDetail",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
+		// {  /*首页 学校列表*/
+		// 	"path":"pages/page_lm/listPage/schoolList",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// },
+		// {  /*首页 教师列表*/
+		// 	"path":"pages/page_lm/listPage/teacList",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// },
+		// {  /*首页 资讯列表*/
+		// 	"path":"pages/page_lm/listPage/infoList",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// }
+		// },
 		{  /* 发现页 */
 			"path":"pages/page_lzj/find/find",
 			"style":{
@@ -188,70 +195,14 @@
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FD8109"
 	},
-	"tabBar": {
-	    "color": "#7A7E83",
-	    "selectedColor": "#3cc51f",
-	    "borderStyle": "black",
-	    "backgroundColor": "#ffffff",
-	    "list": [
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [ 
 			{
-				"pagePath": "pages/index/index",
-				"iconPath": "static/image/tabBal/index.png",
-				"selectedIconPath": "static/image/tabBal/IndexSelect.png",
-				"text": "首页"
-			},
-			{
-				"pagePath": "pages/page_lzj/find/find",
-				"iconPath": "static/image/tabBal/findLeft.png",
-				"selectedIconPath": "static/image/tabBal/findSelect.png",
-				"text": "发现"
-			},
-			{
-				"pagePath": "pages/page_lzj/message/message",
-				"iconPath": "static/image/tabBal/messageLeft.png",
-				"selectedIconPath": "static/image/tabBal/messageSelect.png",
-				"text": "消息"
-			},
-			{
-				"pagePath": "pages/page_lm/myPage/myPage",
-				"iconPath": "static/image/tabBal/my.png",
-				"selectedIconPath": "static/image/tabBal/mySelect.png",
-				"text": "我的"
-			}
-		]
-	},
-	"condition":{
-		"current": 5,
-		"list": [
-			{
-				"name":"index",
-				"path":"pages/index/index",
-				"query":""
-			},
-			{
-				"name":"find",
-				"path":"pages/page_lzj/find/find",
-				"query":""
-			},
-			{
-				"name":"message",
-				"path":"pages/page_lzj/message/message",
-				"query":""
-			},
-			{
-				"name":"my",
-				"path":"pages/page_lm/myPage/myPage",
-				"query":""
-			},
-			{
-				"name":"messageDetail",
-				"path":"pages/page_lzj/message/chat",
-				"query":""
-			},
-			{
-				"name":"messageDetail",
-				"path":"pages/page_lzj/search/search",
-				"query":""
+				"name": "", //模式名称 
+				// "path": "pages/index/index", //启动页面，必选
+				"path": "pages/page_lm/detailPage/currDetail", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]
 	}

@@ -25,24 +25,21 @@
 				</scroll-view>
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
-				<scroll-view class="scroll-y " :scroll-y="true">
-					<view style="background-color: #007AFF;">11111111111111</view>
-				</scroll-view>
+					<!-- 课程列表 -->
+					<currList></currList>
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
-				<scroll-view class="scroll-y" :scroll-y="true">
-					<view>22222222222222222</view>
-				</scroll-view>
+				<!-- 学校列表 -->
+				<schoolList></schoolList>
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
-				<scroll-view class="scroll-y" :scroll-y="true">
-					<view>33333333333333333</view>
-				</scroll-view>
+				<!-- 教师列表 -->
+				<teacList></teacList>
+				
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
-				<scroll-view class="scroll-y" :scroll-y="true">
-					<view>444444444444444</view>
-				</scroll-view>
+				<!-- 资讯列表 -->
+				<infoList></infoList>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -54,12 +51,22 @@
 	import uTableBar from '../../components/components_lm/listPage/tableBer.vue'
 	import uMian from '../../components/components_lzj/index/main/main.vue'
 	
+	import currList from '../page_lm/listPage/currList.vue'
+	import schoolList from '../page_lm/listPage/schoolList.vue'
+	import teacList from '../page_lm/listPage/teacList.vue'
+	import infoList from '../page_lm/listPage/infoList.vue'
+	
 	export default {
 		components: {
 			headerNav,
 			uSwiper,
 			uMian,
-			uTableBar
+			uTableBar,
+			
+			currList,
+			schoolList,
+			teacList,
+			infoList
 		},
 		data() {
 			return {
@@ -101,7 +108,26 @@
 			 * 根据搜索内容 查询数据
 			 */
 			getSearchResult(data) {
-				this.searchConenxt = data.input;
+				let listClassNumber = this.listClassNumber;
+				let input = data.input
+				switch(listClassNumber) {
+					case 1:	// 传递给课程列表
+						uni.$emit('currSearch',input)
+						break;
+					case 2:	// 传递给学校列表
+						uni.$emit('schSearch',input)
+						break;
+					case 3:	// 传递给课教师列表
+						uni.$emit('teacSeach',input)
+						break;
+					case 4:	// 传递给资讯列表
+						uni.$emit('infoSeach',input);
+						break;
+				}
+				
+				
+				this.searchConenxt = input;
+				
 			},
 			/**
 			 * 监听轮播图是否被头部导航栏完全遮挡
@@ -145,6 +171,7 @@
 			 */
 			onSelect(i){
 				this.listClassNumber = i;
+				this.input = '';
 			}
 		},
 		onShow() {

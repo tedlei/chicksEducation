@@ -164,7 +164,7 @@
 			"style":{
 				"navigationStyle":"custom"
 			}
-		}
+		},
 		// {  /*首页 学校列表*/
 		// 	"path":"pages/page_lm/listPage/schoolList",
 		// 	"style":{
@@ -183,7 +183,7 @@
 		// 		"navigationStyle":"custom"
 		// 	}
 		// }
-		},
+		// },
 		{  /* 发现页 */
 			"path":"pages/page_lzj/find/find",
 			"style":{

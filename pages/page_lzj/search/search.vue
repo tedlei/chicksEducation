@@ -15,7 +15,7 @@
 				<text class="iconfont"></text>
 			</view>
 			<view class="context fx">
-				<text v-for="(item,index) in historyKeyword" :key="index">
+				<text class="active" v-for="(item,index) in historyKeyword" :key="index" @click="getHistoryContext(item)">
 					{{item}}
 				</text>
 			</view>
@@ -39,6 +39,9 @@
 		methods: {
 			updateNum(num) {
 				this.num = num;
+			},
+			getHistoryContext(input){
+				uni.$emit('sendSearchInput', input)
 			}
 		}
 	}

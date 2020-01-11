@@ -28,8 +28,6 @@
 		    "path" : "pages/page_lzj/courseCategory/courseCategory",
 		    "style" : {
 				"navigationBarTitleText":"课程分类",
-				"navigationBarBackgroundColor": "#FD8109",
-				"navigationBarTextStyle": "#FFFFFF",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [
@@ -41,16 +39,13 @@
 							}
 						]
 					}
-				},
-				"subNVues": []
+				}
 			}
 		},
 		{
 		    "path" : "pages/page_lzj/location/location",
 		    "style" : {
 				"navigationBarTitleText":"切换城市",
-				"navigationBarBackgroundColor":"#FD8109",
-				"navigationBarTextStyle":"white",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [
@@ -64,6 +59,18 @@
 					"subNVues": []
 				}
 			}
+		},
+		{  /* 消息页 */
+			"path":"pages/page_lzj/message/message",
+			"style":{
+				"navigationBarTitleText":"消息",
+				"app-plus":{
+					"bounce":"none"
+				}
+			}
+		},
+		{
+			"path":"pages/page_lzj/message/chat"
 		},
 				
 /* ------------------------------------------------------------------------------------- */
@@ -95,12 +102,12 @@
 					"titleNView": {
 						"buttons": [ //原生标题栏按钮配置,
 							{
-							"type":"none",
-							"text":"确认",
-							"float":"right",
-							"color":"#fff",
-							"fontSize":"18px",
-							"width":"40px"
+								"type":"none",
+								"text":"确认",
+								"float":"right",
+								"color":"#fff",
+								"fontSize":"18px",
+								"width":"40px"
 							}
 						]
 					}
@@ -176,12 +183,17 @@
 		// 		"navigationStyle":"custom"
 		// 	}
 		// }
+		},
+		{  /* 发现页 */
+			"path":"pages/page_lzj/find/find",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		}
     ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#FD8109"
 	},
 	"condition" : { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)

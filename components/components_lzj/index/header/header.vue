@@ -8,7 +8,9 @@
 					<text class="ellipsis">{{getCity()}}</text>
 					<text class="iconfont">&#xe771;</text>
 				</navigator>
-				<navigator hover-class="none" :url="'/pages/page_lzj/search/search'" class="search_content">
+				<navigator 
+					hover-class="none" :url="'/pages/page_lzj/search/search'"
+					class="search_content">
 					<view class="search">
 						<text class="iconfont">&#xe610;</text>
 						<view class="search_input">请输入关键字</view>
@@ -20,12 +22,7 @@
 </template>
 
 <script>
-	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue"
 	export default {
-		components: {uniNavBar},
-		onLoad() {
-			
-		},
 		methods:{
 			selectCity(){
 				

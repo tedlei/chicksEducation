@@ -29,7 +29,7 @@
 		font-size: 32rpx;
 	}
 	body{
-		background-color: #F5F5F5;
+		background-color: #FFFFFF;
 	}
 	navigator:active{
 		opacity: 0.4;

@@ -1,26 +1,44 @@
 <template>
-	<view class="footer">
-		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe623;</text>
-			<text class="interval"></text>
-			<text class="text">首页</text>
-		</view>
-		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe623;</text>
-			<text class="interval"></text>
-			<text class="text">发现</text>
-		</view>
-		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe623;</text>
-			<text class="interval"></text>
-			<text class="text">消息</text>
-		</view>
-		<view class="fxCenter list">
-			<text class="iconfont2 text">&#xe623;</text>
-			<text class="interval"></text>
-			<text class="text">我的</text>
-		</view>
-	</view>
+	<div class="footerNvue">
+		<div class="footer">
+			<div class="fxCenter list" @tap="viewResult">
+				<!-- 未选中显示 -->
+				<image v-if="true" style="width:17px;height:18px;" src="../../../static/image/tabBal/index.png"></image>
+				<!-- 选中显示 -->
+				<image v-else style="width:17px;height:18px;" src="../../../static/image/tabBal/IndexSelect.png"></image>
+				<text class="interval"></text>
+				<text class="text">首页</text>
+			</div>
+			<div class="fxCenter list" @click="sendNumber(1)">
+				<!-- 焦点位于 3|4 时显示 -->
+				<image v-if="true" style="width:24px;height:16px;" src="../../../static/image/tabBal/findRight.png"></image>
+				<!-- 焦点位于 1 时显示 -->
+				<image v-if="false" style="width:24px;height:16px;" src="../../../static/image/tabBal/findLeft.png"></image>
+				<!-- 焦点位于 当前显示 -->
+				<image v-if="false" style="width:24px;height:16px;" src="../../../static/image/tabBal/findSelect.png"></image>
+				<text class="interval"></text>
+				<text class="text">发现</text>
+			</div>
+			<div class="fxCenter list" @click="sendNumber(2)">
+				<!-- 焦点位于 1|2 时显示 -->
+				<image v-if="true" style="width:22px;height:15px;" src="../../../static/image/tabBal/messageRight.png"></image>
+				<!-- 焦点位于 4 时显示 -->
+				<image v-if="false" style="width:22px;height:15px;" src="../../../static/image/tabBal/messageLeft.png"></image>
+				<!-- 焦点位于 当前显示 -->
+				<image v-if="false" style="width:22px;height:15px;" src="../../../static/image/tabBal/messageSelect.png"></image>
+				<text class="interval"></text>
+				<text class="text">消息</text>
+			</div>
+			<div class="fxCenter list" @click="sendNumber(3)">
+				<!-- 未选中显示 -->
+				<image v-if="true" style="width:19px;height:21px;" src="../../../static/image/tabBal/my.png"></image>
+				<!-- 选中显示 -->
+				<image v-else style="width:19px;height:21px;" src="../../../static/image/tabBal/mySelect.png"></image>
+				<text class="interval"></text>
+				<text class="text">我的</text>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -30,22 +48,23 @@
 				
 			}
 		},
-		methods: {
-			
-		},
 		created() {
 			
-			// 引入icon图标
-			const domModule = weex.requireModule('dom')
-			domModule.addRule('fontFace', {
-			    'fontFamily': "iconfont2",
-			    'src': "url('https://at.alicdn.com/t/font_1472826_ujpta4di21n.ttf')"
-			});
+		},
+		methods: {
+			sendNumber(){
+				console.log(11111);
+				return 
+				uni.$emit('getNumber', i);
+			}
 		}
 	}
 </script>
 
 <style>
+	.footerNvue{
+		background-color: rgba(0, 0, 0, 0);
+	}
 	.iconfont2{
 		font-family: iconfont2;
 	}
@@ -57,6 +76,7 @@
 		flex: 1;
 		height: 48px;
 	}
+	
 	.interval{
 		width: 2px;
 		height: 8px;
@@ -64,5 +84,8 @@
 	.text{
 		color: #999999;
 		font-size: 12px;
+	}
+	.text:active{
+		color: red;
 	}
 </style>

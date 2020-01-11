@@ -1,5 +1,5 @@
 <template>
-	<view >
+	<view class="index">
 		<headerNav></headerNav>
 		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
 			<uTableBar @onSelect="onSelect" :settingNum="listClassNumber"></uTableBar>
@@ -185,6 +185,9 @@
 </script>
 
 <style scoped lang="scss">
+	.index{
+		background-color: $col-f5;
+	}
 	.u-table-bar{
 		position: fixed;
 		left: 0;

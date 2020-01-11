@@ -28,6 +28,11 @@
 			    'fontFamily': "iconfont2",
 			    'src': "url('https://at.alicdn.com/t/font_1472826_ujpta4di21n.ttf')"
 			});
+			
+			// 获取历史搜索
+			uni.$on('sendSearchInput', (input)=>{
+				this.input = input;
+			})
 		},
 		mounted() {
 			setTimeout(()=>{

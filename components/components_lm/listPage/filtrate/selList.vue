@@ -1,10 +1,10 @@
 <template>
 	<view class="sl_app">
-		<text class="slText">{{item.className}}</text>
+		<text class="slText">{{selList.className}}</text>
 		<view class="slView fx">
-			<template v-for="(val,t) of item.type">
-				<SelView class="slMarLeft" :key="t" @clickSel='clickSel'
-				 v-show="val!=='不限'" :val="val" :selNum='item.selNum' :t='t'></SelView>
+			<template v-for="(val,t) of selList.type">
+				<SelView class="slMarLeft" :key="t" @clickSel="clickSel"
+				 v-if="val!=='不限'" :val="val" :selNum='selList.selNum' :t='t'></SelView>
 			</template>
 		</view>
 	</view>
@@ -17,12 +17,18 @@ export default {
 	props:['item','i'],
 	data() {
 		return {
-			num:10
+			selList:{},
 		}
 	},
+	created() {
+		this.selList = this.item;
+	},
 	methods: {
-		clickSel(t){
-			this.item.selNum === t; 
+		clickSel(t,val){
+			let num = 0 ;
+			if(t!==this.selList.selNum) num = t;
+			this.selList.selNum = num; 
+			this.$emit('clickSel',this.i,num,val);
 		}
 	}
 }

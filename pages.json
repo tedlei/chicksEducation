@@ -3,21 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationStyle": "custom",
-				"app-plus": {
-					"subNVues":[
-						{
-							//自定义头
-							"id": "sasdafadsfdsafsda",
-							"path": "paltform/app-plus/subNVue/footer",
-							"style": {
-								"position": "dock",
-								"dock": "bottom",
-								"height": "48px"
-							}
-						}
-					]
-				}
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -160,18 +146,36 @@
 				"navigationStyle":"custom"
 			}
 		},
-		{  /*首页 列表页*/
-			"path":"pages/page_lm/listPage/currList",
-			"style":{
-				"navigationStyle":"custom"
-			}
-		},
-		{   /*验证码登陆*/
+		{   /*筛选*/
 			"path":"pages/page_lm/listPage/filtrate/filtrate",
 			"style":{
 				"navigationStyle":"custom"
 			}
+		},
+		{  /*首页 课程详情*/
+			"path":"pages/page_lm/detailPage/currDetail",
+			"style":{
+				"navigationStyle":"custom"
+			}
 		}
+		// {  /*首页 学校列表*/
+		// 	"path":"pages/page_lm/listPage/schoolList",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// },
+		// {  /*首页 教师列表*/
+		// 	"path":"pages/page_lm/listPage/teacList",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// },
+		// {  /*首页 资讯列表*/
+		// 	"path":"pages/page_lm/listPage/infoList",
+		// 	"style":{
+		// 		"navigationStyle":"custom"
+		// 	}
+		// }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -184,7 +188,8 @@
 		"list": [ 
 			{
 				"name": "", //模式名称 
-				"path": "pages/page_lm/listPage/filtrate/filtrate", //启动页面，必选
+				// "path": "pages/index/index", //启动页面，必选
+				"path": "pages/page_lm/detailPage/currDetail", //启动页面，必选
 				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]

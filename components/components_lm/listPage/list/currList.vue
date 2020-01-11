@@ -1,10 +1,10 @@
 <template>
-	<view class="cuList_app fx">
+	<view class="cuList_app fx active">
 		<view class="clImg">
 			<image :src="require('../../../../static/image/default.png')" mode=""></image>
 		</view>
 		<view class="clRight">
-			<view class="clName n1">{{item.courseName}}</view>
+			<view class="clName n1" v-html="item.courseName"></view>
 			<view class="clName n2">上课时间：{{item.courseTime}}</view>
 			<view class="clName">
 				上课地址：{{site(item)}}

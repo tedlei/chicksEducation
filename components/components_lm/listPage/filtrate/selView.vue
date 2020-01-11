@@ -1,6 +1,6 @@
 <template>
-	<view class="sv_app ellipsis" :class="selNum===t?'selBgColor':''" @tap="clickSel(t)">
-		<image v-if="false" :src="require('../../../../static/image/errIcon.png')"></image>
+	<view class="sv_app ellipsis" :class="selNum===t?'selBgColor':''" @tap="clickSel(t,val)">
+		<image v-if="selNum===t" :src="require('../../../../static/image/errIcon.png')"></image>
 		<text>{{val}}</text>
 	</view>
 </template>
@@ -14,8 +14,8 @@ export default {
 	},
 	methods: {
 		//点击选择时
-		clickSel(t){
-			this.$emit(clickSel,t);
+		clickSel(t,val){
+			this.$emit('clickSel',t,val);
 		}
 	}
 }

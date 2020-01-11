@@ -8,7 +8,8 @@ obj.condList = [
   {className:'课程级别',selNum:0,classify:'curriculum',isShow:false,type:['不限','入门','初级','中级','高级']},
   {className:'行业分类',selNum:0,classify:'school',isShow:false,type:['不限','学前辅导','小学辅导','中学辅导','艺术培训','学历提升','职业培训','资格证书','其他']},
   {className:'区域选择',selNum:0,classify:'school',isShow:false,type:['不限']},
-  {className:'字母检索',selNum:0,classify:'teacher',isShow:false,type:['不限','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']}
+  {className:'字母检索',selNum:0,classify:'teacher',isShow:false,type:['不限','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']},
+	{className:'资讯分类',selNum:0,classify:'info',isShow:false,type:['不限','学前资讯','小学资讯','中学资讯','艺术培训','学历提升','职业培训','资格证书','其他资讯']}
 ];
 obj.gradeList =[
   ["一年级","二年级","三年级","四年级","五年级","六年级","一对一"],

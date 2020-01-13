@@ -56,11 +56,6 @@
 	import teacList from '../page_lm/listPage/teacList.vue'
 	import infoList from '../page_lm/listPage/infoList.vue'
 	
-	import currList from '../page_lm/listPage/currList.vue'
-	import schoolList from '../page_lm/listPage/schoolList.vue'
-	import teacList from '../page_lm/listPage/teacList.vue'
-	import infoList from '../page_lm/listPage/infoList.vue'
-	
 	export default {
 		components: {
 			headerNav,

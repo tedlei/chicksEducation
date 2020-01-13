@@ -165,6 +165,12 @@
 				"navigationStyle":"custom"
 			}
 		},
+		{  /*首页 预约*/
+			"path":"pages/page_lm/detailPage/appointment",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
 		{  /* 发现页 */
 			"path":"pages/page_lzj/find/find",
 			"style":{
@@ -175,5 +181,30 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FD8109"
+	},
+	"condition": {
+		"current":2,
+		"list": [
+			{
+				"name":"index",
+				"path":"pages/index/index",
+				"query":""
+			},
+			{
+				"name":"index",
+				"path":"pages/page_lm/detailPage/currDetail",
+				"query":""
+			},
+			{
+				"name":"index",
+				"path":"pages/page_lm/detailPage/appointment",
+				"query":""
+			},
+			{
+				"name":"index",
+				"path":"pages/page_lm/myPage/myPage",
+				"query":""
+			}
+		]
 	}
 }

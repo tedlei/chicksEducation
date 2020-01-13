@@ -1,6 +1,7 @@
 <template>
 	<view class="index">
 		<headerNav></headerNav>
+		<text>版本1</text>
 		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
 			<uTableBar @onSelect="onSelect" :settingNum="listClassNumber"></uTableBar>
 		</view>

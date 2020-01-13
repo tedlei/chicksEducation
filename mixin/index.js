@@ -204,7 +204,7 @@ const Api = {
 	 */
 	hideKey(){
 		// #ifdef APP-PLUS
-			plus.key.hideSoftKeybord();
+		plus.key.hideSoftKeybord();
 		// #endif
 	},
 	

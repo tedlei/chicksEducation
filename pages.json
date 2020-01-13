@@ -175,5 +175,15 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FD8109"
+	},
+	"condition": {
+		"current":0,
+		"list": [
+			{
+				"name":"index",
+				"path":"pages/index/index",
+				"query":""
+			}
+		]
 	}
 }

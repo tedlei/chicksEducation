@@ -181,6 +181,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FD8109"
+<<<<<<< HEAD
 	},
 	"condition": {
 		"current":2,
@@ -206,5 +207,17 @@
 				"query":""
 			}
 		]
+=======
+	},
+	"condition": {
+		"current":0,
+		"list": [
+			{
+				"name":"index",
+				"path":"pages/index/index",
+				"query":""
+			}
+		]
+>>>>>>> c3aac1b61c7c1d019fbf87b6cf663562b7b8c0d3
 	}
 }

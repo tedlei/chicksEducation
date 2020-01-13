@@ -1,6 +1,13 @@
 <script>
+	// #ifdef APP-PLUS
+	import {packageUpdate} from './static/js/appUpdate.js'
+	// #endif
+	
 	export default {
 		onLaunch: function() {
+			// #ifdef APP-PLUS
+			packageUpdate();
+			// #endif
 		},
 		onShow: function() {
 			console.log('App Show')

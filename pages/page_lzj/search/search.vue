@@ -12,7 +12,7 @@
 		<view class="search_main">
 			<view class="history fx">
 				<text>历史搜索</text>
-				<text class="iconfont"></text>
+				<text class="iconfont delete">&#xe732;</text>
 			</view>
 			<view class="context fx">
 				<text class="active" v-for="(item,index) in historyKeyword" :key="index" @click="getHistoryContext(item)">
@@ -69,6 +69,9 @@
 			color: $col-333;
 			.history{
 				justify-content: space-between;
+				& text:nth-child(2){
+					font-size: 38rpx;
+				}
 			}
 			.context{
 				flex-wrap: wrap;

@@ -69,7 +69,10 @@ function packageUpdate(){
 }
 
 
-//下载资源包
+/**
+ * //下载资源包
+ * @param {Object} wgtUrl
+ */
 function downWgt(wgtUrl){
 	var that=this;				
 	var	task=plus.downloader.createDownload( wgtUrl, {}, function(download,status){ //安装到手机的目录

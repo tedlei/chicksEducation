@@ -35,10 +35,12 @@ const Api = {
 		if (typeof port === 'undefined') port = 1;
 		port = port - 1;
 		let ipList = [
-			'http://112.74.18.182:9101/cnjy-search-web/',
+			// 'http://112.74.18.182:9101/cnjy-search-web/',
+			'http://192.168.3.88:9101/',
 			'http://112.74.16.235:9102/cnjy-user-web/',
 			'http://112.74.16.235:9103/cnjy-curriculum-web/',
-			'http://120.24.45.159:9104/cnjy-school-web/',
+			// 'http://120.24.45.159:9104/cnjy-school-web/',
+			'http://192.168.3.88:9104/',
 			'http://120.24.45.159:9105/cnjy-teacher-web/',
 		];
 		let url = param.url;

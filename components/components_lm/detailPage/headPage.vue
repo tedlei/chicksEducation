@@ -17,7 +17,7 @@ export default {
 	methods: {
 		//点击返回时
 		topBack(){
-			this.$emit('topBack')
+			this.pop();
 		},
 		//点击保存时
 		topSkip(){
@@ -33,17 +33,19 @@ export default {
 	padding:14rpx 30rpx;
 	padding-top: 56rpx;
 	background-color: rgba(0,0,0,0.3);
-	border-bottom: 2rpx solid #e5e5e5;
+	// border-bottom: 2rpx solid #e5e5e5;
 	justify-content:space-between;
 	align-items: center;
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 10001;
 	.udBack{
+		width: 100rpx;
 		height:60rpx;
 		line-height: 60rpx;
 		font-size: 36rpx;
-		color:$col-333;
+		color:$col-fff;
 		.udText{
 			margin-left: 20rpx;
 		}

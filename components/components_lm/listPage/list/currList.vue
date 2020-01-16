@@ -1,5 +1,5 @@
 <template>
-	<view class="cuList_app fx active">
+	<view class="cuList_app fx active" @tap="currDetail(item.id)">
 		<view class="clImg">
 			<image :src="require('../../../../static/image/default.png')" mode=""></image>
 		</view>
@@ -40,6 +40,10 @@ export default {
 		//显示价格
 		price(item){
 			return item.courseCategory!=='0'||item.courseHidePrice==='0';
+		},
+		
+		currDetail(id){
+			this.push({url:'/pages/page_lm/detailPage/currDetail?id='+id})
 		}
 	}
 }

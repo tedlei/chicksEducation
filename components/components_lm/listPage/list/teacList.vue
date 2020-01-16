@@ -1,5 +1,5 @@
 <template>
-	<view class="cuList_app fx active">
+	<view class="cuList_app fx active" @tap="goToTeac(item.id)">
 		<view class="clImg">
 			<image :src="item.teacherImage||require('../../../../static/image/default.png')" mode=""></image>
 		</view>
@@ -22,6 +22,9 @@ export default {
 		}
 	},
 	methods: {
+		goToTeac(id){
+			this.push({url:'/pages/page_lm/detailPage/teacherDetail?id='+id})
+		}
 	}
 }
 </script>

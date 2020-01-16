@@ -1,6 +1,6 @@
 <template>
 	<view class="cl_app">
-		<view class="clSchName fx">
+		<view class="clSchName fx" @tap="clickSchool">
 			<image class="clImg" :src="item.schoolImage||require('../../../../static/image/default.png')"></image>
 			<view class="clName ellipsis">{{item.organizationName}}</view>
 			<!-- <view class="clBs">撒旦发射</view>
@@ -21,7 +21,7 @@
 				<text class="clt1">{{fontSize(item)}}</text>
 				<text class="clt1">距您5.01km</text>
 			</view>
-			<view class="clRight">
+			<view class="clRight" @tap="clickSchool">
 				<text>进入学校</text>
 			</view>
 		</view>
@@ -54,11 +54,14 @@ export default {
 			let data = {schoolId:id}
 			this.fetch({url,data,method:'get'},1).then(res=>{
 				this.currList = res[1].data.splice(0,3);
-				console.log(res[1].data)
 			})
 		},
 		
-		
+		//到学校详情
+		clickSchool(){
+			let id = this.item.id
+			this.push({url:'/pages/page_lm/detailPage/schoolDetail?id='+id})
+		}
 	}
 }
 </script>

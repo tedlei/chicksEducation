@@ -6,7 +6,7 @@
 	export default {
 		onLaunch: function() {
 			// #ifdef APP-PLUS
-			packageUpdate();
+			// packageUpdate();
 			// #endif
 		},
 		onShow: function() {

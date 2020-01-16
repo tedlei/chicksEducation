@@ -165,6 +165,24 @@
 				"navigationStyle":"custom"
 			}
 		},
+		{  /*首页 学校详情*/
+			"path":"pages/page_lm/detailPage/schoolDetail",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
+		{  /*首页 教师详情*/
+			"path":"pages/page_lm/detailPage/teacherDetail",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
+		{  /*首页 预约*/
+			"path":"pages/page_lm/detailPage/appointment",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
 		{  /* 发现页 */
 			"path":"pages/page_lzj/find/find",
 			"style":{
@@ -183,7 +201,12 @@
 				"name":"index",
 				"path":"pages/index/index",
 				"query":""
+			},
+			{
+				"name":"schoolDetail",
+				"path":"pages/page_lm/detailPage/schoolDetail",
+				"query":""
 			}
 		]
-	}
+	} 
 }

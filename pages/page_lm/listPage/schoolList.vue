@@ -37,7 +37,7 @@ export default {
 			isShowData:true
 		}
 	},
-	onLoad() {
+	created() {
 		this.creatScreenEmonitor();
 		this.creatSeachEmonitor();
 		this.getSchoolList();
@@ -74,7 +74,6 @@ export default {
 				let {list,size} = res[1].data;
 				this.schoolList = this.schoolList.concat(list);
 				this.listSize = size;
-				console.log(list)
 			})
 		},
 		

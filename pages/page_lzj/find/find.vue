@@ -11,16 +11,29 @@
 				</view>
 			</view>
 		</view>
+		<uni-load-more :status="status" :content-text="contentText" />
 	</view>
 </template>
 
 <script>
 	import uHeader from '../../../components/components_lzj/index/header/header.vue'
+	import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
+
 	export default {
-		components: {uHeader},
+		components: {uHeader, uniLoadMore},
 		data() {
 			return {
+				status: 'more',
+				contentText: {
+					contentdown: '上拉加载更多',
+					contentrefresh: '加载中',
+					contentnomore: '没有更多'
+				},
 				dataList: [
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
 					{
 						el: '重庆工商大学',
 						context: '对于幼儿，家长该哈电话u放佛萨附件'
@@ -54,6 +67,8 @@
 		},
 		onLoad() {
 			uni.$on('getSearchResult', this.getDataList);
+			
+			this.closePullDownRefresh();
 		},
 		methods: {
 			/**
@@ -61,9 +76,66 @@
 			 */
 			getDataList(input){
 				console.log(input, '搜索结果');
+			},
+			/**
+			 * 关闭下拉刷新
+			 */
+			closePullDownRefresh(){
+				const pages = getCurrentPages();
+				const page = pages[pages.length - 1];  
+				const currentWebview = page.$getAppWebview();
+				currentWebview.setStyle({  
+				  pullToRefresh: {  
+				    support: false,  
+				    style: plus.os.name === 'Android' ? 'circle' : 'default'  
+				  }  
+				});
 			}
 		},
 		show(){
+		},
+		onReachBottom() {
+			this.status = 'loading';
+			 
+			setTimeout(()=>{
+				let dataList = [
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					},
+					{
+						el: '重庆工商大学',
+						context: '对于幼儿，家长该哈电话u放佛萨附件'
+					}
+				]
+				this.dataList = this.dataList.concat(dataList)
+				
+				this.status = 'more';
+			}, 300)
 		}
 	}
 </script>

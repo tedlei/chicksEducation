@@ -1,12 +1,11 @@
 <template>
 	<view class="index">
 		<headerNav></headerNav>
-		<text>版本1</text>
 		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
 			<uTableBar @onSelect="onSelect" :settingNum="listClassNumber"></uTableBar>
 		</view>
 		<swiper class="swiper_main" :current="listClassNumber">
-			<swiper-item @touchmove.stop="()=>{}">
+			<swiper-item>
 				<scroll-view class="scroll-y" :scroll-y="true" @scroll="emitScroll">
 					<view class="section fx">
 						<view class="header-nav"></view>
@@ -26,8 +25,8 @@
 				</scroll-view>
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
-					<!-- 课程列表 -->
-					<currList></currList>
+				<!-- 课程列表 -->
+				<currList></currList>
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
 				<!-- 学校列表 -->
@@ -36,7 +35,6 @@
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
 				<!-- 教师列表 -->
 				<teacList></teacList>
-				
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
 				<!-- 资讯列表 -->
@@ -72,10 +70,12 @@
 		data() {
 			return {
 				top: 0,	// 分类导航栏top值
-				searchConenxt: '', // 搜索内容
+				oldClassNameScrollYBottom: 0,
 				hideTableBar: false,	// 是否隐藏分类导航栏
+				searchConenxt: '', // 搜索内容
 				listClassNumber: 0,	// 显示类别序号
 				isUpdateData: false,	// 是否更新首页数据
+				firstNotUpdate: false, // 首次进入不触发onShow
 				class_nav_data: [{
 						image: '../../static/image/kecheng.png',
 						name: '课程'
@@ -105,6 +105,9 @@
 			uni.$on('getSearchResult', this.getSearchResult);
 		},
 		methods: {
+			test(e){
+			
+			},
 			/**
 			 * 根据搜索内容 查询数据
 			 */
@@ -154,6 +157,7 @@
 							this.top = Math.abs(top)*32/36;
 						} else {
 							this.hideTableBar = true;
+							
 							if (top >= 0) {
 								this.top = 0;
 							} else this.top = 32;
@@ -176,11 +180,15 @@
 			}
 		},
 		onShow() {
-			this.isUpdateData = true;
-			let timer = setTimeout(() => {
-				this.isUpdateData = false;
-				clearTimeout(timer);
-			}, 1000)
+			if (this.firstNotUpdate) {
+				this.isUpdateData = true;
+				let timer = setTimeout(() => {
+					this.isUpdateData = false;
+					clearTimeout(timer);
+				}, 1000)
+			} else {
+				this.firstNotUpdate = true;
+			}
 		}
 	}
 </script>

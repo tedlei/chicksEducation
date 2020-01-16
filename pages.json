@@ -186,16 +186,23 @@
 		{  /* 发现页 */
 			"path":"pages/page_lzj/find/find",
 			"style":{
-				"navigationStyle":"custom"
+				"navigationStyle":"custom",
+				"enablePullDownRefresh": true
 			}
 		}
+        ,{
+            "path" : "pages/test/test",
+            "style" : {
+				"enablePullDownRefresh": true
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FD8109"
 	},
 	"condition": {
-		"current":0,
+		"current": 0,
 		"list": [
 			{
 				"name":"index",
@@ -206,7 +213,60 @@
 				"name":"schoolDetail",
 				"path":"pages/page_lm/detailPage/schoolDetail",
 				"query":""
+			},
+			{
+				"name":"test",
+				"path":"pages/test/test",
+				"query":""
+			},
+			{
+				"name":"find",
+				"path":"pages/page_lzj/find/find",
+				"query":""
+			},
+			{
+				"name":"message",
+				"path":"pages/page_lzj/message/message",
+				"query":""
+			},
+			{
+				"name":"chat",
+				"path":"pages/page_lzj/message/chat",
+				"query":""
+			},
+			{
+				"name":"myPage",
+				"path":"pages/page_lm/myPage/myPage",
+				"query":""
 			}
 		]
-	} 
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath":"pages/index/index",
+				"iconPath":"static/image/tabBal/index.png",
+				"selectedIconPath":"static/image/tabBal/IndexSelect.png",
+				"text":"首页"
+			},
+			{
+				"pagePath":"pages/page_lzj/find/find",
+				"iconPath":"static/image/tabBal/findLeft.png",
+				"selectedIconPath":"static/image/tabBal/findSelect.png",
+				"text":"发现"
+			},
+			{
+				"pagePath":"pages/page_lzj/message/message",
+				"iconPath":"./static/image/tabBal/messageLeft.png",
+				"selectedIconPath":"static/image/tabBal/messageSelect.png",
+				"text":"消息"
+			},
+			{
+				"pagePath":"pages/page_lm/myPage/myPage",
+				"iconPath":"static/image/tabBal/my.png",
+				"selectedIconPath":"static/image/tabBal/mySelect.png",
+				"text":"我的"
+			}
+		]
+	}
 }

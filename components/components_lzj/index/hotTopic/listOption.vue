@@ -37,7 +37,7 @@
 				
 				let val = this.selectArrValue;
 				if (val === '其他热门推荐课程') val = 'other';
-				
+
 				this.fetch({
 					method: 'post',
 					url: 'curri/indexlist.do',

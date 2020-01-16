@@ -5,7 +5,7 @@
 			<uTableBar @onSelect="onSelect" :settingNum="listClassNumber"></uTableBar>
 		</view>
 		<swiper class="swiper_main" :current="listClassNumber">
-			<swiper-item>
+			<swiper-item @touchmove.stop="()=>{}">
 				<scroll-view class="scroll-y" :scroll-y="true" @scroll="emitScroll">
 					<view class="section fx">
 						<view class="header-nav"></view>

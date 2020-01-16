@@ -165,6 +165,18 @@
 				"navigationStyle":"custom"
 			}
 		},
+		{  /*首页 学校详情*/
+			"path":"pages/page_lm/detailPage/schoolDetail",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
+		{  /*首页 教师详情*/
+			"path":"pages/page_lm/detailPage/teacherDetail",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
 		{  /*首页 预约*/
 			"path":"pages/page_lm/detailPage/appointment",
 			"style":{
@@ -181,33 +193,6 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FD8109"
-<<<<<<< HEAD
-	},
-	"condition": {
-		"current":2,
-		"list": [
-			{
-				"name":"index",
-				"path":"pages/index/index",
-				"query":""
-			},
-			{
-				"name":"index",
-				"path":"pages/page_lm/detailPage/currDetail",
-				"query":""
-			},
-			{
-				"name":"index",
-				"path":"pages/page_lm/detailPage/appointment",
-				"query":""
-			},
-			{
-				"name":"index",
-				"path":"pages/page_lm/myPage/myPage",
-				"query":""
-			}
-		]
-=======
 	},
 	"condition": {
 		"current":0,
@@ -216,8 +201,12 @@
 				"name":"index",
 				"path":"pages/index/index",
 				"query":""
+			},
+			{
+				"name":"schoolDetail",
+				"path":"pages/page_lm/detailPage/schoolDetail",
+				"query":""
 			}
 		]
->>>>>>> c3aac1b61c7c1d019fbf87b6cf663562b7b8c0d3
-	}
+	} 
 }

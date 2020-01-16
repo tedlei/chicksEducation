@@ -6,7 +6,7 @@
 			<view class="cd_main" v-if="currDetail">
 				<view class="cd_curr_name fx">
 					<view class="cdName ellipsis">{{currDetail.courseName}}</view>
-					<text class="iconfont iconColor">{{true?'&#xe61f;':'&#xe63b;'}}</text>
+					<text class="iconfont iconColor" @tap="clickAttention">{{isAttention?'&#xe63b;':'&#xe61f;'}}</text>
 				</view>
 				<view class="cd_ul schStyle ellipsis">{{currDetail.organizationName}}</view>
 				<view class="cd_ul ellipsis">课程价格：{{currDetail.coursePrice}}</view>
@@ -20,7 +20,8 @@
 				<view class="cd_ul referral" v-html="currDetail.courseContent"></view>
 			</view>
 		</scroll-view>
-		<bottomBtn @clickLeft="clickLeft" @clickRight="clickRight" leftTitle="在线咨询" rightTitle="课程预约"></bottomBtn>
+		<bottomBtn @clickLeft="clickLeft" @clickRight="clickRight" 
+			leftTitle="在线咨询" :isOrder="isOrder" :rightTitle="(isOrder?'已':'课程')+'预约'"></bottomBtn>
 	</view>
 </template>
 
@@ -32,19 +33,35 @@ export default {
 	components:{HeadPage,topImage,bottomBtn},
 	data() {
 		return {
-			currDetail:null   //课程数据
+			currDetail:null,  //课程数据
+			isOrder:false,    //true:已预约    false:未预约
+			isAttention:false,  //true：已关注  false ：未关注
+			isLoadFinish:false,   //是否加载完成
+			userInfo:null,  //用户数据
 		}
 	},
 	onLoad(e) {
+		let ui = this.getItemSync('userInfo');
+		this.userInfo = ui
 		this.getCurrDetail(e.id);
+		if(ui){
+			this.creatOrderMonitor();
+			this.getIsOrder(e.id);
+			this.getIsAttention(e.id);
+		}
 	},
 	methods: {
+		//创建监听器
+		creatOrderMonitor(){
+			this.once.call(this,'updateOrderCurr','orderCurr')
+		},
 		//获取课程列表
 		getCurrDetail(id){
 			let url = 'curri/findById.do';
 			let data = {sourceType:'1',id}
 			this.fetch({url,data,method:'get'},1).then(res=>{
-				this.currDetail = res[1].data[0]
+				this.currDetail = res[1].data[0];
+				this.isLoadFinish = true;
 			})
 		},
 		
@@ -55,6 +72,25 @@ export default {
 			return str;
 		},
 		
+		//查询是否预约
+		getIsOrder(id){
+			let userId = this.userInfo.user.id;
+			let url = "/course/findByAppOin.do";
+			let data = {userId,curseId:id};
+			this.fetch({url,data,method:'get',},3).then(res=>{
+				this.isOrder = res[1].data;
+			})		
+		},
+		//查询课程是否关注
+		getIsAttention(curseid){
+			let userid = this.userInfo.user.id;
+			let url = "/course/findByFollow.do";
+			let data = {userid,curseid}
+			this.fetch({url,data,method:'get',},3).then(res=>{
+				this.isAttention = res[1].data.success;
+			})
+		},
+		
 		//当点击地址时
 		clickSite(site){
 			console.log(site);
@@ -62,13 +98,55 @@ export default {
 		
 		//在线资讯
 		clickLeft(){
+			let {isLoadFinish} = this
+			if(!isLoadFinish)return 
 			console.log('在线资讯')
 		},
 		
 		//课程预约
 		clickRight(){
-			console.log('课程预约')
+			let {isLoadFinish,currDetail,isOrder,userInfo} = this
+			let {id,schoolId} = currDetail;
+			if(!isLoadFinish||isOrder)return 
+			if(!userInfo){
+				this.message('请登录后在预约课程')
+				return
+			}
+			let url = '/pages/page_lm/detailPage/appointment?id='+id+'&schoolId='+schoolId+'&type=1'
+			this.push({url})
+		},
+		
+		//预约成功时修改
+		orderCurr(boo){
+			this.creatOrderMonitor()
+			this.isOrder = boo;
+		},
+		
+		//点击关注时
+		clickAttention(){
+			let {isLoadFinish,currDetail,isAttention,userInfo} = this
+			let id = currDetail.id;
+			if(!isLoadFinish||isAttention)return 
+			if(!userInfo){
+				this.message('请登录后在关注课程')
+				return
+			}
+			let userid = userInfo.user.id;
+			let url = "/course/follow.do";
+			let data={curseId:id,userid};
+			this.fetch({url,data,method:'post',},3).then(res=>{
+				let {message,success} = res[1].data;
+				this.message(message);
+				this.isAttention = success;
+			})
+		},
+		
+		//点击进入学校
+		topSkip(){
+			let schoolId = this.currDetail.schoolId;
+			console.log(schoolId)
 		}
+		
 	}
 }
 </script>
@@ -85,8 +163,6 @@ export default {
 			background-color: $col-fff;
 			position: relative;
 			top: -100rpx;
-			// border-top-left-radius: 40px;
-			// border-top-right-radius: 40px;
 			.cd_curr_name{
 				padding: 0 20px 0 15px;
 				height: 100rpx;

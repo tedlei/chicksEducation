@@ -1,11 +1,12 @@
 <template>
 	<view class="ti_app">
-		<image :src="require('../../../static/image/default.png')" mode=""></image>
+		<image :src="image||require('../../../static/image/default.png')" mode=""></image>
 	</view>
 </template>
 
 <script>
 export default {
+	props:['image'],
 	data() {
 		return {
 		}

@@ -53,9 +53,9 @@ export default {
 	onLoad(option){
 		let lp = option.loginpattern;
 		if(lp) this.loginpattern = lp;
-		if(this.getItemSync('userInfo')){
-			this.push({url:'/pages/page_lm/myPage/myPage'})
-		}
+		// if(this.getItemSync('userInfo')){
+		// 	this.push({url:'/pages/page_lm/myPage/myPage'})
+		// }
 	},
 	methods: {
 		//点击清除按钮时
@@ -140,7 +140,8 @@ export default {
 				this.message(msg);
 				if(success){
 					this.setItemSync('userInfo',data);
-					this.push({url:'/pages/page_lm/myPage/myPage'})
+					// this.push({url:'/pages/page_lm/myPage/myPage'})
+					this.push({url:'/pages/page_lm/detailPage/appointment'})
 					// this.push({url:'/pages/index/index'})
 				}
 			})

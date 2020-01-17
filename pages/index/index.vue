@@ -4,7 +4,7 @@
 		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
 			<uTableBar @onSelect="onSelect" :settingNum.sync="listClassNumber"></uTableBar>
 		</view>
-		<swiper class="swiper_main" :current="listClassNumber">
+		<swiper class="swiper_main" :current="listClassNumber" :duration="200">
 			<swiper-item @touchmove.stop="()=>{}">
 				<scroll-view :scroll-top="scrollTop" class="scroll-y" :scroll-y="true" @scroll="emitScroll">
 					<view class="section fx">
@@ -107,8 +107,8 @@
 		},
 		methods: {
 			/**
-			 * 由分类选择后点击确定时执行
-			 * @param {Object} obj 
+			 * 首页选中分类时 筛选条件后点击确定进入到首页中的课程列表
+			 * @param {Object} obj
 			 */
 			courseCategoryToCurrList(obj){
 				this.listClassNumber = 1;

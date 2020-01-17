@@ -56,7 +56,7 @@
 						uni.navigateBack({
 							delta: 1
 						})
-					}, 100);
+					}, 220);
 				} else {
 					uni.showToast({
 						title: '未选择筛选条件',

@@ -43,10 +43,9 @@
 							"titleNView": {
 								"buttons": [
 									{
-										"text": "\ue610",
+										"text": "确定",
 										"float":"right",
-										"fontSrc": "./static/font/font.ttf",
-										"fontSize": "17px"
+										"fontSize": "16px"
 									}
 								]
 							}
@@ -214,6 +213,11 @@
 	"condition": {
 		"current": 0,
 		"list": [
+			// {
+			// 	"name":"ss",
+			// 	"path":"pages/page_lzj/courseCategory/courseCategory",
+			// 	"query":""
+			// },
 			{
 				"name":"index",
 				"path":"pages/index/index",

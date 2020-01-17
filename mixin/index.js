@@ -176,13 +176,20 @@ const Api = {
 	push(param, data, isBack = true){
 		if (data) {
 			Object.keys(data).forEach((key, i)=>{
-				if (!i) param.url += "?"
-				param.url += key + '=' + data[key]
+				if (!i) {
+					param.url += "?"
+					param.url += key + '=' + data[key]
+				} else {
+					param.url += '&' + key + '=' + data[key]
+				}
 			})
 		}
 		if (isBack) {
 			uni.navigateTo(param);
-		} else uni.redirectTo(param);
+		} else {
+			console.log(param, 7);
+			uni.redirectTo(param)
+		};
 	},
 	/**
 	 * 返回页面

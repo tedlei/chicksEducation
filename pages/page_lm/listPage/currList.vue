@@ -45,7 +45,7 @@ export default {
 		}
 	},
 	created() {
-		this.currConditionFind();
+		this.courseCategoryToCurrList();
 		
 		this.creatScreenEmonitor()
 		this.creatSeachEmonitor()
@@ -53,8 +53,10 @@ export default {
 	},
 	methods: {
 		//创建筛选监听器
-		currConditionFind(){
-			// this.once.call('currConditionFind','clickSel');
+		courseCategoryToCurrList(){
+			uni.$on('courseCategoryToCurrList', (data)=>{
+				console.log(data, '获取分类选取结果');
+			});
 		},
 		//创建筛选监听器
 		creatScreenEmonitor(){

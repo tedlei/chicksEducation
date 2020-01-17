@@ -5,14 +5,8 @@
 				<view class="fx fxCenter leftNavOption_tit active" 
 					:class="index === showNumber ?  'checked' : ''" 
 					@tap="cutShowNumber(index)">{{item.tit}}</view>
-				<view v-show="index === showNumber"
-						class="rightContent">
-						<view v-for="(value, j) in item.option" :key="j">
-							<text class="optionTit">{{value.optionTit}}</text>
-							<view class="optionContextList fx">
-								<text v-for="(val, m) in value.optionContextList" :key="m">{{val}}</text>
-							</view>
-						</view>
+				<view v-show="index === showNumber">
+					<uCourseCategoryOption  :option="item.option"></uCourseCategoryOption>
 				</view>
 			</view>
 		</view>
@@ -21,7 +15,9 @@
 
 <script>
 	import courseCategoryState from './courseCategory.js';
+	import uCourseCategoryOption from './courseCategoryOption'
 	export default {
+		components:{uCourseCategoryOption},
 		data() {
 			return {...courseCategoryState};
 		},
@@ -31,6 +27,42 @@
 			 */
 			cutShowNumber(index){
 				this.showNumber = index;
+			},
+			/**
+			 * 获取查询条件
+			 */
+			getSelectCondition(j, m){
+				let {numberArr, contextArr, showNumber, courseClassificationList} = this;
+				numberArr = [showNumber, j, m];
+				contextArr = [
+					courseClassificationList[showNumber].tit,
+					courseClassificationList[showNumber].option[j].optionTit,
+					courseClassificationList[showNumber].option[j].optionContextList[m]
+				];
+				
+				this.numberArr = numberArr;
+				this.contextArr = contextArr;
+			}
+		},
+		onNavigationBarButtonTap({float}) {
+			if (float === 'right') {
+				let {numberArr, contextArr} = this;
+				if (numberArr.length && contextArr.length) {
+					uni.$emit('courseCategoryToCurrList', {
+						numberArr,
+						contextArr
+					})
+					setTimeout(()=>{
+						uni.navigateBack({
+							delta: 1
+						})
+					}, 100);
+				} else {
+					uni.showToast({
+						title: '未选择筛选条件',
+						icon: 'none'
+					})
+				}
 			}
 		}
 	}
@@ -60,31 +92,6 @@
 					height: 120rpx;
 					content: '';
 					background-color: $col-main;
-				}
-				.rightContent{
-					position: absolute;
-					top: 0;
-					bottom: 0;
-					right: 0;
-					overflow-y: auto;
-					width: 562rpx;
-					padding: 6rpx 0 32rpx 60rpx;
-					background-color: $col-fff;
-					.optionTit{
-						display: inline-block;
-						margin: 26rpx 0;
-						color: $col-main;
-						font-size:32rpx;
-						font-weight:bold;
-					}
-					.optionContextList{
-						flex-wrap: wrap;
-						text{
-							display: inline-block;
-							margin-right: 32rpx;
-							margin-bottom: 10rpx;
-						}
-					}
 				}
 			}
 		}

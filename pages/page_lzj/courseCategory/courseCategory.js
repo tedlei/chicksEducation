@@ -1,4 +1,6 @@
 export default {
+	numberArr: [],	// 查询内容层级序号列表
+	contextArr: [],	// 查询内容
 	showNumber: 0,
 	courseClassificationList: [{
 			tit: '学前辅导',

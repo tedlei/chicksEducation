@@ -6,11 +6,11 @@
 		</view>
 		<image class="section_image" :src="informationImage.pic" mode=""></image>
 		<!-- 热门课程 -->
-		<uHotCurriclum :isUpdateData.sync="isUpdateData"></uHotCurriclum>
+		<uHotCurriclum :isUpdateData.sync="isUpdateData" @toPage="toPage"></uHotCurriclum>
 		<!-- 热门学校 -->
-		<uHotSchool :isUpdateData.sync="isUpdateData"></uHotSchool>
+		<uHotSchool :isUpdateData.sync="isUpdateData"  @toPage="toPage"></uHotSchool>
 		<!-- 热门课程推荐 -->
-		<uCategory :isUpdateData.sync="isUpdateData"></uCategory>
+		<uCategory :isUpdateData.sync="isUpdateData"  @toPage="toPage"></uCategory>
 	</view>
 </template>
 
@@ -18,13 +18,14 @@
 	import uCategory from '../hotTopic/category.vue'
 	import uHotCurriclum from '../hotTopic/hotCurriclum.vue'
 	import uHotSchool from '../hotTopic/hotSchool.vue'
+	
 	export default {
 		components: {
 			uCategory,
 			uHotCurriclum,
 			uHotSchool
 		},
-		props: ['isUpdateData'],
+		props: ['isUpdateData', 'toPage'],
 		data() {
 			return {
 				informationImage: {},

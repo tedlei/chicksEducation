@@ -1,5 +1,5 @@
 <template>
-	<view class="option fx">
+	<view class="option fx" @tap="toPage(value.id)">
 		<image :src="value.schoolImage || require('../../../../static/image/default.png')" mode=""></image>
 		<text class="course_name">{{value.organizationName}}</text>
 		
@@ -19,6 +19,11 @@
             }
         },
         methods:{
+			toPage(id){
+				this.push({
+					url: "/pages/page_lm/detailPage/schoolDetail"
+				}, {id});
+			}
         }
     }
 </script>

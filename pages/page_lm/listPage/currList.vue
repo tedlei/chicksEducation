@@ -45,11 +45,17 @@ export default {
 		}
 	},
 	created() {
+		this.currConditionFind();
+		
 		this.creatScreenEmonitor()
 		this.creatSeachEmonitor()
 		this.getCurrList();
 	},
 	methods: {
+		//创建筛选监听器
+		currConditionFind(){
+			// this.once.call('currConditionFind','clickSel');
+		},
 		//创建筛选监听器
 		creatScreenEmonitor(){
 			this.once.call(this,'teacherScreen','clickSel')

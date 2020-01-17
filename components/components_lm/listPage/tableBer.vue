@@ -25,6 +25,11 @@ export default {
 			this.n = num;
 			this.$emit('onSelect',num);
 		}
+	},
+	watch:{
+		settingNum(i){
+			this.n = i;
+		}
 	}
 }
 </script>

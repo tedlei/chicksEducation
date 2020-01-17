@@ -1,5 +1,5 @@
 <template>
-	<view class="option fx">
+	<view class="option fx" @click="toPage(value.id)">
 		<image :src="value.courseImage"></image>
 		<text class="course_name">{{value.courseName}}</text>
 		<text class="course_price">{{'价格：' + value.coursePrice + '元'}}</text>
@@ -20,6 +20,11 @@
             }
         },
         methods:{
+			toPage(id){
+				this.push({
+					url: "/pages/page_lm/detailPage/currDetail"
+				}, {id});
+			}
         }
     }
 </script>

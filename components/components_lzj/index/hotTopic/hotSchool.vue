@@ -2,14 +2,14 @@
 	<view class="hotSchool">
 		<view class="head fx">
 			<text class="title">热门学校</text>
-			<view class="more">
+			<view class="more" @tap="toSchool">
 				<text>更多</text>
 				<text class="iconfont">&#xe601;</text>
 			</view>
 		</view>
 		<view class="list fx">
 			<uSchoolOption
-					v-for="(value, i) in popularSchool" 
+					v-for="(value, i) in popularSchool"
 					:value="value"
 					:key="i"></uSchoolOption>
 		</view>
@@ -40,6 +40,9 @@
 				this.getRandomData(result, arr, 2);
 				this.popularSchool = arr;
 			},
+			toSchool(){
+				this.$parent.$emit('toPage', 'school');
+			}
 		},
 		watch: {
 			isUpdateData(v){

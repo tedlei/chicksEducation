@@ -2,15 +2,13 @@
 	<view class="hotCurriclum">
 		<view class="head fx">
 			<text class="title">热门课程</text>
-			<navigator url="/pages/page_lzj/courseCategory/courseCategory">
-				<view class="more">
-					<text>更多</text>
-					<text class="iconfont">&#xe601;</text>
-				</view>
-			</navigator>
+			<view class="more" @tap="toCurrList">
+				<text>更多</text>
+				<text class="iconfont">&#xe601;</text>
+			</view>
 		</view>
 		<view class="list fx">
-			<uOption :showCurriclum="true" 
+			<uOption :showCurriclum="true"
 					v-for="(value, i) in popularCourse"
 					:value="value" :key="i"></uOption>
 		</view>
@@ -41,6 +39,12 @@
 				this.getRandomData(res, arr, 4);
 				this.popularCourse = arr;
 			},
+			/**
+			 * 跳转到课程列表页面
+			 */
+			toCurrList(){
+				this.$parent.$emit('toPage', 'curriculum');
+			}
 		},
 		watch: {
 			isUpdateData(v){

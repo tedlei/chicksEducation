@@ -2,11 +2,11 @@
 	<view class="index">
 		<headerNav></headerNav>
 		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
-			<uTableBar @onSelect="onSelect" :settingNum="listClassNumber"></uTableBar>
+			<uTableBar @onSelect="onSelect" :settingNum.sync="listClassNumber"></uTableBar>
 		</view>
 		<swiper class="swiper_main" :current="listClassNumber">
 			<swiper-item @touchmove.stop="()=>{}">
-				<scroll-view class="scroll-y" :scroll-y="true" @scroll="emitScroll">
+				<scroll-view :scroll-top="scrollTop" class="scroll-y" :scroll-y="true" @scroll="emitScroll">
 					<view class="section fx">
 						<view class="header-nav"></view>
 						<uSwiper></uSwiper>
@@ -20,7 +20,7 @@
 						</view>
 									
 						<!-- 主体内容 -->
-						<uMian :isUpdateData.sync="isUpdateData"></uMian>
+						<uMian :isUpdateData.sync="isUpdateData" @toPage="toPage"></uMian>
 					</view>
 				</scroll-view>
 			</swiper-item>
@@ -69,6 +69,7 @@
 		},
 		data() {
 			return {
+				scrollTop: 0,
 				top: 0,	// 分类导航栏top值
 				oldClassNameScrollYBottom: 0,
 				hideTableBar: false,	// 是否隐藏分类导航栏
@@ -100,7 +101,6 @@
 			}
 		},
 		onLoad() {
-
 			// 获取搜索关键字
 			uni.$on('getSearchResult', this.getSearchResult);
 		},
@@ -127,6 +127,7 @@
 					case 4:	// 传递给资讯列表
 						uni.$emit('infoSeach',input);
 						break;
+					// not default
 				}
 				
 				
@@ -177,6 +178,26 @@
 			onSelect(i){
 				this.listClassNumber = i;
 				this.input = '';
+			},
+			/**
+			 * '跳转' 到课程列表 
+			 */
+			toPage(v){
+				switch(v){
+					case 'curriculum':
+						this.listClassNumber = 1;
+						break;
+					case 'school':
+						this.listClassNumber = 2;
+						break;
+					default:
+						uni.$emit('currConditionFind',v);
+						this.listClassNumber = 1;
+						break;
+				}
+				// 避免点击一次之后再次点击时因scrollTop未改变而使滚动不生效
+				this.scrollTop = this.scrollTop === 200 ? 201 : 200;
+				this.top = 32;
 			}
 		},
 		onShow() {

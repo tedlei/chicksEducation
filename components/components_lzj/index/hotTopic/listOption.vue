@@ -2,7 +2,7 @@
 	<view class="box">
 		<view class="head fx">
 			<text class="title">{{value}}</text>
-			<view class="more">
+			<view class="more" @tap="conditionFind">
 				<text>更多</text>
 				<text class="iconfont">&#xe601;</text>
 			</view>
@@ -23,7 +23,7 @@
 				listData: []
 			}
 		},
-		props: ['value', 'selectArrValue', 'isUpdateData'],
+		props: ['value', 'selectArrValue', 'isUpdateData', 'toPageMain'],
 		created() {
 			this.initialize();
 		},
@@ -53,6 +53,10 @@
 						return index < 4;
 					}) : res;
 				});
+			},
+			// 课程跳转并附加查询条件
+			conditionFind(){
+				this.$parent.$parent.$emit('toPage', this.value.slice(0, 2));
 			}
 		},
 		watch: {

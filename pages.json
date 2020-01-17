@@ -248,7 +248,8 @@
 				"name":"myPage",
 				"path":"pages/page_lm/myPage/myPage",
 				"query":""
-			},{
+			},
+			{
 				"name":"search",
 				"path":"pages/page_lzj/search/search",
 				"query":""

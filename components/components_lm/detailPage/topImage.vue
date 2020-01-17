@@ -1,6 +1,6 @@
 <template>
 	<view class="ti_app">
-		<image :src="image||require('../../../static/image/default.png')" mode=""></image>
+		<image :src="image||require('../../../static/image/default.png')" mode="aspectFit"></image>
 	</view>
 </template>
 
@@ -20,6 +20,7 @@ export default {
 <style scoped lang="scss">
 .ti_app{
 	width: 100%;
+	background-color: #a2b5d3;
 	image{
 		width: 100%;
 	}

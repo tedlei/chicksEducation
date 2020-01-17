@@ -57,7 +57,7 @@
 		opacity: 0.4;
 	}
 	.pfAllScreen{
-		position: fixed;
+		position: absolute;
 		width: 100%;
 		height: 100%;
 		top:0;

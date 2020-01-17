@@ -37,7 +37,9 @@ const Api = {
 		let ipList = [
 			// 'http://112.74.18.182:9101/cnjy-search-web/',
 			'http://192.168.3.88:9101/',
-			'http://112.74.16.235:9102/cnjy-user-web/',
+			// 'http://112.74.16.235:9102/cnjy-user-web/',
+			'http://192.168.3.88:9102/',
+			
 			'http://112.74.16.235:9103/cnjy-curriculum-web/',
 			// 'http://120.24.45.159:9104/cnjy-school-web/',
 			'http://192.168.3.88:9104/',

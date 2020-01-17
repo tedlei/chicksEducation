@@ -25,6 +25,7 @@ export default {
 				topic:'',   //资讯题目
 				index:"0",   // 分页   
 				status:'1',   //资讯状态
+				pageSize:"10",    //每页条数
 				port:'1'
 			},
 			selObj:{},
@@ -64,7 +65,7 @@ export default {
 		
 		//清空列表
 		clearList(){
-			this.teacList = [];
+			this.infoList = [];
 			this.setParam.index = '0';
 		},
 		
@@ -78,6 +79,7 @@ export default {
 		
 		//筛选页面返回时
 		clickSel(obj){
+			console.log(123456)
 			this.creatScreenEmonitor();
 			this.clearList()
 			this.selObj = obj;
@@ -85,8 +87,7 @@ export default {
 			for(let name in obj){
 				sp[name] = obj[name].value;
 			}
-			console.log(sp)
-			this.getTeacherList();
+			this.getZxData();
 		},
 	}
 }

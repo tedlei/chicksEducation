@@ -41,7 +41,7 @@ export default {
 		let ud = this.updateData;
 		let item = JSON.parse(e.itemStr);
 		let user = JSON.parse(e.userStr);
-		this.userInfo = this.getItem('userInfo');
+		this.userInfo = this.getItemSync('userInfo');
 		user.birthday = user['birthday'].split(' ')[0]
 		this.item = item
 		this.user = user
@@ -87,7 +87,7 @@ export default {
 				let two = user.twoDddress === updateData.twoDddress
 				let three = user.threeDddress === updateData.threeDddress
 			}
-			let url = "/user/update.do"
+			let url = "user/update.do"
 			this.fetch({url,data:updateData,method:'post'},2).then(res=>{
 				let {message,success} = res[1].data; 
 				if(success){
@@ -100,8 +100,9 @@ export default {
 						
 					}
 					ui.user = user;
-					this.setItem('userInfo',ui);
+					this.setItemSync('userInfo',ui);
 					uni.$emit('updateUser')
+					uni.$emit('updateHead')
 					setTimeout(()=>{
 						this.pop();
 					},1500)

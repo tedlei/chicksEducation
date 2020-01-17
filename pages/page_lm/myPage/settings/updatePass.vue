@@ -30,7 +30,7 @@ export default {
 		}
 	},
 	onLoad() {
-		this.userInfo = this.getItem('userInfo');
+		this.userInfo = this.getItemSync('userInfo');
 	},
 	methods: {
 		//返回上一个页面
@@ -59,7 +59,7 @@ export default {
 				pass.affirm = '';
 				return
 			}
-			let url = '/user/updatePassword.do'
+			let url = 'user/updatePassword.do'
 			let data = {usedpassword:formerPass,password:NewPass,phone}
 			this.fetch({url,data,method:'get'},2).then(res=>{
 				let {message,success} = res[1].data
@@ -76,7 +76,7 @@ export default {
 		tzToLogin(){
 			try {uni.clearStorageSync()}catch (e){}
 			this.fetch({
-				url: '/logout.do',
+				url: 'logout.do',
 				method: 'get',
 				data: {username: phone}
 			}, 2).then((res) => {

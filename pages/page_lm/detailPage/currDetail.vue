@@ -75,7 +75,7 @@ export default {
 		//查询是否预约
 		getIsOrder(id){
 			let userId = this.userInfo.user.id;
-			let url = "/course/findByAppOin.do";
+			let url = "course/findByAppOin.do";
 			let data = {userId,curseId:id};
 			this.fetch({url,data,method:'get',},3).then(res=>{
 				this.isOrder = res[1].data;
@@ -84,7 +84,7 @@ export default {
 		//查询课程是否关注
 		getIsAttention(curseid){
 			let userid = this.userInfo.user.id;
-			let url = "/course/findByFollow.do";
+			let url = "course/findByFollow.do";
 			let data = {userid,curseid}
 			this.fetch({url,data,method:'get',},3).then(res=>{
 				this.isAttention = res[1].data.success;
@@ -132,7 +132,7 @@ export default {
 				return
 			}
 			let userid = userInfo.user.id;
-			let url = "/course/follow.do";
+			let url = "course/follow.do";
 			let data={curseId:id,userid};
 			this.fetch({url,data,method:'post',},3).then(res=>{
 				let {message,success} = res[1].data;

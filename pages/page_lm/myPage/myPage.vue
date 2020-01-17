@@ -39,7 +39,7 @@ export default {
 				{title:'我的关注',icon:'\ue6af',url:'/pages/page_lm/myPage/focusAndorder/myAttention?type=gz'},
 				{title:'我的预约',icon:'\ue622',url:'/pages/page_lm/myPage/focusAndorder/myAttention?type=yy'},
 				{title:'个人资料',icon:'\ue621',url:'/pages/page_lm/myPage/personalData/myDataCenter'},
-				{title:'卡券',icon:'\ue623',url:''},
+				{title:'卡券',icon:'\ue623',url:'/pages/page_lm/myPage/coupon/couponList'},
 				{title:'设置',icon:'\ue620',url:'/pages/page_lm/myPage/settings/setting'},
 			],
 			userInfo:null, 
@@ -52,7 +52,7 @@ export default {
 	methods: {
 		//获取用户对象
 		getUsre(){
-			this.userInfo = this.getItemSync('userInfo');
+			let userInfo = this.getItemSync('userInfo');
 			if(userInfo) this.userInfo = userInfo
 			else{
 				uni.reLaunch({url:'/pages/page_lm/LoginRelated/verifyLogin'})

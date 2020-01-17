@@ -1,6 +1,7 @@
 <template>
 	<view class="bb_app fx">
-		<view class="bbLift active" @tap="clickLeft">{{leftTitle}}</view>
+		<view class="bbLift active" 
+			v-if="type!=='teacher'" @tap="clickLeft">{{leftTitle}}</view>
 		<view class="bbRight" :class="isOrder?'bgColor':'active'" 
 		  v-if="type!=='school'"	@tap="clickRight">{{rightTitle}}</view>
 	</view>

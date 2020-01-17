@@ -1,5 +1,5 @@
 <template>
-	<view class="mpc_app" @longpress="LongPress">
+	<view class="mpc_app" @longpress="pressNum(i)">
 		<view class="mpcImg" :class="selectNum===1?'mpcTeacher':''">
 			<image :src="imgSrc(item,selectNum)" mode=""></image>
 		</view>
@@ -7,7 +7,7 @@
 		<view class="mapName mapM" v-if="selectNum===0">价格：￥<text>{{item.coursePrice}}</text>元</view>
 		<view class="mapName" v-if="selectNum===1">{{item.teacherName}}</view>
 		<view class="mapName mapM" v-if="selectNum===2">课程数：{{item.subjectNum}}</view>
-		<view class="mpcTc fx" v-show="isShowTc">
+		<view class="mpcTc fx" v-show="i===deleteNum">
 			<view class="mpcTcBtn" hover-class="topTcBtn" @tap="topCancel(item.id,isgz,selectNum)">取消{{isgz==='gz'?'关注':'预约'}}</view>
 		</view>
 	</view> 
@@ -15,10 +15,9 @@
 
 <script>
 export default {
-	props:['isTeacher','selectNum','isgz','item'],
+	props:['isTeacher','selectNum','isgz','item','deleteNum','i'],
 	data() {
 		return {
-			isShowTc:false
 		}
 	},
 	methods: {
@@ -35,14 +34,15 @@ export default {
 			}
 		},
 		//长按方块时
-		LongPress(){
-			if(this.isShowTc)return
-			this.isShowTc = true;
+		pressNum(i){
+			let deleteNum = this.deleteNum;
+			if(deleteNum===i)return
+			this.$emit('pressNum',i);
 		},
 		
 		//点击取消时
-		topCancel(id,isgz,num){
-			this.$emit('topCancel',id,isgz,num);
+		topCancel(id,isgz,num,i){
+			this.$emit('topCancel',id,isgz,num,i);
 		}
 	}
 }

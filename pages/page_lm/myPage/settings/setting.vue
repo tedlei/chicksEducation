@@ -1,5 +1,6 @@
 <template>
 	<view class="sett_app">
+		<hb title="设置"></hb>
 		<mpl
 		 v-for="(item,i) of dataList" :key='i' 
 		 :item = "item"
@@ -10,8 +11,9 @@
 
 <script>
 import mpl from '../../../../components/components_lm/myPage/myPageList.vue'
+import hb from '../../../../components/components_lm/detailPage/headBack.vue'
 export default {
-	components:{mpl},
+	components:{mpl,hb},
 	data() {
 		return {
 			dataList:[
@@ -22,7 +24,7 @@ export default {
 		}
 	},
 	onLoad() {
-		this.userInfo = this.getItem('userInfo');
+		this.userInfo = this.getItemSync('userInfo');
 	},
 	methods: {
 		//点击选项时
@@ -40,7 +42,7 @@ export default {
 			let phone = this.userInfo.user.phone;
 			try {uni.clearStorageSync()}catch (e){}
 			this.fetch({
-				url: '/logout.do',
+				url: 'logout.do',
 				method: 'get',
 				data: {username: phone}
 			}, 2).then((res) => {

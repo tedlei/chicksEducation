@@ -85,7 +85,7 @@ export default {
 		
 		//获取验证码
 		getVerify(phone){
-			let url = "/message/phone.do";
+			let url = "message/phone.do";
 			let data = {phone}
 			this.fetch({url,data},2).then(res=>{
 				let {message,success} = res[1].data;
@@ -125,7 +125,7 @@ export default {
 				this.affirpass = '';
 				return
 			}
-			let url = '/user/save.do';
+			let url = 'user/save.do';
 			let data ={phone,password:pass}
 			this.fetch({url,data,method:'post'},2).then(res=>{
 				let {message,success} = res[1].data

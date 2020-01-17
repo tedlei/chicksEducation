@@ -1,5 +1,6 @@
 <template>
 	<view class="mdc_app">
+		<hb title="个人资料"></hb>
 		<mpl 
 		 v-for="(item,i) of dataList" :key='i' 
 		 :item = "item"
@@ -10,8 +11,9 @@
 
 <script>
 import mpl from '../../../../components/components_lm/myPage/myPageList.vue'
+import hb from '../../../../components/components_lm/detailPage/headBack.vue'
 export default {
-	components:{mpl},
+	components:{mpl,hb},
 	data() {
 		return {
 			dataList:[
@@ -34,7 +36,7 @@ export default {
 	methods: {
 		//获取用户对象
 		getUsre(){
-			this.userInfo = this.getItem('userInfo');
+			this.userInfo = this.getItemSync('userInfo');
 		},
 		
 		//对象序列化

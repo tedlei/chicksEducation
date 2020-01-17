@@ -65,7 +65,7 @@ export default {
 		//获取学校列表
 		getSchoolList(boo){
 			this.curriculumList = [];
-			let url='/schooluser/getschool.do';
+			let url='schooluser/getschool.do';
 			let data = this.schoolObj;
 			if(boo){
 				data.index = ''+(data.index*1+1)

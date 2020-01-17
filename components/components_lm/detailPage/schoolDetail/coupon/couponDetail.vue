@@ -42,6 +42,7 @@ export default {
 			}
 		},
 		
+		//领取显示
 		down(item,boo){
 			let isFollow = item.isFollow;
 			if(isFollow==='0') return '立即领取'
@@ -59,7 +60,19 @@ export default {
 				return
 			}
 			this.fetch({url,data:{couponId:id,userId},method:'post'},4).then(res=>{
-				console.log(res[1].data);
+				let {message,success} = res[1].data;
+				console.log(message,success)
+				this.message(message);
+				this.isDraw = success;
+			})
+		},
+		
+		//查看是否领取
+		seachIsDraw(couponId,userId){
+			let url = 'coup/isReceive.do'
+			let data = {couponId,userId}
+			this.fetch({url,data,method:'post'},4).then(res=>{
+				this.isDraw = res[1].data;
 			})
 		}
 	}

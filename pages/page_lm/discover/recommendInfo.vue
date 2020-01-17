@@ -28,7 +28,7 @@ export default {
 				port: "1",    //动态资讯   
 				status: "1",
 			}
-			let url = '/schoolMessage/getMessage.do';
+			let url = 'schoolMessage/getMessage.do';
 			this.fetch({url,data,method:"post"},1).then(res=>{})
 		}
 	}

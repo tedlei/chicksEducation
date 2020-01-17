@@ -53,9 +53,9 @@ export default {
 	onLoad(option){
 		let lp = option.loginpattern;
 		if(lp) this.loginpattern = lp;
-		// if(this.getItemSync('userInfo')){
-		// 	this.push({url:'/pages/page_lm/myPage/myPage'})
-		// }
+		if(this.getItemSync('userInfo')){
+			this.push({url:'/pages/page_lm/myPage/myPage'})
+		}
 	},
 	methods: {
 		//点击清除按钮时
@@ -84,7 +84,7 @@ export default {
 		
 		//获取验证码
 		getVerify(phone){
-			let url = "/message/phone.do";
+			let url = "message/phone.do";
 			let data = {phone}
 			this.fetch({url,data},2).then(res=>{
 				let {message,success} = res[1].data;
@@ -128,7 +128,7 @@ export default {
 			let vc = this.verifyCode;
 			let pass = this.pass;
 			let lit = this.loginpattern;
-			let url = '/login.do';
+			let url = 'login.do';
 			let data = {userCode:phone,password:'code'}
 			if(lit==='code'){
 				data.code = vc;
@@ -140,8 +140,8 @@ export default {
 				this.message(msg);
 				if(success){
 					this.setItemSync('userInfo',data);
-					// this.push({url:'/pages/page_lm/myPage/myPage'})
-					this.push({url:'/pages/page_lm/detailPage/appointment'})
+					this.push({url:'/pages/page_lm/myPage/myPage'})
+					// this.push({url:'/pages/page_lm/detailPage/appointment'})
 					// this.push({url:'/pages/index/index'})
 				}
 			})

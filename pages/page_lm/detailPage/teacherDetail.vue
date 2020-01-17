@@ -44,14 +44,10 @@ export default {
 		this.userInfo = ui
 		this.getTeacher(e.id);
 		if(ui){
-			this.creatOrderMonitor();
+			this.once('updateOrderTeac','orderTeac')
 		}
 	},
 	methods: {
-		//创建监听器
-		creatOrderMonitor(){
-			this.once.call(this,'updateOrderTeac','orderTeac')
-		},
 		//进入学校
 		topSkip(){
 			this.push({url:'/pages/page_lm/detailPage/schoolDetail?id='+this.teacherDetail.teacherSchoolId})
@@ -107,8 +103,6 @@ export default {
 		
 		//关注成功
 		orderTeac(boo){
-			console.log(boo,154354645)
-			this.creatOrderMonitor();
 			this.isOrder = boo;
 		}
 	}

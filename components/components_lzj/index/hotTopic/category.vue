@@ -4,7 +4,7 @@
 				    v-for="(item, idx) in titleArr" 
 					:selectArrValue="selectArr[idx]" 
 					:key="idx"
-					:isUpdateData.sync="isUpdateData"/>
+					:isUpdateData.sync="isUpdateData" />
     </div>
 </template>
 
@@ -19,6 +19,11 @@
                 titleArr: ['小学热门推荐课程', '中学热门推荐课程', '艺术热门推荐课程', '学历热门推荐课程', '职业热门推荐课程'],
                 advertisingSix: []  // 广告位
             }
-        }
+        },
+		methods:{
+			// toPageMain(v){
+			// 	this.$emit('toPage', v);
+			// }
+		}
     }
 </script>

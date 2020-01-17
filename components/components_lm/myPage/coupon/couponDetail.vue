@@ -1,9 +1,10 @@
 <template>
-	<view class="cd_app" :class="item.isNotCourse==='2'?'cd_zy1':''">
-		<view class="cd_name">{{item.isNotCourse==='1'?'通用':'专用'}}优惠券</view>
-		<view class="cd_price">{{item.couponPrice}}元</view>
+	<view class="cd_app" :class="item.isUniversal==='2'?'cd_zy1':''">
+		<!-- <view class="cd_name">{{item.isUniversal==='1'?'通用':'专用'}}优惠券</view> -->
+		<view class="cd_price mt30">优惠券 {{item.couponPrice}}元</view>
 		<view class="cd_price t1">{{showPic(item)}}</view>
-		<!-- <view class="cd_price t2">有效日期至：{{item.createTime.split('')[0]}}</view> -->
+		<view class="cd_price t2">有效日期至：{{item.createTime.split(' ')[0]}}</view>
+		<view class="cd_price t2 ellipsis">{{item.schoolName}}</view>
 		<view class="cd_btn" @tap="clickUse(item)">立即使用</view>
 	</view>
 </template>
@@ -45,9 +46,11 @@ export default {
 <style scoped lang="scss">
 .cd_app{
 	width: 336rpx;
-	height: 208rpx;
+	// height: 208rpx;
 	margin-left: 26rpx;
 	margin-top: 20rpx;
+	padding:0 10rpx;
+	padding-bottom: 16rpx;
 	border-radius: 5px;
 	background-image: url('~@/static/image/coupon/ty1.png');
 	background-size: 100% 100%;
@@ -58,6 +61,9 @@ export default {
 		font-weight: bold;
 		text-align: center;
 		line-height: 49rpx;
+	}
+	.mt30{
+		margin-top: 16rpx;
 	}
 	.t1,.t2{
 		font-size: 10px;

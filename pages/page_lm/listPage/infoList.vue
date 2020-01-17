@@ -34,21 +34,11 @@ export default {
 		}
 	},
 	created() {
-		this.creatScreenEmonitor();
-		this.creatSeachEmonitor();
+		this.once('infoScreen','clickSel')
+		this.once('infoSeach','searchConenxt')
 		this.getZxData();
 	},
 	methods: {
-		//创建筛选监听器
-		creatScreenEmonitor(){
-			this.once.call(this,'infoScreen','clickSel')
-		},
-		
-		//创建搜索监听器
-		creatSeachEmonitor(){
-			this.once.call(this,'infoSeach','searchConenxt')
-		},
-		
 		//获取资讯数据
 		getZxData(boo){
 			let url = 'schoolMessage/getMessage.do';
@@ -71,7 +61,6 @@ export default {
 		
 		//当搜索条件变化时
 		searchConenxt(val){ 
-			this.creatSeachEmonitor();
 			this.clearList()
 			this.setParam.topic = val;
 			this.getZxData();
@@ -79,8 +68,6 @@ export default {
 		
 		//筛选页面返回时
 		clickSel(obj){
-			console.log(123456)
-			this.creatScreenEmonitor();
 			this.clearList()
 			this.selObj = obj;
 			let sp = this.setParam;

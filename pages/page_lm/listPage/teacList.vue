@@ -40,21 +40,11 @@ export default {
 		}
 	},
 	created() {
-		this.creatScreenEmonitor();
-		this.creatSeachEmonitor();
+		this.once('teacherScreen','clickSel')
+		this.once('teacSeach','searchConenxt')
 		this.getTeacherList();
 	},
 	methods: {
-		//创建筛选监听器
-		creatScreenEmonitor(){
-			this.once.call(this,'teacherScreen','clickSel')
-		},
-		
-		//创建搜索监听器
-		creatSeachEmonitor(){
-			this.once.call(this,'teacSeach','searchConenxt')
-		},
-		
 		//获取教师列表
 		getTeacherList(boo){
 			let url = 'teacher/getteacher.do';
@@ -81,7 +71,6 @@ export default {
 		
 		//筛选页面返回时
 		clickSel(obj){
-			this.creatScreenEmonitor();
 			this.clearList()
 			this.selObj = obj;
 			let teac = this.teacherObj;
@@ -93,12 +82,12 @@ export default {
 		
 		//清空列表
 		clearList(){
-			this.teacList = [];			this.teacherObj.index = '0';
+			this.teacList = [];
+			this.teacherObj.index = '0';
 		},
 		
 		//当搜索条件变化时
 		searchConenxt(val){
-			this.creatSeachEmonitor();
 			this.clearList()
 			this.teacherObj.name = val;
 			this.getTeacherList();

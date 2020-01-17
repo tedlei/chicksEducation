@@ -1,10 +1,10 @@
 <template>
 	<view class="cd_app" 
-		:class="item.isNotCourse==='2'?(isFinally?'cd_zy2 width100':'cd_zy1'):(isFinally?'cd_ty2 width100':'')">
-		<view class="cd_name" v-if="!isFinally">{{item.isNotCourse==='1'?'通用':'专用'}}优惠券</view>
+		:class="item.isUniversal==='2'?(isFinally?'cd_zy2 width100':'cd_zy1'):(isFinally?'cd_ty2 width100':'')">
+		<view class="cd_name" v-if="!isFinally">{{item.isUniversal==='1'?'通用':'专用'}}优惠券</view>
 		<view class="cd_price" :class="isFinally?'pricePt':''">
 			{{item.couponPrice}}元
-			<text class="cd_yhj" v-if="isFinally">{{item.isNotCourse==='1'?'通用':'专用'}}优惠券</text>
+			<text class="cd_yhj" v-if="isFinally">{{item.isUniversal==='1'?'通用':'专用'}}优惠券</text>
 		</view>
 		<view class="cd_price t1">{{showPic(item)}}</view>
 		<view class="cd_price t2">有效日期至：{{item.createTime.split(' ')[0]}}</view>
@@ -61,7 +61,6 @@ export default {
 			}
 			this.fetch({url,data:{couponId:id,userId},method:'post'},4).then(res=>{
 				let {message,success} = res[1].data;
-				console.log(message,success)
 				this.message(message);
 				this.isDraw = success;
 			})

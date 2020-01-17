@@ -30,8 +30,8 @@ export default {
 		}
 	},
 	onLoad() {
+		this.once('updateUser','getUsre')
 		this.getUsre();
-		this.once.call(this,'updateUser','getUsre')
 	},
 	methods: {
 		//获取用户对象

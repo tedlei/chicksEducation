@@ -11,6 +11,7 @@
 				<view class="mpanike">
 					<view class="mpaNick">{{userInfo&&userInfo.user.nickName}}</view>
 					<view class="mpaNick mpanikeText"><text>账户名：{{userInfo&&userInfo.user.name}}</text></view>
+					<view class="mpSignIn active" @tap="clickSign">每日签到</view>
 				</view>
 			</view>
 		</view>
@@ -46,8 +47,8 @@ export default {
 		}
 	},
 	onLoad() {
+		this.once('updateHead','getUsre')
 		this.getUsre();
-		this.once.call(this,'updateHead','getUsre')
 	},
 	methods: {
 		//获取用户对象
@@ -66,6 +67,11 @@ export default {
 		//跳转到点击的url
 		topViewList(url){
 			this.push({url})
+		},
+		
+		//点击每日签到时
+		clickSign(){
+			this.push({url:'/pages/page_lm/myPage/signIn/signIn'})
 		}
 	}
 }
@@ -109,7 +115,7 @@ export default {
 			.mpanike{
 				width: 340rpx;
 				margin-left: 60rpx;
-				padding-top: 66rpx;
+				padding-top: 40rpx;
 				color: $col-fff;
 				.mpaNick{
 					font-size: 40rpx;
@@ -118,8 +124,19 @@ export default {
 					white-space: nowrap;
 				}
 				.mpanikeText{
-					margin-top:32rpx;
+					margin-top:24rpx;
 					font-size: 28rpx;
+				}
+				.mpSignIn{
+					width:192rpx;
+					height:48rpx;
+					margin-top: 48rpx;
+					border-radius:24rpx;
+					text-align: center;
+					line-height: 48rpx;
+					background:linear-gradient(179deg,rgba(255,221,162,1) 0%,rgba(255,192,67,1) 100%);
+					font-size: 28rpx;
+					color:rgba(255,40,32,1);
 				}
 			}
 		}

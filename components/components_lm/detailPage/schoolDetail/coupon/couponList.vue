@@ -29,7 +29,7 @@ export default {
 			couponPrice: 100   //优惠价格
 			createTime: "2020-01-15 10:10:37"   //有效期
 			id: "15465464"     //id
-			isNotCourse: "1"     //1：通用   2：专用
+			isUniversal: "1"     //1：通用   2：专用
 			*/
 		}
 	},

@@ -29,7 +29,6 @@ export default {
 			let url = 'schoolMessage/getByid.do'
 			this.fetch({url,data:{id},method:'post'},1).then(res=>{
 				this.infoDetail = res[1].data.at
-				console.log(res[1].data.at)
 			})
 		}
 	}

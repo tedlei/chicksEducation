@@ -36,8 +36,7 @@
 			uni.setNavigationBarTitle({
 				title: '消息详情' || data.el
 			})
-
-
+			this.createSocket();
 		},
 		data() {
 			return {
@@ -50,19 +49,19 @@
 		},
 		methods: {
 			createSocket() {
-				// let socketTask = uni.connectSocket({
-				//     url: 'wss://www.example.com/socket', //仅为示例，并非真实接口地址。
-				//     complete: ()=> {}
-				// });
-				// uni.onSocketOpen(function(res) {
-				// 	console.log('WebSocket连接已打开！');
-				// 	uni.sendSocketMessage({
-				// 		data: {
-				// 			messageContent: "发送内容"
-				// 		}
-				// 	})
-				// });
-				// this.socket = socketTask;
+				let socketTask = uni.connectSocket({
+				    url: 'http://192.168.3.88:9091',
+				    complete: ()=> {}
+				});
+				uni.onSocketOpen(function(res) {
+					console.log('WebSocket连接已打开！');
+					uni.sendSocketMessage({
+						data: {
+							messageContent: "发送内容"
+						}
+					})
+				});
+				this.socket = socketTask;
 			},
 			send() {
 				console.log(this.input, '发送内容');

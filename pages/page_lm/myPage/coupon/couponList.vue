@@ -1,6 +1,6 @@
 <template>
 	<view class="cl_app fx pfAllScreen">
-		<hb title="卡券"></hb>
+		<hb :title="isUseCoupon?'使用卡券':'卡券'"></hb>
 		<view class="cl_kj fx">
 			<couponSel :selNum="selNum" @clickNum="clickNum"></couponSel>
 			<scroll-view scroll-y="true" class="cl_scro">
@@ -12,7 +12,8 @@
 			</scroll-view>
 			<view class="cl_use" v-if="isUseCoupon">
 				<view class="cl_code">
-					
+					<tkiQrcode :size="600" :val="useCode" :onval="true" :loadMake="true"
+						></tkiQrcode>
 				</view>
 				<view class="cl_numCode">{{useCode}}</view>
 			</view>
@@ -24,8 +25,9 @@
 import hb from '../../../../components/components_lm/detailPage/headBack.vue'
 import couponSel from '../../../../components/components_lm/myPage/coupon/couponSel.vue'
 import couponDetail from '../../../../components/components_lm/myPage/coupon/couponDetail.vue'
+import tkiQrcode from '../../../../components/tki-qrcode/tki-qrcode.vue'
 export default {
-	components:{hb,couponSel,couponDetail},
+	components:{hb,couponSel,couponDetail,tkiQrcode},
 	data() {
 		return {
 			selNum:2,
@@ -56,15 +58,24 @@ export default {
 			}
 			this.fetch({url,data,method:'post'},2).then(res=>{
 				this.couponList = res[1].data;
+				console.log(res[1].data[0])
 			})
 		},
 		
 		//点击使用时
 		clickUse(item){
-			console.log(item)
-			this.isUseCoupon = true;
 			this.useCode = item.id;
+			this.isUseCoupon = true;
 		}
+	},
+	//监听页面返回
+	onBackPress(){
+		if(this.isUseCoupon){
+			this.isUseCoupon = false;
+			this.useCode = '';
+			return true;
+		}
+		return false
 	}
 }
 </script>
@@ -97,7 +108,7 @@ export default {
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background-color: rgba(0,0,0,0.5);
+			background-color: $col-fff;
 			.cl_code{
 				width: 600rpx;
 				height: 600rpx;
@@ -109,7 +120,7 @@ export default {
 				margin: 120rpx auto;
 				margin-bottom: 0;
 				font-size: 40px;
-				color: $col-fff;
+				color: $col-333;
 				text-align: center;
 				font-weight: bold;
 				letter-spacing:24rpx;

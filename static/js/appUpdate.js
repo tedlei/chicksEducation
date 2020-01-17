@@ -1,75 +1,47 @@
 // #ifdef APP-PLUS
 /**
- * App更新
+ * App 热更新
  * @param {Object} widgetInfo
  */
-function hotUpdate() {
-	plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
-		uni.request({
-			url: '',
-			method: 'GET',
-			data: {
-				name: widgetInfo.name,
-				version: widgetInfo.version
-			},
-			success: res => {
-				let data = result.data;
-				if (data.update && data.wgtUrl) {
-					uni.downloadFile({
-						url: data.wgtUrl,
-						success: (downloadResult) => {
-							if (downloadResult.statusCode === 200) {
-								plus.runtime.install(downloadResult.tempFilePath, {
-									force: false
-								}, function() {
-									console.log('install success...');
-									plus.runtime.restart();
-								}, function(e) {
-									console.error('install fail...');
-								});
-							}
-						}
-					});
-				}
+function hotUpdate(wgtUrl) {
+	uni.downloadFile({
+		url: wgtUrl,
+		success: (downloadResult) => {
+			if (downloadResult.statusCode === 200) {
+				plus.runtime.install(downloadResult.tempFilePath, {
+					force: false
+				}, function() {
+					console.log('install success...');
+					plus.runtime.restart();
+				}, function(e) {
+					console.error('install fail...');
+				});
 			}
-		});
-	})
+		}
+	});
 }
 
 /**
  * 整包更新
  */
-function packageUpdate(){
-	let server = "http://192.168.3.87"; //检查更新地址
-	let req = { //升级检测数据  
-		"appid": plus.runtime.appid,
-		"version": plus.runtime.version
-	};
-	uni.request({
-		url: server,
-		method: 'GET',
-		data: req,
-		success: (res) => {
-			if (res.statusCode == 200 && res.data.status === 1) {
-				uni.showModal({ //提醒用户更新  
-					title: "更新提示",
-					content: '检测到有新版本,是否更新?',
-					success: (result) => {
-						if (result.confirm) {
-							downWgt(res.data.url);
-						} else {
-							// 检测热更新
-							hotUpdate()
-						}
-					}
-				})
+function apkUpdate(pkgUrl){
+	uni.showModal({ //提醒用户更新
+		title: "更新提示",
+		content: '检测到有新版本,是否更新?',
+		success: (result) => {
+			if (result.confirm) {
+				downWgt(pkgUrl);
 			}
 		}
 	})
 }
 
 
-//下载资源包
+
+/**
+ * //下载资源包
+ * @param {Object} wgtUrl
+ */
 function downWgt(wgtUrl){
 	var that=this;				
 	var	task=plus.downloader.createDownload( wgtUrl, {}, function(download,status){ //安装到手机的目录
@@ -103,6 +75,36 @@ function downWgt(wgtUrl){
 	});
 	task.start();
 }
+
+/**
+ * 检测更新
+ */
+function packageUpdate() {
+	plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
+		uni.request({
+			url: '',
+			method: 'GET',
+			data: {
+				name: widgetInfo.name,
+				appid: plus.runtime.appid,
+				version: widgetInfo.version
+			},
+			success: res => {
+				let data = res.data;
+				if (data.update) {
+					let {wgtUrl, pkgUrl} = data;
+					if (wgtUrl) {
+						hotUpdate(wgtUrl);
+					} else if(pkgUrl) {
+						apkUpdate(pkgUrl);
+					}
+					
+				}
+			}
+		});
+	})
+}
+
 
 export {packageUpdate}
 

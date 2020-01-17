@@ -38,21 +38,11 @@ export default {
 		}
 	},
 	created() {
-		this.creatScreenEmonitor();
-		this.creatSeachEmonitor();
+		this.once('schoolScreen','clickSel')
+		this.once('schSearch','searchConenxt')
 		this.getSchoolList();
 	},
 	methods: {
-		//创建筛选监听器
-		creatScreenEmonitor(){
-			this.once.call(this,'schoolScreen','clickSel')
-		},
-		
-		//创建搜索监听器
-		creatSeachEmonitor(){
-			this.once.call(this,'schSearch','searchConenxt')
-		},
-		
 		//选择排序方式时
 		clickSortord(obj){
 			this.clearList()
@@ -79,7 +69,6 @@ export default {
 		
 		//筛选页面返回时
 		clickSel(obj){
-			this.creatScreenEmonitor();
 			this.clearList();
 			this.selObj = obj;
 			let schoolObj = this.schoolObj;
@@ -95,7 +84,6 @@ export default {
 		},
 		//当搜索条件变化时
 		searchConenxt(val){
-			this.creatSeachEmonitor();
 			this.clearList()
 			this.schoolObj.name = val;
 			this.getSchoolList()

@@ -2,11 +2,11 @@
 	<view class="index">
 		<headerNav></headerNav>
 		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
-			<uTableBar @onSelect="onSelect" :settingNum="listClassNumber"></uTableBar>
+			<uTableBar @onSelect="onSelect" :settingNum.sync="listClassNumber"></uTableBar>
 		</view>
 		<swiper class="swiper_main" :current="listClassNumber">
 			<swiper-item @touchmove.stop="()=>{}">
-				<scroll-view class="scroll-y" :scroll-y="true" @scroll="emitScroll">
+				<scroll-view :scroll-top="scrollTop" class="scroll-y" :scroll-y="true" @scroll="emitScroll">
 					<view class="section fx">
 						<view class="header-nav"></view>
 						<uSwiper></uSwiper>
@@ -20,13 +20,13 @@
 						</view>
 									
 						<!-- 主体内容 -->
-						<uMian :isUpdateData.sync="isUpdateData"></uMian>
+						<uMian :isUpdateData.sync="isUpdateData" @toPage="toPage"></uMian>
 					</view>
 				</scroll-view>
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
-					<!-- 课程列表 -->
-					<currList></currList>
+				<!-- 课程列表 -->
+				<currList></currList>
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
 				<!-- 学校列表 -->
@@ -35,7 +35,6 @@
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
 				<!-- 教师列表 -->
 				<teacList></teacList>
-				
 			</swiper-item>
 			<swiper-item @touchmove.stop="()=>{}" class="swItem">
 				<!-- 资讯列表 -->
@@ -70,11 +69,14 @@
 		},
 		data() {
 			return {
+				scrollTop: 0,
 				top: 0,	// 分类导航栏top值
-				searchConenxt: '', // 搜索内容
+				oldClassNameScrollYBottom: 0,
 				hideTableBar: false,	// 是否隐藏分类导航栏
+				searchConenxt: '', // 搜索内容
 				listClassNumber: 0,	// 显示类别序号
 				isUpdateData: false,	// 是否更新首页数据
+				firstNotUpdate: false, // 首次进入不触发onShow
 				class_nav_data: [{
 						image: '../../static/image/kecheng.png',
 						name: '课程'
@@ -99,11 +101,13 @@
 			}
 		},
 		onLoad() {
-
 			// 获取搜索关键字
 			uni.$on('getSearchResult', this.getSearchResult);
 		},
 		methods: {
+			test(e){
+			
+			},
 			/**
 			 * 根据搜索内容 查询数据
 			 */
@@ -123,6 +127,7 @@
 					case 4:	// 传递给资讯列表
 						uni.$emit('infoSeach',input);
 						break;
+					// not default
 				}
 				
 				
@@ -153,6 +158,7 @@
 							this.top = Math.abs(top)*32/36;
 						} else {
 							this.hideTableBar = true;
+							
 							if (top >= 0) {
 								this.top = 0;
 							} else this.top = 32;
@@ -172,14 +178,38 @@
 			onSelect(i){
 				this.listClassNumber = i;
 				this.input = '';
+			},
+			/**
+			 * '跳转' 到课程列表 
+			 */
+			toPage(v){
+				switch(v){
+					case 'curriculum':
+						this.listClassNumber = 1;
+						break;
+					case 'school':
+						this.listClassNumber = 2;
+						break;
+					default:
+						uni.$emit('currConditionFind',v);
+						this.listClassNumber = 1;
+						break;
+				}
+				// 避免点击一次之后再次点击时因scrollTop未改变而使滚动不生效
+				this.scrollTop = this.scrollTop === 200 ? 201 : 200;
+				this.top = 32;
 			}
 		},
 		onShow() {
-			this.isUpdateData = true;
-			let timer = setTimeout(() => {
-				this.isUpdateData = false;
-				clearTimeout(timer);
-			}, 1000)
+			if (this.firstNotUpdate) {
+				this.isUpdateData = true;
+				let timer = setTimeout(() => {
+					this.isUpdateData = false;
+					clearTimeout(timer);
+				}, 1000)
+			} else {
+				this.firstNotUpdate = true;
+			}
 		}
 	}
 </script>

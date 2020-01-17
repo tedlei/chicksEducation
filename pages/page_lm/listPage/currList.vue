@@ -45,21 +45,12 @@ export default {
 		}
 	},
 	created() {
-		this.creatScreenEmonitor()
-		this.creatSeachEmonitor()
+		this.once('currConditionFind','conditionFind')
+		this.once('currScreen','clickSel')
+		this.once('currSearch','searchConenxt')
 		this.getCurrList();
 	},
 	methods: {
-		//创建筛选监听器
-		creatScreenEmonitor(){
-			this.once.call(this,'teacherScreen','clickSel')
-		},
-		
-		//创建搜索监听器
-		creatSeachEmonitor(){
-			this.once.call(this,'currSearch','searchConenxt')
-		},
-		
 		//当切换列表时
 		onSelect(num){
 			this.topListNum = num
@@ -108,7 +99,6 @@ export default {
 		
 		//筛选页面返回时
 		clickSel(obj){
-			this.creatScreenEmonitor();
 			this.clearList();
 			this.selObj = obj;
 			let currObj = this.currObj;
@@ -126,11 +116,23 @@ export default {
 		
 		//当搜索条件变化时
 		searchConenxt(val){
-			this.creatSeachEmonitor();
 			this.clearList()
 			this.currObj.keywords = val;
 			this.getCurrList()
 		},
+		
+		//选择分类时
+		conditionFind(value){
+			let arr = {
+				'小学':{i:'0',num:2,value:'小学辅导'},
+				'中学':{i:'0',num:3,value:'中学辅导'},
+				'艺术':{i:'0',num:4,value:'艺术培训'},
+				'学历':{i:'0',num:5,value:'学历提升'},
+				'职业':{i:'0',num:6,value:'职业培训'}
+			}
+			let data = {category:arr[value]};
+			this.clickSel(data);
+		}
 	}
 }
 </script>

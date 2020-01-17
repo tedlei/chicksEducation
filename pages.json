@@ -120,6 +120,12 @@
 				"navigationStyle":"custom"
 			}
 		},
+		{  /*每日签到页面*/
+			"path":"pages/page_lm/myPage/signIn/signIn",
+			"style":{
+				"navigationStyle":"custom"
+			}
+		},
 		{  /*个人资料*/
 			"path":"pages/page_lm/myPage/personalData/myDataCenter",
 			"style":{
@@ -204,7 +210,7 @@
 		"navigationBarBackgroundColor": "#FD8109"
 	},
 	"condition": {
-		"current":1,
+		"current":0,
 		"list": [
 			{
 				"name":"index",
@@ -215,7 +221,67 @@
 				"name":"schoolDetail",
 				"path":"pages/page_lm/LoginRelated/verifyLogin",
 				"query":""
+			},
+			{
+				"name":"test",
+				"path":"pages/test/test",
+				"query":""
+			},
+			{
+				"name":"find",
+				"path":"pages/page_lzj/find/find",
+				"query":""
+			},
+			{
+				"name":"message",
+				"path":"pages/page_lzj/message/message",
+				"query":""
+			},
+			{
+				"name":"chat",
+				"path":"pages/page_lzj/message/chat",
+				"query":""
+			},
+			{
+				"name":"myPage",
+				"path":"pages/page_lm/myPage/myPage",
+				"query":""
+			},
+			{
+				"name":"search",
+				"path":"pages/page_lzj/search/search",
+				"query":""
 			}
 		]
-	} 
+	},
+	"tabBar": {
+		"iconWidth": "31px",
+		"selectedColor":"#FD8109",
+		"list": [
+			{
+				"pagePath":"pages/index/index",
+				"iconPath":"static/image/tabBal/index.png",
+				"selectedIconPath":"static/image/tabBal/IndexSelect.png",
+				"text":"首页"
+			},
+			{
+				"pagePath":"pages/page_lzj/find/find",
+				"iconPath":"static/image/tabBal/find.png",
+				"selectedIconPath":"static/image/tabBal/findSelect.png",
+				"text":"发现"
+			},
+			{
+				"pagePath":"pages/page_lzj/message/message",
+				"iconPath":"./static/image/tabBal/message.png",
+				"selectedIconPath":"static/image/tabBal/messageSelect.png",
+				"text":"消息"
+			},
+			{
+				"pagePath":"pages/page_lm/myPage/myPage",
+				"iconPath":"static/image/tabBal/my.png",
+				"selectedIconPath":"static/image/tabBal/mySelect.png",
+				"text":"我的"
+			}
+		]
+	}
 }

@@ -43,6 +43,7 @@ const Api = {
 			'http://112.74.16.235:9103/cnjy-curriculum-web/',
 			// 'http://120.24.45.159:9104/cnjy-school-web/',
 			'http://192.168.3.88:9104/',
+			
 			'http://120.24.45.159:9105/cnjy-teacher-web/',
 		];
 		let url = param.url;
@@ -219,7 +220,7 @@ const Api = {
 	 */
 	once(eventName,funName){
 		let _then = this;
-		uni.$once(eventName, function(data){
+		uni.$on(eventName, function(data){
 			_then[funName](data);
 		})
 	},

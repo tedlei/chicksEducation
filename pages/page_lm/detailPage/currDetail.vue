@@ -45,16 +45,12 @@ export default {
 		this.userInfo = ui
 		this.getCurrDetail(e.id);
 		if(ui){
-			this.creatOrderMonitor();
+			this.once('updateOrderCurr','orderCurr')
 			this.getIsOrder(e.id);
 			this.getIsAttention(e.id);
 		}
 	},
 	methods: {
-		//创建监听器
-		creatOrderMonitor(){
-			this.once.call(this,'updateOrderCurr','orderCurr')
-		},
 		//获取课程列表
 		getCurrDetail(id){
 			let url = 'curri/findById.do';
@@ -118,7 +114,6 @@ export default {
 		
 		//预约成功时修改
 		orderCurr(boo){
-			this.creatOrderMonitor()
 			this.isOrder = boo;
 		},
 		

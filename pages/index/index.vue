@@ -4,7 +4,7 @@
 		<view class="u-table-bar" :style="{top: top + 36 + 'px'}">
 			<uTableBar @onSelect="onSelect" :settingNum.sync="listClassNumber"></uTableBar>
 		</view>
-		<swiper class="swiper_main" :current="listClassNumber">
+		<swiper class="swiper_main" :current="listClassNumber" :duration="200">
 			<swiper-item @touchmove.stop="()=>{}">
 				<scroll-view :scroll-top="scrollTop" class="scroll-y" :scroll-y="true" @scroll="emitScroll">
 					<view class="section fx">
@@ -12,7 +12,7 @@
 						<uSwiper></uSwiper>
 						<view class="index_nav">
 							<view class="class_nav fx">
-								<view v-for="(item, i) in class_nav_data" :key="i">
+								<view v-for="(item, i) in class_nav_data" :key="i" @tap="changeListClassNumber(i)">
 									<image :src="item.image"></image>
 									<text class="name">{{item.name}}</text>
 								</view>
@@ -61,7 +61,6 @@
 			uSwiper,
 			uMian,
 			uTableBar,
-			
 			currList,
 			schoolList,
 			teacList,
@@ -103,10 +102,19 @@
 		onLoad() {
 			// 获取搜索关键字
 			uni.$on('getSearchResult', this.getSearchResult);
+			
+			uni.$on('courseCategoryToCurrList', this.courseCategoryToCurrList);
 		},
 		methods: {
-			test(e){
-			
+			/**
+			 * 首页选中分类时 筛选条件后点击确定进入到首页中的课程列表
+			 * @param {Object} obj
+			 */
+			courseCategoryToCurrList(obj){
+				this.listClassNumber = 1;
+				this.top = 32;
+				// 避免点击一次之后再次点击时因scrollTop未改变而使滚动不生效
+				this.scrollTop = this.scrollTop === 200 ? 201 : 200;
 			},
 			/**
 			 * 根据搜索内容 查询数据
@@ -178,6 +186,20 @@
 			onSelect(i){
 				this.listClassNumber = i;
 				this.input = '';
+			},
+			changeListClassNumber(i){
+				i = i+1;
+				
+				if (i === 5) {
+					this.push({
+						url: '/pages/page_lzj/courseCategory/courseCategory'
+					});
+					return;
+				}
+				
+				this.listClassNumber = i;
+				this.scrollTop = this.scrollTop === 200 ? 201 : 200;
+				this.top = 32;
 			},
 			/**
 			 * '跳转' 到课程列表 

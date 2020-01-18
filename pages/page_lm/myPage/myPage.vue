@@ -71,7 +71,7 @@ export default {
 		
 		//点击每日签到时
 		clickSign(){
-			this.push({url:'/pages/page_lm/myPage/signIn/signIn'})
+			this.push({url:'/pages/page_lm/myPage/signIn'})
 		}
 	}
 }

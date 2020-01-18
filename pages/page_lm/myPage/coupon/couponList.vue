@@ -58,7 +58,6 @@ export default {
 			}
 			this.fetch({url,data,method:'post'},2).then(res=>{
 				this.couponList = res[1].data;
-				console.log(res[1].data[0])
 			})
 		},
 		

@@ -1,10 +1,9 @@
 <template>
 	<view class="cd_app" :class="item.isUniversal==='2'?'cd_zy1':''">
-		<!-- <view class="cd_name">{{item.isUniversal==='1'?'通用':'专用'}}优惠券</view> -->
-		<view class="cd_price mt30">优惠券 {{item.couponPrice}}元</view>
+		<view class="cd_price pt30">优惠券 {{item.couponPrice}}元</view>
 		<view class="cd_price t1">{{showPic(item)}}</view>
-		<view class="cd_price t2">有效日期至：{{item.createTime.split(' ')[0]}}</view>
-		<view class="cd_price t2 ellipsis">{{item.schoolName}}</view>
+		<view class="cd_price t1">有效日期至：{{item.createTime.split(' ')[0]}}</view>
+		<view class="cd_price t1 ellipsis">{{item.schoolName}}</view>
 		<view class="cd_btn" @tap="clickUse(item)">立即使用</view>
 	</view>
 </template>
@@ -27,6 +26,7 @@ export default {
 		},
 		//显示使用条件
 		showPic(item){
+			console.log(item,123456)
 			if(item.courseId){
 				return '仅用于课程：'+item.courseName
 			}else{
@@ -57,28 +57,29 @@ export default {
 	color:$col-fff;
 	text-align: center;
 	.cd_price{
-		font-size: 40rpx;
+		font-size: 30rpx;
 		font-weight: bold;
 		text-align: center;
-		line-height: 49rpx;
+		// line-height: 49rpx;
 	}
-	.mt30{
-		margin-top: 16rpx;
+	.pt30{
+		padding-top: 14rpx;
 	}
-	.t1,.t2{
+	.t1{
 		font-size: 10px;
-		line-height: 39rpx;
+		line-height: 30rpx;
 		font-weight: normal;
 	}
 	.cd_btn{
-		height: 30rpx;
-		padding:0 10px;
+		height: 40rpx;
+		margin-top: 10rpx;
+		padding:0 15px;
 		display: inline-block;
-		border-radius: 15rpx;
+		border-radius: 20rpx;
 		background-color: $col-fff;
 		text-align: center;
-		line-height: 30rpx;
-		font-size: 8px;
+		line-height: 40rpx;
+		font-size: 12px;
 		color:$col-main
 	}
 }

@@ -81,7 +81,7 @@ export default {
 <style scoped lang="scss">
 .cd_app{
 	width: 336rpx;
-	height: 208rpx;
+	height: 228rpx;
 	margin-top: 20rpx;
 	border-radius: 5px;
 	background-image: url('~@/static/image/coupon/ty1.png');

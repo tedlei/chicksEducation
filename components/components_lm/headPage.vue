@@ -32,6 +32,7 @@ export default {
 <style scoped lang="scss">
 .udNav{
 	padding:14rpx 30rpx;
+	padding-top: 54rpx;
 	background-color: $col-f5;
 	border-bottom: 2rpx solid #e5e5e5;
 	justify-content:space-between;

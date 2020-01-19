@@ -1,7 +1,7 @@
 <template>
 	<view class="id_app fx pfAllScreen">
 		<hb title="资讯详情"></hb>
-		<scroll-view scroll-y="true" class="id_scro">
+		<scroll-view scroll-y="true" class="id_scro" v-if="infoDetail">
 			<view class="id_title">{{infoDetail.schoolTopic}}</view>
 			<view class="id_item fx">
 				<view class="id_fbz ellipsis">发布者：{{infoDetail.schoolAuthor}}</view>

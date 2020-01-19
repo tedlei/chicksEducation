@@ -5,10 +5,10 @@
 			<view class="si_integral">
 				<view class="si_int_top">
 					我的积分
-					<text class="si_int_num">100</text>
+					<text class="si_int_num">{{signData&&signData.integralNumber}}</text>
 				</view>
 				<view class="si_remind fx">
-					<view class="si_rem_left">本周你已连续签到1天</view>
+					<view class="si_rem_left">你已连续签到{{signData&&signData.integralDate}}天</view>
 					<view class="si_rem_right fx">
 						<text>签到提醒</text>
 						<switch style="transform:scale(0.6)" :checked="false" @change="switch1Change" />
@@ -45,13 +45,13 @@ export default {
 	data() {
 		return {
 			sinList:[
-				{sky:'第1天',integral:5},
-				{sky:'第2天',integral:5},
-				{sky:'第3天',integral:5},
-				{sky:'第4天',integral:5},
-				{sky:'第5天',integral:5},
-				{sky:'第6天',integral:5},
-				{sky:'第7天',integral:5}
+				// {sky:'第1天',integral:5},
+				// {sky:'第2天',integral:5},
+				// {sky:'第3天',integral:5},
+				// {sky:'第4天',integral:5},
+				// {sky:'第5天',integral:5},
+				// {sky:'第6天',integral:5},
+				// {sky:'第7天',integral:5}
 			],
 			continuousSky:0, //周连续签到天数
 			taskList:[
@@ -59,13 +59,44 @@ export default {
 				{title:'每日关注',integral:2,isFinish:false,url:'/pages/index/index'},
 				{title:'每日预约',integral:2,isFinish:false,url:'/pages/index/index'},
 			],
+			
+			
+			signData:null,   //签到信息
+			/*
+			integralDate: 1             //签到天数
+			integralNumber: 115         //总积分
+			*/
 		}
+	},
+	onLoad() {
+		let userInfo = this.getItemSync('userInfo');
+		if(userInfo) this.seachSign(userInfo.user.id);
+		else{this.message('请登录')}
 	},
 	methods: {
 		//开关连续签到
 		switch1Change(e){
 			console.log(e.detail.value);
 		},
+		
+		//签到
+		seachSign(userId){
+			let url = '/user/findIntegral.do';
+			this.fetch({url,data:{userId},method:'get'},2).then(res=>{
+				let data = res[1].data;
+				this.signData = data;
+				this.taskList[0].isFinish=true;
+				this.showSign(data.integralDate);
+			})
+		},
+		
+		//签到显示
+		showSign(num){
+			for(let i=num;i<num+7;i++){
+				this.sinList.push({sky:'第'+i+'天',integral:5})
+			}
+		}
+		
 	}
 }
 </script>

@@ -10,7 +10,9 @@
 				</view>
 				<view class="mpanike">
 					<view class="mpaNick">{{userInfo&&userInfo.user.nickName}}</view>
-					<view class="mpaNick mpanikeText"><text>账户名：{{userInfo&&userInfo.user.name}}</text></view>
+					<view class="mpaNick mpanikeText">
+						<text>账户名：{{(userInfo&&userInfo.user.name)||'没有设置帐户名'}}</text>
+					</view>
 					<view class="mpSignIn active" @tap="clickSign">每日签到</view>
 				</view>
 			</view>

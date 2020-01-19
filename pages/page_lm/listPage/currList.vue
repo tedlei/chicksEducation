@@ -4,9 +4,8 @@
 		<scroll-view scroll-y="true" class="lp_scro" @scrolltolower="getCurrList(true)">
 			<view v-if="curriculumList.length>0">
 				<CurrList v-for="(item,i) of curriculumList" :item="item" :key='i'></CurrList>
-				<!-- <ToLoad :title="hintTitle" v-if='isShowHint'></ToLoad>  留起有用-->
 			</view>
-			<DataNull v-else :isShowData="isShowData"></DataNull>
+			<uniLoadMore :status="status"></uniLoadMore>
 		</scroll-view>
 	</view> 
 </template>
@@ -14,10 +13,9 @@
 <script>
 import Sortord from '../../../components/components_lm/listPage/sortord.vue'
 import CurrList from '../../../components/components_lm/listPage/list/currList.vue'
-import ToLoad from '../../../components/components_lm/hint/toLoad.vue'
-import DataNull from '../../../components/components_lm/hint/dataNull.vue'
+import uniLoadMore from '../../../components/uni-load-more/uni-load-more.vue' 
 export default {
-	components:{Sortord,CurrList,ToLoad,DataNull},
+	components:{Sortord,CurrList,uniLoadMore},
 	data() {
 		return {
 			// topListNum:0,   //选择课程、学校、教师、资讯
@@ -39,9 +37,7 @@ export default {
 			curriculumList:[],   //课程列表
 			selObj:{},   //筛选条件
 			
-			isShowHint:true,   //加载
-			hintTitle:''   ,//提示
-			isShowData:true
+			status:'loading'   //上拉加载更多
 		}
 	},
 	created() {
@@ -67,11 +63,10 @@ export default {
 		
 		//获取课程数据
 		getCurrList(boo){
-			this.isShowHint = true;
 			let cl = this.curriculumList;
-			this.hintTitle = '正在加载'
 			let url='curri/search.do';
 			let data = this.currObj;
+			this.status = 'loading'
 			if(!data.keywords) delete data.keywords; 
 			if(boo){
 				let pageNo = data.pageNo
@@ -80,20 +75,9 @@ export default {
 			this.fetch({url,data,method:'post'},1).then(res=>{
 				let {rows,total} = res[1].data
 				data.total = total;
-				if(rows.length>0){
-					this.isShowHint = false;
-					cl = cl.concat(rows)
-					this.curriculumList = cl;
-				}else{
-					if(this.curriculumList.length>0){
-						this.hintTitle = '这是底线';
-						setTimeout(()=>{
-							// this.isShowHint = false;
-						},1000)
-					}else{
-						this.isShowData = false;
-					}
-				}
+				cl = cl.concat(rows)
+				this.curriculumList = cl;
+				if(rows.length<=0) this.status = 'noMore'
 			})
 		},
 		

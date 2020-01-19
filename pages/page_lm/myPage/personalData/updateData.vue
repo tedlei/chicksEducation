@@ -5,6 +5,7 @@
 			<view class="unInp fx">
 				{{item.title}}
 				<input type="text" v-model="updateData[item.key]"
+				:placeholder="'请输入'+item.title"
 				v-if="item.key&&item.key!=='birthday'" focus/>
 				<Lyzd class="unDate" v-if="item.key==='birthday'"
 				:config="datePickerConfig" @onDateChange="onBirthDayChange"></Lyzd>
@@ -33,7 +34,7 @@ export default {
 				initDate:""    //默认选中日期
 			},
 			userInfo:null,
-			txt: '选择地址',
+			txt: '',
 			
 		}
 	},
@@ -42,11 +43,11 @@ export default {
 		let item = JSON.parse(e.itemStr);
 		let user = JSON.parse(e.userStr);
 		this.userInfo = this.getItemSync('userInfo');
-		user.birthday = user['birthday'].split(' ')[0]
+		user.birthday = user['birthday']&&user['birthday'].split(' ')[0]
 		this.item = item
 		this.user = user
 		ud.phone = user.phone;
-		if(item.key) ud[item.key] = user[item.key];
+		if(item.key) ud[item.key] = user[item.key]?user[item.key]:'';
 		else{
 			if(item.fun==='birthday') {
 				ud['birthday'] = user['birthday'];
@@ -55,7 +56,8 @@ export default {
 				ud.oneDddress = user.oneDddress;
 				ud.twoDddress = user.twoDddress;
 				ud.threeDddress = user.threeDddress;
-				this.txt = (user.oneDddress===user.twoDddress?user.oneDddress:user.oneDddress+user.twoDddress)+user.threeDddress;
+				let str =(user.oneDddress===user.twoDddress?user.oneDddress:user.oneDddress+user.twoDddress)+user.threeDddress;
+				this.txt = str?str:'请选择地址'
 			}
 		}
 	},
@@ -63,6 +65,7 @@ export default {
 		let key = this.item.key
 		if(key==='birthday'){
 			let date = this.user[key];
+			date = date?date:'请选择生日'
 			this.$children[0].$children[1].$children[0].$children[0].initDate(date);
 		}
 	},
@@ -78,7 +81,7 @@ export default {
 			let {title,key} = this.item;
 			let user = this.user;
 			let updateData = this.updateData;
-			if(key&&user[key]===updateData[key]){
+			if(key&&user[key]===updateData[key]||(!user[key]&&!updateData[key])){
 				this.message('请修改'+title+'后在保存')
 				return
 			}
@@ -131,7 +134,6 @@ export default {
 
 <style scoped lang="scss">
 .ud_app{
-	padding-top: 54rpx;
 	flex-direction:column;
 	.udPage{
 		flex: 1;

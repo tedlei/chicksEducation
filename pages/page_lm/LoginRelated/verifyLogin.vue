@@ -140,9 +140,7 @@ export default {
 				this.message(msg);
 				if(success){
 					this.setItemSync('userInfo',data);
-					this.push({url:'/pages/page_lm/myPage/myPage'})
-					// this.push({url:'/pages/page_lm/detailPage/appointment'})
-					// this.push({url:'/pages/index/index'})
+					uni.switchTab({url:'/pages/index/index'})
 				}
 			})
 		},
@@ -156,7 +154,7 @@ export default {
 		
 		//点击返回键
 		topBack(){
-			this.pop()
+			uni.switchTab({url:'/pages/index/index'})
 		}
 	},
 	onNavigationBarButtonTap(e) {
@@ -184,7 +182,6 @@ export default {
 <style scoped lang="scss">
 
 .vlog-app{
-	padding-top: 54rpx;
 	flex-direction:column;
 	.vlogBg{
 		flex: 1;

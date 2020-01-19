@@ -94,9 +94,13 @@ export default {
 		
 		//在线资讯
 		clickLeft(){
-			let {isLoadFinish} = this
+			let {isLoadFinish,userInfo} = this
 			if(!isLoadFinish)return 
-			console.log('在线资讯')
+			if(!userInfo){
+				this.message('请登录')
+				return
+			}
+			console.log('在线咨询')
 		},
 		
 		//课程预约
@@ -105,7 +109,7 @@ export default {
 			let {id,schoolId} = currDetail;
 			if(!isLoadFinish||isOrder)return 
 			if(!userInfo){
-				this.message('请登录后在预约课程')
+				this.message('请登录')
 				return
 			}
 			let url = '/pages/page_lm/detailPage/appointment?id='+id+'&schoolId='+schoolId+'&type=1'
@@ -123,7 +127,7 @@ export default {
 			let id = currDetail.id;
 			if(!isLoadFinish||isAttention)return 
 			if(!userInfo){
-				this.message('请登录后在关注课程')
+				this.message('请登录')
 				return
 			}
 			let userid = userInfo.user.id;
@@ -139,9 +143,8 @@ export default {
 		//点击进入学校
 		topSkip(){
 			let schoolId = this.currDetail.schoolId;
-			console.log(schoolId)
+			this.push({url:'/pages/page_lm/detailPage/schoolDetail?id='+schoolId})
 		}
-		
 	}
 }
 </script>

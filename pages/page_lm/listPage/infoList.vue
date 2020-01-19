@@ -4,9 +4,8 @@
 		<scroll-view scroll-y="true" class="il_scro" @scrolltolower="getZxData(true)">
 			<view v-if="infoList.length>0">
 				<InfoList v-for="(item,i) of infoList" :key="i" :item="item"></InfoList>
-				<!-- <ToLoad :title="hintTitle" v-if='isShowHint'></ToLoad>  留起有用-->
 			</view>
-			<DataNull v-else :isShowData="isShowData"></DataNull>
+			<uniLoadMore :status="status"></uniLoadMore>
 		</scroll-view>
 	</view>
 </template>
@@ -14,9 +13,9 @@
 <script>
 import Sortord from '../../../components/components_lm/listPage/sortord.vue'
 import InfoList from '../../../components/components_lm/listPage/list/infoList.vue'
-import DataNull from '../../../components/components_lm/hint/dataNull.vue'
+import uniLoadMore from '../../../components/uni-load-more/uni-load-more.vue' 
 export default {
-	components:{Sortord,InfoList,DataNull},
+	components:{Sortord,InfoList,uniLoadMore},
 	data() {
 		return {
 			infoList:[],   //资讯列表
@@ -26,11 +25,11 @@ export default {
 				index:"0",   // 分页   
 				status:'1',   //资讯状态
 				pageSize:"10",    //每页条数
-				port:'1'
+				port:''
 			},
-			selObj:{},
+			selObj:{},   //筛选条件
 			listSize:0,  //数据总条数
-			isShowData:true,
+			status:'loading'   //上拉加载更多
 		}
 	},
 	created() {
@@ -46,10 +45,12 @@ export default {
 			if(boo){
 				data.index = ''+(data.index*1+1);
 			}
+			this.status = 'loading'
 			this.fetch({url,data,method:"post"},1).then(res=>{ 
 				let {list,size} = res[1].data;
 				this.infoList = this.infoList.concat(list);
 				this.listSize = size;
+				if(list.length<=0) this.status = 'noMore'
 			})
 		},
 		

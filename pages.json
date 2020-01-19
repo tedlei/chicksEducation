@@ -133,15 +133,13 @@
 				{ /*我的关注页面*/
 					"path": "myPage/focusAndorder/myAttention",
 					"style": {
-						"navigationBarTitleText": "我的关注",
-						"navigationBarBackgroundColor": "#F5F5F5"
+						"navigationStyle": "custom"
 					}
 				},
 				{ /*个人资料*/
 					"path": "myPage/personalData/myDataCenter",
 					"style": {
-						"navigationBarTitleText": "个人资料",
-						"navigationBarBackgroundColor": "#F5F5F5"
+						"navigationStyle": "custom"
 					}
 				},
 				{ /*修改个人资料页面*/
@@ -153,11 +151,10 @@
 				{ /*我的设置页面*/
 					"path": "myPage/settings/setting",
 					"style": {
-						"navigationBarTitleText": "设置",
-						"navigationBarBackgroundColor": "#F5F5F5"
+						"navigationStyle": "custom"
 					}
 				},
-				{ /*修改个人资料页面*/
+				{ /*修改密码页面*/
 					"path": "myPage/settings/updatePass",
 					"style": {
 						"navigationStyle": "custom"

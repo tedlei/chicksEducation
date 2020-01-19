@@ -7,7 +7,7 @@
 				<view class="td_curr_name fx">
 					<view class="tdName ellipsis">{{teacherDetail.teacherName}}</view>
 					<text class="iconfont" :class="isAtten?'iconColor':''" 
-						@tap="clickAttention(userInfo.user.id,teacherDetail.id)">{{isAtten?'&#xe63b;':'&#xe61f;'}}</text>
+						@tap="clickAttention(teacherDetail.id)">{{isAtten?'&#xe63b;':'&#xe61f;'}}</text>
 				</view>
 				<view class="td_text">
 					<view class="td_t1 bold ellipsis">{{teacherDetail.organizationName}}</view>
@@ -44,7 +44,9 @@ export default {
 		this.userInfo = ui
 		this.getTeacher(e.id);
 		if(ui){
-			this.once('updateOrderTeac','orderTeac')
+			this.once('updateOrderTeac','orderTeac');
+			this.setchIsAtten(e.id);
+			this.seachIsOrder(e.id);
 		}
 	},
 	methods: {
@@ -58,8 +60,6 @@ export default {
 			let url = 'teacher/byid.do'
 			this.fetch({url,data:{userid:id},method:'post'},1).then(res=>{
 				this.teacherDetail = res[1].data[0];
-				this.setchIsAtten(id);
-				this.seachIsOrder(id);
 			})
 		},
 		
@@ -81,7 +81,12 @@ export default {
 		},
 		
 		//加关注
-		clickAttention(userid,teacherid){
+		clickAttention(teacherid){
+			let ui = this.userInfo;
+			if(!ui){
+				this.message('请登录')
+				return
+			}
 			let url = 'addTeacher/add.do'
 			this.fetch({url,data:{userid,teacherid},method:'post'},5).then(res=>{
 				this.isAtten = res[1].data;
@@ -94,7 +99,7 @@ export default {
 			let {id,teacherSchoolId} = teacherDetail;
 			if(isOrder)return 
 			if(!userInfo){
-				this.message('请登录后在预约课程')
+				this.message('请登录')
 				return
 			}
 			let url = '/pages/page_lm/detailPage/appointment?id='+id+'&schoolId='+teacherSchoolId+'&type=2'

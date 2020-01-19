@@ -1,5 +1,5 @@
 <template>
-	<view class="mdc_app">
+	<view class="mdc_app pfAllScreen">
 		<hb title="个人资料"></hb>
 		<mpl 
 		 v-for="(item,i) of dataList" :key='i' 
@@ -18,7 +18,7 @@ export default {
 		return {
 			dataList:[
 				{title:'手机号',key:'phone',isIcon:true},
-				{title:'账户名',key:'name',isIcon:true},
+				{title:'账户名',key:'name',isIcon:false},
 				{title:'昵称',key:'nickName'},
 				{title:'生日',key:'',fun:'birthday'},
 				{title:'地区',key:'',fun:'region'},
@@ -36,7 +36,9 @@ export default {
 	methods: {
 		//获取用户对象
 		getUsre(){
-			this.userInfo = this.getItemSync('userInfo');
+			let ui = this.getItemSync('userInfo');
+			this.userInfo = ui;
+			if(ui&&ui.user.name) this.dataList[1].isIcon = true; 
 		},
 		
 		//对象序列化
@@ -56,6 +58,5 @@ export default {
 <style scoped lang="scss">
 .mdc_app{
 	background: $col-fff;
-	
 }
 </style>

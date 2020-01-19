@@ -92,7 +92,6 @@ export default {
 	position: fixed;
 	width: 750rpx;
 	height: 100%;
-	padding-top: 54rpx;
 	flex-direction:column;
 	.upMain{
 		flex: 1;

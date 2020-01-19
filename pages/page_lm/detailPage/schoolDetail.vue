@@ -22,7 +22,7 @@
 				<view v-show="selNum===0">
 					<!-- 优惠卷 -->
 					<coli @clickOpen='clickOpen' :schoolIsAttention="schoolIsAttention" 
-					 :userId = "userInfo.user.id"	:schoolId="schoolId"></coli>
+					 :userId = "userInfo&&userInfo.user.id"	:schoolId="schoolId"></coli>
 					<view v-show="!couponOpen">
 						<!-- 推荐课程 -->
 						<more title="课程" :num='1' @clickMore="clickMore"></more>
@@ -108,11 +108,14 @@ export default {
 		}
 	},
 	onLoad(e) {
-		// this.schoolId = 'e.id';
-		this.schoolId = '1209017944516874241';
 		let ui = this.getItemSync('userInfo');
+		let id = e.id;
+		this.schoolId = id;
 		this.userInfo = ui
-		this.getSchoolDetail('1209017944516874241');
+		this.getSchoolDetail(id);
+		if(ui){
+			this.setchIsGz(id);
+		}
 	},
 	methods: {
 		//获取学校详情
@@ -121,7 +124,7 @@ export default {
 			this.fetch({url,data:{userid},method:'post'},1).then((res)=>{
 				this.isLoad = true;
 				this.schoolDetail = res[1].data;
-				this.setchIsGz(userid);
+				
 			})
 		},
 		//点击地址时
@@ -161,7 +164,12 @@ export default {
 		
 		//在线咨询
 		clickLeft(){
-			if(!this.isLoad)return
+			let {isLoad,userInfo} = this
+			if(!isLoad)return 
+			if(!userInfo){
+				this.message('请登录')
+				return
+			}
 			console.log('在线咨询')
 		},
 		
@@ -176,14 +184,17 @@ export default {
 		
 		//加关注
 		clickAttention(schoolid,isLoad){
-			if(!isLoad)return;
-			let userid = this.userInfo.user.id;
+			let ui = this.userInfo;
 			let url = 'attention/add.do';
-			this.fetch({url,data:{userid,schoolid},method:'post'},4).then(res=>{
+			if(!isLoad)return;
+			if(!ui){
+				this.message('请登录')
+				return
+			}
+			this.fetch({url,data:{userid:ui.user.id,schoolid},method:'post'},4).then(res=>{
 				let boo = res[1].data;
 				this.schoolIsAttention = boo;
 				this.message(boo?'关注成功':'关注失败');
-				
 			})
 		}
 	}

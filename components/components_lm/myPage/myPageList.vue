@@ -23,18 +23,18 @@ export default {
 		},
 		sel(item,user){
 			if(!user) return
-			if(!item.fun) return user[item.key];
+			if(!item.fun) return user[item.key]?user[item.key]:'';
 			if(item.fun==='birthday') return this.birthday(user.birthday);
 			if(item.fun==='region') return this.region(user);
 		},
 		//地区处理
 		region(obj){
 			let str = (obj.oneDddress!==obj.twoDddress?obj.oneDddress+obj.twoDddress:obj.oneDddress)+obj.threeDddress
-			return str;
+			return str?str:'';
 		},
 		//生日处理
 		birthday(str){
-			return str.split(' ')[0]
+			return str&&str.split(' ')[0]||''
 		},
 	}
 }

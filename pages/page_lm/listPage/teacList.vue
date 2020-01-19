@@ -4,9 +4,8 @@
 		<scroll-view scroll-y="true" class="lp_scro" @scrolltolower="getTeacherList(true)">
 			<view v-if="teacList.length>0">
 				<TeacList v-for="(item,i) of teacList" :item="item" :key='i'></TeacList>
-				<!-- <ToLoad :title="hintTitle" v-if='isShowHint'></ToLoad>  留起有用-->
 			</view>
-			<DataNull v-else :isShowData="isShowData"></DataNull>
+			<uniLoadMore :status="status"></uniLoadMore>
 		</scroll-view>
 	</view> 
 </template>
@@ -14,10 +13,9 @@
 <script>
 import Sortord from '../../../components/components_lm/listPage/sortord.vue'
 import TeacList from '../../../components/components_lm/listPage/list/teacList.vue'
-import ToLoad from '../../../components/components_lm/hint/toLoad.vue'
-import DataNull from '../../../components/components_lm/hint/dataNull.vue'
+import uniLoadMore from '../../../components/uni-load-more/uni-load-more.vue' 
 export default {
-	components:{Sortord,TeacList,ToLoad,DataNull},
+	components:{Sortord,TeacList,uniLoadMore},
 	// props:['searchConenxt'],
 	data() {
 		return {
@@ -33,10 +31,7 @@ export default {
 			},
 			selObj:{},  //筛选条件
 			ListSize:0,   //数据总条数
-			
-			isShowHint:true,   //加载
-			hintTitle:''   ,//提示
-			isShowData:false
+			status:'loading'   //上拉加载更多	
 		}
 	},
 	created() {
@@ -53,10 +48,12 @@ export default {
 				let index = data.index;
 				data.index = ''+(index*1+1)
 			}
+			this.status = 'loading'
 			this.fetch({url,data,method:'post'},1).then(res=>{
 				let {list,size} = res[1].data;
 				this.teacList=this.teacList.concat(list);
 				this.ListSize = size;
+				if(list.length<=0) this.status = 'noMore'
 			})
 		},
 		

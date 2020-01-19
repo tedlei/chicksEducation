@@ -38,7 +38,7 @@ export default {
 				return '仅用于课程：'+item.courseName
 			}else{
 				if(item.useReRule==='0') return '无门槛使用'
-				else return '满'+item.useReRule+'元使用'
+				else return '满'+item.useReRule+'元使用' 
 			}
 		},
 		
@@ -54,12 +54,20 @@ export default {
 		clickDraw(item,userId,isDraw,schoolIsAttention){
 			let {id,isFollow} = item;
 			let url = 'coup/receive.do'
-			if(isDraw)return
+			if(isDraw){
+				this.message('已领取此优惠卷')
+				return
+			}
 			if(isFollow==='1'&&!schoolIsAttention){
 				this.message('请在关注后领取优惠卷')
 				return
 			}
-			this.fetch({url,data:{couponId:id,userId},method:'post'},4).then(res=>{
+			if(!userId){
+				this.message('请登录')
+				return
+			}
+			let data = {couponId:id,userId,status:item.isUniversal}
+			this.fetch({url,data,method:'post'},4).then(res=>{
 				let {message,success} = res[1].data;
 				this.message(message);
 				this.isDraw = success;

@@ -48,7 +48,7 @@ const Api = {
 			if (port > -1) {
 				url = ipList[port] + param.url
 			}
-			console.log(url, 7);
+
 			param.url = url;
 			if (param.method === 'POST') {
 				param.header = param.header || {
@@ -200,44 +200,27 @@ const Api = {
 	/**
 	 * 返回页面
 	 */
-	pop(param) {
-		param = param || {
-			delta: 1
-		}
+	pop(param){
+		param = param || {delta: 1}
 		uni.navigateBack(param)
 	},
-
+	
 	/**
 	 * 消息提示
 	 */
-	message(title) {
-		uni.showToast({
-			title,
-			icon: 'none'
-		})
+	message(title){
+		uni.showToast({title,icon:'none'})
 	},
-
+	
 	/**
 	 * 隐藏键盘
 	 */
-	hideKey() {
+	hideKey(){
 		// #ifdef APP-PLUS
 		plus.key.hideSoftKeybord();
 		// #endif
 	},
-
-	/**
-	 * 调用指定页面方法
-	 * @param {Object} eventName   监听事件名
-	 * @param {Object} funName  要调用的页面方法
-	 */
-	once(eventName, funName) {
-		let _then = this;
-		uni.$once(eventName, function(data) {
-			_then[funName](data);
-		})
-	},
-
+	
 	/**
 	 * 获取广告位数据 1 
 	 */
@@ -260,12 +243,12 @@ const Api = {
 	 * @param {Array} result	接收结果的对象
 	 * @param {Number} n	随机取几个
 	 */
-	getRandomData(origin, result, n) {
-		let len = 0, // 用于限定取值范围
-			rd = -1; // 随机数
+	getRandomData(origin,result, n){
+		let len = 0,	// 用于限定取值范围
+			rd = -1;	// 随机数
 		for (var i = 0; i < n; i++) {
 			len = origin.length;
-			rd = Math.floor(Math.random() * len);
+			rd = Math.floor(Math.random()*len);
 			result.push(origin[rd]);
 			origin.splice(rd, 1);
 		}
@@ -274,14 +257,14 @@ const Api = {
 	 * @param {String} mutationsApiName	mutations 中的方法名
 	 * @param {Any} newValue
 	 */
-	updateStoreState(mutationsApiName, newValue) {
+	updateStoreState(mutationsApiName, newValue){
 		this.$store.commit(mutationsApiName, newValue);
 	},
 	/**
 	 * 获取定位vuex计算属性中的值
 	 * @param {String} name
 	 */
-	getStoreGetter(name) {
+	getStoreGetter(name){
 		return this.$store.getters[name]();
 	}
 }

@@ -4,9 +4,8 @@
 		<scroll-view scroll-y="true" class="lp_scro" @scrolltolower="getCurrList(true)">
 			<view v-if="curriculumList.length>0">
 				<CurrList v-for="(item,i) of curriculumList" :item="item" :key='i'></CurrList>
-				<!-- <ToLoad :title="hintTitle" v-if='isShowHint'></ToLoad>  留起有用-->
 			</view>
-			<DataNull v-else :isShowData="isShowData"></DataNull>
+			<uniLoadMore :status="status"></uniLoadMore>
 		</scroll-view>
 	</view> 
 </template>
@@ -14,10 +13,9 @@
 <script>
 import Sortord from '../../../components/components_lm/listPage/sortord.vue'
 import CurrList from '../../../components/components_lm/listPage/list/currList.vue'
-import ToLoad from '../../../components/components_lm/hint/toLoad.vue'
-import DataNull from '../../../components/components_lm/hint/dataNull.vue'
+import uniLoadMore from '../../../components/uni-load-more/uni-load-more.vue' 
 export default {
-	components:{Sortord,CurrList,ToLoad,DataNull},
+	components:{Sortord,CurrList,uniLoadMore},
 	data() {
 		return {
 			// topListNum:0,   //选择课程、学校、教师、资讯
@@ -39,35 +37,17 @@ export default {
 			curriculumList:[],   //课程列表
 			selObj:{},   //筛选条件
 			
-			isShowHint:true,   //加载
-			hintTitle:''   ,//提示
-			isShowData:true
+			status:'loading'   //上拉加载更多
 		}
 	},
 	created() {
-		this.courseCategoryToCurrList();
+		uni.$on('currConditionFind', this.conditionFind);
+		uni.$on('currScreen', this.clickSel);
+		uni.$on('currSearch', this.searchConenxt);
 		
-		this.creatScreenEmonitor()
-		this.creatSeachEmonitor()
 		this.getCurrList();
 	},
 	methods: {
-		//创建筛选监听器
-		courseCategoryToCurrList(){
-			uni.$on('courseCategoryToCurrList', (data)=>{
-				console.log(data, '获取分类选取结果');
-			});
-		},
-		//创建筛选监听器
-		creatScreenEmonitor(){
-			this.once.call(this,'teacherScreen','clickSel')
-		},
-		
-		//创建搜索监听器
-		creatSeachEmonitor(){
-			this.once.call(this,'currSearch','searchConenxt')
-		},
-		
 		//当切换列表时
 		onSelect(num){
 			this.topListNum = num
@@ -84,11 +64,10 @@ export default {
 		
 		//获取课程数据
 		getCurrList(boo){
-			this.isShowHint = true;
 			let cl = this.curriculumList;
-			this.hintTitle = '正在加载'
 			let url='curri/search.do';
 			let data = this.currObj;
+			this.status = 'loading'
 			if(!data.keywords) delete data.keywords; 
 			if(boo){
 				let pageNo = data.pageNo
@@ -97,26 +76,14 @@ export default {
 			this.fetch({url,data,method:'post'},1).then(res=>{
 				let {rows,total} = res[1].data
 				data.total = total;
-				if(rows.length>0){
-					this.isShowHint = false;
-					cl = cl.concat(rows)
-					this.curriculumList = cl;
-				}else{
-					if(this.curriculumList.length>0){
-						this.hintTitle = '这是底线';
-						setTimeout(()=>{
-							// this.isShowHint = false;
-						},1000)
-					}else{
-						this.isShowData = false;
-					}
-				}
+				cl = cl.concat(rows)
+				this.curriculumList = cl;
+				if(rows.length<=0) this.status = 'noMore'
 			})
 		},
 		
 		//筛选页面返回时
 		clickSel(obj){
-			this.creatScreenEmonitor();
 			this.clearList();
 			this.selObj = obj;
 			let currObj = this.currObj;
@@ -134,11 +101,30 @@ export default {
 		
 		//当搜索条件变化时
 		searchConenxt(val){
-			this.creatSeachEmonitor();
 			this.clearList()
 			this.currObj.keywords = val;
 			this.getCurrList()
 		},
+		
+		//选择更多
+		conditionFind(value){
+			console.log(value);
+			let arr = {
+				'小学':{i:'0',num:2,value:'小学辅导'},
+				'中学':{i:'0',num:3,value:'中学辅导'},
+				'艺术':{i:'0',num:4,value:'艺术培训'},
+				'学历':{i:'0',num:5,value:'学历提升'},
+				'职业':{i:'0',num:6,value:'职业培训'}
+			}
+			let data = {category:arr[value]};
+			this.clickSel(data);
+		},
+		
+		//选择分类
+		// classIfy(value){
+		// 	let {numberArr,contextArr} = value;
+		// 	console.log(numberArr,contextArr);
+		// }
 	}
 }
 </script>

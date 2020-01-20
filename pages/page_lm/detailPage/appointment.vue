@@ -1,6 +1,6 @@
 <template>
 	<view class="at_app fx pfAllScreen">
-		<hb title="课程预约"></hb>
+		<hb :title="type==='1'?'课程预约':'教师预约'"></hb>
 		<view class="at_inp fx ">
 			<view class="at_text">电话</view>
 			<view class="at_input">
@@ -59,8 +59,10 @@ export default {
 	},
 	onLoad(e) {
 		let {schoolId,type,id} = e;
-		let {userId,phone} = this.getItemSync('userInfo').user;
-		this.userId = userId
+		let user = this.getItemSync('userInfo').user;
+		let userId = user.id;
+		let phone = user.phone
+		this.userId = userId;
 		this.order.phone = phone
 		this.schoolId = schoolId;
 		this.type = type;
@@ -120,7 +122,7 @@ export default {
 				this.verify = '';
 				return
 			}
-			let url = '/course/appOin.do';
+			let url = 'course/appOin.do';
 			let IP = 3
 			let data = {
 				appointment:{
@@ -136,7 +138,7 @@ export default {
 				}
 			}
 			if(type==='2'){
-				url = '/appointment/add.do';
+				url = 'appointment/add.do';
 				IP = 5;
 				delete data.courseAppointment;
 				data.teacherAppointment = {
@@ -148,9 +150,8 @@ export default {
 				let {message,success} = res[1].data;
 				this.message(message);
 				if(success){
-					if(type==='1') {
-						uni.$emit('updateOrderCurr',true);
-					}else console.log('预约教师');
+					if(type==='1') uni.$emit('updateOrderCurr',true);
+					else uni.$emit('updateOrderTeac',true);
 					setTimeout(()=>{
 						this.pop();
 					},1500)

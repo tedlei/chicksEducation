@@ -4,9 +4,8 @@
 		<scroll-view scroll-y="true" class="lp_scro" @scrolltolower="getTeacherList(true)">
 			<view v-if="teacList.length>0">
 				<TeacList v-for="(item,i) of teacList" :item="item" :key='i'></TeacList>
-				<!-- <ToLoad :title="hintTitle" v-if='isShowHint'></ToLoad>  留起有用-->
 			</view>
-			<DataNull v-else :isShowData="isShowData"></DataNull>
+			<uniLoadMore :status="status"></uniLoadMore>
 		</scroll-view>
 	</view> 
 </template>
@@ -14,10 +13,9 @@
 <script>
 import Sortord from '../../../components/components_lm/listPage/sortord.vue'
 import TeacList from '../../../components/components_lm/listPage/list/teacList.vue'
-import ToLoad from '../../../components/components_lm/hint/toLoad.vue'
-import DataNull from '../../../components/components_lm/hint/dataNull.vue'
+import uniLoadMore from '../../../components/uni-load-more/uni-load-more.vue' 
 export default {
-	components:{Sortord,TeacList,ToLoad,DataNull},
+	components:{Sortord,TeacList,uniLoadMore},
 	// props:['searchConenxt'],
 	data() {
 		return {
@@ -33,28 +31,15 @@ export default {
 			},
 			selObj:{},  //筛选条件
 			ListSize:0,   //数据总条数
-			
-			isShowHint:true,   //加载
-			hintTitle:''   ,//提示
-			isShowData:false
+			status:'loading'   //上拉加载更多	
 		}
 	},
 	created() {
-		this.creatScreenEmonitor();
-		this.creatSeachEmonitor();
+		uni.$on('teacherScreen', this.clickSel);
+		uni.$on('teacSeach', this.searchConenxt);
 		this.getTeacherList();
 	},
 	methods: {
-		//创建筛选监听器
-		creatScreenEmonitor(){
-			this.once.call(this,'teacherScreen','clickSel')
-		},
-		
-		//创建搜索监听器
-		creatSeachEmonitor(){
-			this.once.call(this,'teacSeach','searchConenxt')
-		},
-		
 		//获取教师列表
 		getTeacherList(boo){
 			let url = 'teacher/getteacher.do';
@@ -63,10 +48,12 @@ export default {
 				let index = data.index;
 				data.index = ''+(index*1+1)
 			}
+			this.status = 'loading'
 			this.fetch({url,data,method:'post'},1).then(res=>{
 				let {list,size} = res[1].data;
 				this.teacList=this.teacList.concat(list);
 				this.ListSize = size;
+				if(list.length<=0) this.status = 'noMore'
 			})
 		},
 		
@@ -81,7 +68,6 @@ export default {
 		
 		//筛选页面返回时
 		clickSel(obj){
-			this.creatScreenEmonitor();
 			this.clearList()
 			this.selObj = obj;
 			let teac = this.teacherObj;
@@ -93,12 +79,12 @@ export default {
 		
 		//清空列表
 		clearList(){
-			this.teacList = [];			this.teacherObj.index = '0';
+			this.teacList = [];
+			this.teacherObj.index = '0';
 		},
 		
 		//当搜索条件变化时
 		searchConenxt(val){
-			this.creatSeachEmonitor();
 			this.clearList()
 			this.teacherObj.name = val;
 			this.getTeacherList();

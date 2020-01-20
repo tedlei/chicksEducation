@@ -7,200 +7,199 @@
 			}
 		},
 		{
-		    "path" : "pages/test/test",
-		    "style" : {
+			"path": "pages/test/test",
+			"style": {
 				"enablePullDownRefresh": true
 			}
 		}
-    ],
-	"subPackages": [
-		{
-			"root":"pages/page_lzj",
-			"pages": [
-				{
+	],
+	"subPackages": [{
+			"root": "pages/page_lzj",
+			"pages": [{
 					"path": "search/search",
 					"style": {
-						"navigationStyle":"custom",
+						"navigationStyle": "custom",
 						"app-plus": {
-							"subNVues": [
-								{
-									"id": "searchHeader",
-									"path": "search/header",
-									"type": "navigationBar",
-									"style": {
-									}
-								}
-							]
+							"subNVues": [{
+								"id": "searchHeader",
+								"path": "search/header",
+								"type": "navigationBar",
+								"style": {}
+							}]
 						}
 					}
 				},
 				{
 					// 课程分类
-					"path" : "courseCategory/courseCategory",
-					"style" : {
-						"navigationBarTitleText":"课程分类",
+					"path": "courseCategory/courseCategory",
+					"style": {
+						"navigationBarTitleText": "课程分类",
 						"app-plus": {
 							"titleNView": {
-								"buttons": [
-									{
-										"text": "确定",
-										"float":"right",
-										"fontSize": "16px"
-									}
-								]
+								"buttons": [{
+									"text": "确定",
+									"float": "right",
+									"fontSize": "16px"
+								}]
 							}
 						}
 					}
 				},
 				{
-					"path" : "location/location",
-					"style" : {
-						"navigationBarTitleText":"切换城市",
+					"path": "location/location",
+					"style": {
+						"navigationBarTitleText": "切换城市",
 						"app-plus": {
 							"titleNView": {
-								"buttons": [
-									{
-										"float":"right",
-										"text": "确认",
-										"fontSize":"14px"
-									}
-								]
+								"buttons": [{
+									"float": "right",
+									"text": "确认",
+									"fontSize": "14px"
+								}]
 							},
 							"subNVues": []
 						}
 					}
 				},
-				{  /* 消息页 */
-					"path":"message/message",
-					"style":{
-						"navigationBarTitleText":"消息",
-						"app-plus":{
-							"bounce":"none"
+				{ /* 消息页 */
+					"path": "message/message",
+					"style": {
+						"navigationBarTitleText": "消息",
+						"app-plus": {
+							"bounce": "none"
 						}
 					}
 				},
 				{
-					"path":"message/chat"
+					"path": "message/chat"
 				},
-				{  /* 发现页 */
-					"path":"find/find",
-					"style":{
-						"navigationStyle":"custom",
+				{ /* 发现页 */
+					"path": "find/find",
+					"style": {
+						"navigationStyle": "custom",
 						"enablePullDownRefresh": true
 					}
 				}
 			]
 		},
 		{
-			"root":"pages/page_lm",
-			"pages":[
-				{   /*验证码登陆*/
-					"path":"LoginRelated/verifyLogin",
-					"style":{
-						"navigationStyle":"custom"
+			"root": "pages/page_lm",
+			"pages": [{ /*验证码登陆*/
+					"path": "LoginRelated/verifyLogin",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*注册页面*/
-					"path":"LoginRelated/register",
-					"style":{
+				{ /*注册页面*/
+					"path": "LoginRelated/register",
+					"style": {
 						"navigationBarTitleText": ""
 					}
 				},
-				{  /*我的 tabbar页面*/
-					"path":"myPage/myPage",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*我的 tabbar页面*/
+					"path": "myPage/myPage",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*修改头像页面*/
-					"path":"myPage/uploadHead",
-					"style":{
+				{ /*修改头像页面*/
+					"path": "myPage/uploadHead",
+					"style": {
 						"navigationBarTitleText": "",
-						"navigationBarBackgroundColor":"#666",
+						"navigationBarBackgroundColor": "#666",
 						"app-plus": {
 							"bounce": "none", //关闭窗口回弹效果
 							"titleNView": {
 								"buttons": [ //原生标题栏按钮配置,
 									{
-										"type":"none",
-										"text":"确认",
-										"float":"right",
-										"color":"#fff",
-										"fontSize":"18px",
-										"width":"40px"
+										"type": "none",
+										"text": "确认",
+										"float": "right",
+										"color": "#fff",
+										"fontSize": "18px",
+										"width": "40px"
 									}
 								]
 							}
 						}
 					}
 				},
-				{  /*我的关注页面*/
-					"path":"myPage/focusAndorder/myAttention",
-					"style":{
-						"navigationBarTitleText": "我的关注",
-						"navigationBarBackgroundColor":"#F5F5F5"
+				{ /*每日签到页面*/
+					"path": "myPage/signIn",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*个人资料*/
-					"path":"myPage/personalData/myDataCenter",
-					"style":{
-						"navigationBarTitleText": "个人资料",
-						"navigationBarBackgroundColor":"#F5F5F5"
+				{ /*我的关注页面*/
+					"path": "myPage/focusAndorder/myAttention",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*修改个人资料页面*/
-					"path":"myPage/personalData/updateData",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*个人资料*/
+					"path": "myPage/personalData/myDataCenter",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*我的设置页面*/
-					"path":"myPage/settings/setting",
-					"style":{
-						"navigationBarTitleText": "设置",
-						"navigationBarBackgroundColor":"#F5F5F5"
+				{ /*修改个人资料页面*/
+					"path": "myPage/personalData/updateData",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*修改个人资料页面*/
-					"path":"myPage/settings/updatePass",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*我的设置页面*/
+					"path": "myPage/settings/setting",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*发现 tabbar页面*/
-					"path":"discover/recommendInfo",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*修改密码页面*/
+					"path": "myPage/settings/updatePass",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{   /*筛选*/
-					"path":"listPage/filtrate/filtrate",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*我的 卡券页面*/
+					"path": "myPage/coupon/couponList",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*首页 课程详情*/
-					"path":"detailPage/currDetail",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*筛选*/
+					"path": "listPage/filtrate/filtrate",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*首页 学校详情*/
-					"path":"detailPage/schoolDetail",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*首页 课程详情*/
+					"path": "detailPage/currDetail",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*首页 教师详情*/
-					"path":"detailPage/teacherDetail",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*首页 学校详情*/
+					"path": "detailPage/schoolDetail",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				},
-				{  /*首页 预约*/
-					"path":"detailPage/appointment",
-					"style":{
-						"navigationStyle":"custom"
+				{ /*首页 教师详情*/
+					"path": "detailPage/teacherDetail",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{ /*首页 资讯详情*/
+					"path": "detailPage/infoDetail",
+					"style": {
+						"navigationStyle": "custom"
+					}
+				},
+				{ /*首页 预约*/
+					"path": "detailPage/appointment",
+					"style": {
+						"navigationStyle": "custom"
 					}
 				}
 			]
@@ -219,74 +218,73 @@
 			// 	"query":""
 			// },
 			{
-				"name":"index",
-				"path":"pages/index/index",
-				"query":""
+				"name": "index",
+				"path": "pages/index/index",
+				"query": ""
 			},
 			{
-				"name":"schoolDetail",
-				"path":"pages/page_lm/detailPage/schoolDetail",
-				"query":""
+				"name": "schoolDetail",
+				"path": "pages/page_lm/detailPage/schoolDetail",
+				"query": ""
 			},
 			{
-				"name":"test",
-				"path":"pages/test/test",
-				"query":""
+				"name": "test",
+				"path": "pages/test/test",
+				"query": ""
 			},
 			{
-				"name":"find",
-				"path":"pages/page_lzj/find/find",
-				"query":""
+				"name": "find",
+				"path": "pages/page_lzj/find/find",
+				"query": ""
 			},
 			{
-				"name":"message",
-				"path":"pages/page_lzj/message/message",
-				"query":""
+				"name": "message",
+				"path": "pages/page_lzj/message/message",
+				"query": ""
 			},
 			{
-				"name":"chat",
-				"path":"pages/page_lzj/message/chat",
-				"query":""
+				"name": "chat",
+				"path": "pages/page_lzj/message/chat",
+				"query": ""
 			},
 			{
-				"name":"myPage",
-				"path":"pages/page_lm/myPage/myPage",
-				"query":""
+				"name": "myPage",
+				"path": "pages/page_lm/myPage/myPage",
+				"query": ""
 			},
 			{
-				"name":"search",
-				"path":"pages/page_lzj/search/search",
-				"query":""
+				"name": "search",
+				"path": "pages/page_lzj/search/search",
+				"query": ""
 			}
 		]
 	},
 	"tabBar": {
 		"iconWidth": "31px",
-		"selectedColor":"#FD8109",
-		"list": [
-			{
-				"pagePath":"pages/index/index",
-				"iconPath":"static/image/tabBal/index.png",
-				"selectedIconPath":"static/image/tabBal/IndexSelect.png",
-				"text":"首页"
+		"selectedColor": "#FD8109",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/image/tabBal/index.png",
+				"selectedIconPath": "static/image/tabBal/IndexSelect.png",
+				"text": "首页"
 			},
 			{
-				"pagePath":"pages/page_lzj/find/find",
-				"iconPath":"static/image/tabBal/find.png",
-				"selectedIconPath":"static/image/tabBal/findSelect.png",
-				"text":"发现"
+				"pagePath": "pages/page_lzj/find/find",
+				"iconPath": "static/image/tabBal/find.png",
+				"selectedIconPath": "static/image/tabBal/findSelect.png",
+				"text": "发现"
 			},
 			{
-				"pagePath":"pages/page_lzj/message/message",
-				"iconPath":"./static/image/tabBal/message.png",
-				"selectedIconPath":"static/image/tabBal/messageSelect.png",
-				"text":"消息"
+				"pagePath": "pages/page_lzj/message/message",
+				"iconPath": "./static/image/tabBal/message.png",
+				"selectedIconPath": "static/image/tabBal/messageSelect.png",
+				"text": "消息"
 			},
 			{
-				"pagePath":"pages/page_lm/myPage/myPage",
-				"iconPath":"static/image/tabBal/my.png",
-				"selectedIconPath":"static/image/tabBal/mySelect.png",
-				"text":"我的"
+				"pagePath": "pages/page_lm/myPage/myPage",
+				"iconPath": "static/image/tabBal/my.png",
+				"selectedIconPath": "static/image/tabBal/mySelect.png",
+				"text": "我的"
 			}
 		]
 	}

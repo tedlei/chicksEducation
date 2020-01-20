@@ -115,6 +115,8 @@
 				this.top = 32;
 				// 避免点击一次之后再次点击时因scrollTop未改变而使滚动不生效
 				this.scrollTop = this.scrollTop === 200 ? 201 : 200;
+				
+				// uni.$emit('selectClassify',obj);
 			},
 			/**
 			 * 根据搜索内容 查询数据

@@ -1,5 +1,5 @@
 <template>
-	<view class="hb_app fx">
+	<view class="hb_app fx" :class="bgInherit?'bgnone':''">
 		<view class="hb_btn" @tap="clickBack">
 			<text class="iconfont">&#xe651;</text>
 		</view>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-	props:['title'],
+	props:['title','bgInherit'],
 	data() {
 		return {
 		}
@@ -39,5 +39,8 @@ export default {
 		font-size: 18px;
 		color:$col-fff
 	}
+}
+.bgnone{
+	background-color: rgba(0,0,0,0);
 }
 </style>

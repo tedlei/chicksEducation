@@ -198,7 +198,7 @@
 
 <style scoped lang="scss">
 .ld_app{
-	margin-top: 12rpx;
+	// margin-top: 12rpx;
 	font-size: 28rpx;
 	color:$col-333;
 }

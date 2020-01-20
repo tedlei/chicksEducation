@@ -50,6 +50,7 @@ export default {
 		condList[3].type = condList[3].type.concat(ccl["0_3_0"]);
 		condList[7].type = condList[3].type.concat(ccl["0_3_0"]);
 		for(let obj of condList){
+			obj.isShow = false;
 			if(typeNum==='1'&&obj.classify==='curriculum'){
 				obj.isShow = true
 			}

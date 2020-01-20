@@ -1,5 +1,5 @@
 <template>
-	<view class="il_app active">
+	<view class="il_app active" @tap="clickInfoDetail(item.id)">
 		<view class="il_name ellipsis">{{item.schoolTopic}}</view>
 		<view class="il_date fx">
 			<view class="il_fbz ellipsis">发布者：<text>{{item.schoolAuthor}}</text></view>
@@ -19,6 +19,10 @@ export default {
 		//处理时间
 		date(item){
 			return item.schoolTime.split(' ')[0];
+		},
+		//跳转资讯详情
+		clickInfoDetail(id){
+			this.push({url:'/pages/page_lm/detailPage/infoDetail?id='+id});
 		}
 	}
 }

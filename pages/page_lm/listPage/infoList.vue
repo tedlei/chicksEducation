@@ -4,9 +4,8 @@
 		<scroll-view scroll-y="true" class="il_scro" @scrolltolower="getZxData(true)">
 			<view v-if="infoList.length>0">
 				<InfoList v-for="(item,i) of infoList" :key="i" :item="item"></InfoList>
-				<!-- <ToLoad :title="hintTitle" v-if='isShowHint'></ToLoad>  留起有用-->
 			</view>
-			<DataNull v-else :isShowData="isShowData"></DataNull>
+			<uniLoadMore :status="status"></uniLoadMore>
 		</scroll-view>
 	</view>
 </template>
@@ -14,9 +13,9 @@
 <script>
 import Sortord from '../../../components/components_lm/listPage/sortord.vue'
 import InfoList from '../../../components/components_lm/listPage/list/infoList.vue'
-import DataNull from '../../../components/components_lm/hint/dataNull.vue'
+import uniLoadMore from '../../../components/uni-load-more/uni-load-more.vue' 
 export default {
-	components:{Sortord,InfoList,DataNull},
+	components:{Sortord,InfoList,uniLoadMore},
 	data() {
 		return {
 			infoList:[],   //资讯列表
@@ -25,29 +24,20 @@ export default {
 				topic:'',   //资讯题目
 				index:"0",   // 分页   
 				status:'1',   //资讯状态
-				port:'1'
+				pageSize:"10",    //每页条数
+				port:''
 			},
-			selObj:{},
+			selObj:{},   //筛选条件
 			listSize:0,  //数据总条数
-			isShowData:true,
+			status:'loading'   //上拉加载更多
 		}
 	},
 	created() {
-		this.creatScreenEmonitor();
-		this.creatSeachEmonitor();
+		uni.$on('infoScreen', this.clickSel);
+		uni.$on('clickSel', this.searchConenxt);
 		this.getZxData();
 	},
 	methods: {
-		//创建筛选监听器
-		creatScreenEmonitor(){
-			this.once.call(this,'infoScreen','clickSel')
-		},
-		
-		//创建搜索监听器
-		creatSeachEmonitor(){
-			this.once.call(this,'infoSeach','searchConenxt')
-		},
-		
 		//获取资讯数据
 		getZxData(boo){
 			let url = 'schoolMessage/getMessage.do';
@@ -55,22 +45,23 @@ export default {
 			if(boo){
 				data.index = ''+(data.index*1+1);
 			}
+			this.status = 'loading'
 			this.fetch({url,data,method:"post"},1).then(res=>{ 
 				let {list,size} = res[1].data;
 				this.infoList = this.infoList.concat(list);
 				this.listSize = size;
+				if(list.length<=0) this.status = 'noMore'
 			})
 		},
 		
 		//清空列表
 		clearList(){
-			this.teacList = [];
+			this.infoList = [];
 			this.setParam.index = '0';
 		},
 		
 		//当搜索条件变化时
 		searchConenxt(val){ 
-			this.creatSeachEmonitor();
 			this.clearList()
 			this.setParam.topic = val;
 			this.getZxData();
@@ -78,15 +69,13 @@ export default {
 		
 		//筛选页面返回时
 		clickSel(obj){
-			this.creatScreenEmonitor();
 			this.clearList()
 			this.selObj = obj;
 			let sp = this.setParam;
 			for(let name in obj){
 				sp[name] = obj[name].value;
 			}
-			console.log(sp)
-			this.getTeacherList();
+			this.getZxData();
 		},
 	}
 }

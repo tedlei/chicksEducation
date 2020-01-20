@@ -39,6 +39,8 @@
 		},
 		data() {
 			return {
+				index: 1,
+				pageSize: 8,
 				dltNUmber: -1,
 				options: [{
 					text: '\ue732',
@@ -74,16 +76,17 @@
 			 * 获取消息列表
 			 */
 			getMessageList(){
-				console.log();
-				return;
+				// console.log(this.getItemSync('userInfo'), 1111);
+				let userInfo = this.getItemSync('userInfo');
+				
 				this.fetch({
 					url: 'userMessage/message.do',
 					method: 'post',
 					data: {
-						userId: userInfo.schoolUser.id + '',
-						pageNum: value - 1 + '',
+						userId: userInfo.user.id + '',
+						pageNum: this.index - 1 + '',
 						pageSize: this.pageSize + '',
-						num
+						num: '4'
 					},
 					success: (res) => {
 						console.log(res);

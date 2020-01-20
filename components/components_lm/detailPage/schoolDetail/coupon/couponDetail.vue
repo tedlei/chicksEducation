@@ -1,10 +1,10 @@
 <template>
 	<view class="cd_app" 
-		:class="item.isNotCourse==='2'?(isFinally?'cd_zy2 width100':'cd_zy1'):(isFinally?'cd_ty2 width100':'')">
-		<view class="cd_name" v-if="!isFinally">{{item.isNotCourse==='1'?'通用':'专用'}}优惠券</view>
+		:class="item.isUniversal==='2'?(isFinally?'cd_zy2 width100':'cd_zy1'):(isFinally?'cd_ty2 width100':'')">
+		<view class="cd_name" v-if="!isFinally">{{item.isUniversal==='1'?'通用':'专用'}}优惠券</view>
 		<view class="cd_price" :class="isFinally?'pricePt':''">
 			{{item.couponPrice}}元
-			<text class="cd_yhj" v-if="isFinally">{{item.isNotCourse==='1'?'通用':'专用'}}优惠券</text>
+			<text class="cd_yhj" v-if="isFinally">{{item.isUniversal==='1'?'通用':'专用'}}优惠券</text>
 		</view>
 		<view class="cd_price t1">{{showPic(item)}}</view>
 		<view class="cd_price t2">有效日期至：{{item.createTime.split(' ')[0]}}</view>
@@ -38,10 +38,11 @@ export default {
 				return '仅用于课程：'+item.courseName
 			}else{
 				if(item.useReRule==='0') return '无门槛使用'
-				else return '满'+item.useReRule+'元使用'
+				else return '满'+item.useReRule+'元使用' 
 			}
 		},
 		
+		//领取显示
 		down(item,boo){
 			let isFollow = item.isFollow;
 			if(isFollow==='0') return '立即领取'
@@ -53,13 +54,32 @@ export default {
 		clickDraw(item,userId,isDraw,schoolIsAttention){
 			let {id,isFollow} = item;
 			let url = 'coup/receive.do'
-			if(isDraw)return
+			if(isDraw){
+				this.message('已领取此优惠卷')
+				return
+			}
 			if(isFollow==='1'&&!schoolIsAttention){
 				this.message('请在关注后领取优惠卷')
 				return
 			}
-			this.fetch({url,data:{couponId:id,userId},method:'post'},4).then(res=>{
-				console.log(res[1].data);
+			if(!userId){
+				this.message('请登录')
+				return
+			}
+			let data = {couponId:id,userId,status:item.isUniversal}
+			this.fetch({url,data,method:'post'},4).then(res=>{
+				let {message,success} = res[1].data;
+				this.message(message);
+				this.isDraw = success;
+			})
+		},
+		
+		//查看是否领取
+		seachIsDraw(couponId,userId){
+			let url = 'coup/isReceive.do'
+			let data = {couponId,userId}
+			this.fetch({url,data,method:'post'},4).then(res=>{
+				this.isDraw = res[1].data;
 			})
 		}
 	}
@@ -69,7 +89,7 @@ export default {
 <style scoped lang="scss">
 .cd_app{
 	width: 336rpx;
-	height: 208rpx;
+	height: 228rpx;
 	margin-top: 20rpx;
 	border-radius: 5px;
 	background-image: url('~@/static/image/coupon/ty1.png');

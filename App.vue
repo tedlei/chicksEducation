@@ -7,6 +7,8 @@
 		onLaunch: function() {
 			// #ifdef APP-PLUS
 			// packageUpdate();
+			
+			
 			// #endif
 		},
 		onShow: function() {
@@ -14,6 +16,15 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		globalData: {
+			userInfo: (()=> {
+				let result = uni.getStorageInfoSync('userInfo');
+				// if (/^(\[|\{)/.test(result)) {
+				// 	result = JSON.parse(result);
+				// }
+				return result
+			})()
 		}
 	}
 </script>

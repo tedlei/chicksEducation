@@ -29,11 +29,11 @@ export default {
 		this.getInfoList(this.schoolId);
 	},
 	methods: {
+		//获取学校资讯
 		getInfoList(schoolid){
 			let url = 'schoolMessage/findBySchoolId.do'
 			let data = this.infoData;
 			this.fetch({url,data,method:'post'},1).then(res=>{
-				console.log(res[1].data.rows)
 				this.infoList = res[1].data.rows;
 			})
 		}

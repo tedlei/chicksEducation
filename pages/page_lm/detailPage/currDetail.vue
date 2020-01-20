@@ -45,16 +45,12 @@ export default {
 		this.userInfo = ui
 		this.getCurrDetail(e.id);
 		if(ui){
-			this.creatOrderMonitor();
+			this.once('updateOrderCurr','orderCurr')
 			this.getIsOrder(e.id);
 			this.getIsAttention(e.id);
 		}
 	},
 	methods: {
-		//创建监听器
-		creatOrderMonitor(){
-			this.once.call(this,'updateOrderCurr','orderCurr')
-		},
 		//获取课程列表
 		getCurrDetail(id){
 			let url = 'curri/findById.do';
@@ -75,7 +71,7 @@ export default {
 		//查询是否预约
 		getIsOrder(id){
 			let userId = this.userInfo.user.id;
-			let url = "/course/findByAppOin.do";
+			let url = "course/findByAppOin.do";
 			let data = {userId,curseId:id};
 			this.fetch({url,data,method:'get',},3).then(res=>{
 				this.isOrder = res[1].data;
@@ -84,7 +80,7 @@ export default {
 		//查询课程是否关注
 		getIsAttention(curseid){
 			let userid = this.userInfo.user.id;
-			let url = "/course/findByFollow.do";
+			let url = "course/findByFollow.do";
 			let data = {userid,curseid}
 			this.fetch({url,data,method:'get',},3).then(res=>{
 				this.isAttention = res[1].data.success;
@@ -98,9 +94,13 @@ export default {
 		
 		//在线资讯
 		clickLeft(){
-			let {isLoadFinish} = this
+			let {isLoadFinish,userInfo} = this
 			if(!isLoadFinish)return 
-			console.log('在线资讯')
+			if(!userInfo){
+				this.message('请登录')
+				return
+			}
+			console.log('在线咨询')
 		},
 		
 		//课程预约
@@ -109,7 +109,7 @@ export default {
 			let {id,schoolId} = currDetail;
 			if(!isLoadFinish||isOrder)return 
 			if(!userInfo){
-				this.message('请登录后在预约课程')
+				this.message('请登录')
 				return
 			}
 			let url = '/pages/page_lm/detailPage/appointment?id='+id+'&schoolId='+schoolId+'&type=1'
@@ -118,7 +118,6 @@ export default {
 		
 		//预约成功时修改
 		orderCurr(boo){
-			this.creatOrderMonitor()
 			this.isOrder = boo;
 		},
 		
@@ -128,11 +127,11 @@ export default {
 			let id = currDetail.id;
 			if(!isLoadFinish||isAttention)return 
 			if(!userInfo){
-				this.message('请登录后在关注课程')
+				this.message('请登录')
 				return
 			}
 			let userid = userInfo.user.id;
-			let url = "/course/follow.do";
+			let url = "course/follow.do";
 			let data={curseId:id,userid};
 			this.fetch({url,data,method:'post',},3).then(res=>{
 				let {message,success} = res[1].data;
@@ -144,9 +143,8 @@ export default {
 		//点击进入学校
 		topSkip(){
 			let schoolId = this.currDetail.schoolId;
-			console.log(schoolId)
+			this.push({url:'/pages/page_lm/detailPage/schoolDetail?id='+schoolId})
 		}
-		
 	}
 }
 </script>

@@ -66,9 +66,30 @@
 				]
 			};
 		},
-		onLoad() {
+		mounted() {
+			this.getMessageList();
 		},
 		methods: {
+			/**
+			 * 获取消息列表
+			 */
+			getMessageList(){
+				console.log();
+				return;
+				this.fetch({
+					url: 'userMessage/message.do',
+					method: 'post',
+					data: {
+						userId: userInfo.schoolUser.id + '',
+						pageNum: value - 1 + '',
+						pageSize: this.pageSize + '',
+						num
+					},
+					success: (res) => {
+						console.log(res);
+					}
+				}, 2);
+			},
 			dlt() {
 				uni.showModal({
 				    title: '提示',

@@ -4,7 +4,7 @@
 			<text class="information_one">动态资讯</text>
 			<text class="information_two fx fxCenter">热门</text>
 		</view>
-		<image class="section_image" :src="informationImage.pic" mode=""></image>
+		<image class="section_image" :src="informationImage" mode=""></image>
 		<!-- 热门课程 -->
 		<uHotCurriclum :isUpdateData.sync="isUpdateData" @toPage="toPage"></uHotCurriclum>
 		<!-- 热门学校 -->
@@ -28,7 +28,7 @@
 		props: ['isUpdateData', 'toPage'],
 		data() {
 			return {
-				informationImage: {},
+				informationImage: '',
 			}
 		},
 		created() {
@@ -39,7 +39,7 @@
 			 * 获取热门资讯广告位
 			 */
 			async getIformation() {
-				this.informationImage = (await this.getAdvertisingData(5))[0];
+				this.informationImage = (await this.getAdvertisingData(8))[0].pic;
 			}
 		}
 	}

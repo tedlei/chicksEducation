@@ -41,9 +41,10 @@ export default {
 		}
 	},
 	created() {
-		this.once('currConditionFind','conditionFind')
-		this.once('currScreen','clickSel')
-		this.once('currSearch','searchConenxt')
+		uni.$on('currConditionFind', this.conditionFind);
+		uni.$on('currScreen', this.clickSel);
+		uni.$on('currSearch', this.searchConenxt);
+		
 		this.getCurrList();
 	},
 	methods: {
@@ -105,8 +106,9 @@ export default {
 			this.getCurrList()
 		},
 		
-		//选择分类时
+		//选择更多
 		conditionFind(value){
+			console.log(value);
 			let arr = {
 				'小学':{i:'0',num:2,value:'小学辅导'},
 				'中学':{i:'0',num:3,value:'中学辅导'},
@@ -116,7 +118,13 @@ export default {
 			}
 			let data = {category:arr[value]};
 			this.clickSel(data);
-		}
+		},
+		
+		//选择分类
+		// classIfy(value){
+		// 	let {numberArr,contextArr} = value;
+		// 	console.log(numberArr,contextArr);
+		// }
 	}
 }
 </script>

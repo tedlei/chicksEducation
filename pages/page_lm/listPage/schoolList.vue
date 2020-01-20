@@ -36,8 +36,8 @@ export default {
 		}
 	},
 	created() {
-		this.once('schoolScreen','clickSel')
-		this.once('schSearch','searchConenxt')
+		uni.$on('schoolScreen', this.clickSel);
+		uni.$on('schSearch', this.searchConenxt);
 		this.getSchoolList();
 	},
 	methods: {

@@ -33,8 +33,8 @@ export default {
 		}
 	},
 	created() {
-		this.once('infoScreen','clickSel')
-		this.once('infoSeach','searchConenxt')
+		uni.$on('infoScreen', this.clickSel);
+		uni.$on('clickSel', this.searchConenxt);
 		this.getZxData();
 	},
 	methods: {

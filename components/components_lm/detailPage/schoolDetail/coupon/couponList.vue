@@ -5,9 +5,10 @@
 			<view @tap="clickOpen">{{!openType?'展开':'收起'}}</view>
 		</view>
 		<view class="cpl_list fx">
-			<template v-for="(item,i) of closeList">
-				<coupond :key="i" :item="item" :isFinally='ones(closeList,i)' :schoolIsAttention="schoolIsAttention"
-				 :userId="userId"	:class="ones(closeList,i)?'width100':''"></coupond>
+			<template v-if="closeList.length>0">
+				<coupond  v-for="(item,i) of closeList" :key="i" :item="item" 
+				:isFinally='ones(closeList,i)' :schoolIsAttention="schoolIsAttention"
+				:userId="userId"	:class="ones(closeList,i)?'width100':''"></coupond>
 			</template>
 			<view style="width: 100%;height: 20rpx;" v-if="openType"></view>
 		</view>

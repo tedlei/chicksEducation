@@ -35,8 +35,8 @@ export default {
 		}
 	},
 	created() {
-		this.once('teacherScreen','clickSel')
-		this.once('teacSeach','searchConenxt')
+		uni.$on('teacherScreen', this.clickSel);
+		uni.$on('teacSeach', this.searchConenxt);
 		this.getTeacherList();
 	},
 	methods: {

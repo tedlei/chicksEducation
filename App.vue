@@ -19,10 +19,10 @@
 		},
 		globalData: {
 			userInfo: (()=> {
-				let result = uni.getStorageInfoSync('userInfo');
-				// if (/^(\[|\{)/.test(result)) {
-				// 	result = JSON.parse(result);
-				// }
+				let result = uni.getStorageSync('userInfo');
+				if (/^(\[|\{)/.test(result)) {
+					result = JSON.parse(result);
+				}
 				return result
 			})()
 		}

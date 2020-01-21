@@ -89,7 +89,16 @@
 					}
 				},
 				{
-					"path": "message/chat"
+					"path": "message/chatSys",
+					"style": {
+						"navigationBarTitleText":"系统消息"
+					}
+				},
+				{
+					"path": "message/chatService"
+				},
+				{
+					"path": "message/chatSchool"
 				},
 				{ /* 发现页 */
 					"path": "find/find",
@@ -272,8 +281,18 @@
 				"query": ""
 			},
 			{
-				"name": "chat",
-				"path": "pages/page_lzj/message/chat",
+				"name": "chatSys",
+				"path": "pages/page_lzj/message/chatSys",
+				"query": ""
+			},
+			{
+				"name": "chatService",
+				"path": "pages/page_lzj/message/chatService",
+				"query": ""
+			},
+			{
+				"name": "chatSchool",
+				"path": "pages/page_lzj/message/chatSchool",
 				"query": ""
 			},
 			{

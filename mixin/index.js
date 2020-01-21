@@ -19,8 +19,6 @@ const Api = {
 		/*---------------------------------------------------*/
 		this.prototype.message = Api.message;
 		this.prototype.hideKey = Api.hideKey;
-		this.prototype.once = Api.once;
-		this.prototype.getRandomData = Api.getRandomData;
 		
 		
 		// vuex相关

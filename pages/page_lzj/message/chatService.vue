@@ -1,22 +1,13 @@
 <template>
 	<view class="box fx">
 		<view class="message">
-			<view class="message-detail fx">
+			<view class="message-detail fx" v-for="(item, i) in dataList" :key="i">
 				<text class="timer">2019-6-29</text>
-				<view class="message-content fx left">
+				<view class="message-content fx" :class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
 					<image src="../../../static/image/tabBal/IndexSelect.png"></image>
 					<view class="message-content-context">
-						<text>您成功的预约了黄晓明。</text>
+						<text>{{item.messageContent}}</text>
 					</view>
-				</view>
-			</view>
-			<view class="message-detail fx">
-				<text class="timer">2019-6-29</text>
-				<view class="message-content fx right">
-					<view class="message-content-context">
-						<text>您成功的预约了黄晓明。您成功的被黄晓明翻了牌~~对~</text>
-					</view>
-					<image src="../../../static/image/tabBal/IndexSelect.png"></image>
 				</view>
 			</view>
 		</view>
@@ -31,11 +22,14 @@
 </template>
 
 <script>
+	import chatCommon from './chatCommon.js'
 	export default {
+		mixins: [chatCommon],
 		onLoad(data) {
 			uni.setNavigationBarTitle({
-				title: '消息详情' || data.el
+				title: data.userName
 			})
+			this.getMessageDetail(userInfo.user.id, data.elId, '0');
 			this.createSocket();
 		},
 		data() {

@@ -1,7 +1,7 @@
 <template>
 	<view class="udNav fx">
 		<view class="udBack" @tap="topBack">
-			<text class="iconfont">&#xe651;</text>
+			<text class="iconfont">{{isLogin?'&#xe632;':'&#xe651;'}}</text>
 			<text class="udText">{{title}}</text>
 		</view>
 		<button class="udBtn" v-if="!isBtn" :class="login?'bgNone':''" type="primary" @tap="topSave">{{login?'注册':'确认'}}</button>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-	props:['title','login','isBtn'],
+	props:['title','login','isBtn','isLogin'],
 	data() {
 		return {
 		}

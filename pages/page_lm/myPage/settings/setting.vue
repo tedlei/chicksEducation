@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import mpl from '../../../../components/components_lm/myPage/myPageList.vue'
 import hb from '../../../../components/components_lm/detailPage/headBack.vue'
+import mpl from '../../../../components/components_lm/myPage/myPageList.vue'
 export default {
 	components:{mpl,hb},
 	data() {

@@ -6,7 +6,8 @@
 			<view class="cd_main" v-if="currDetail">
 				<view class="cd_curr_name fx">
 					<view class="cdName ellipsis">{{currDetail.courseName}}</view>
-					<text class="iconfont iconColor" @tap="clickAttention">{{isAttention?'&#xe63b;':'&#xe61f;'}}</text>
+					<text class="iconfont" :class="isAttention?'iconColor':''"
+					 @tap="clickAttention">{{isAttention?'&#xe63b;':'&#xe61f;'}}</text>
 				</view>
 				<view class="cd_ul schStyle ellipsis">{{currDetail.organizationName}}</view>
 				<view class="cd_ul ellipsis">课程价格：{{currDetail.coursePrice}}</view>
@@ -45,7 +46,7 @@ export default {
 		this.userInfo = ui
 		this.getCurrDetail(e.id);
 		if(ui){
-			this.once('updateOrderCurr','orderCurr')
+			uni.$on('updateOrderCurr', this.orderCurr);
 			this.getIsOrder(e.id);
 			this.getIsAttention(e.id);
 		}
@@ -89,7 +90,7 @@ export default {
 		
 		//当点击地址时
 		clickSite(site){
-			console.log(site);
+			this.push({url:'/pages/page_lm/map/map?location='+site})
 		},
 		
 		//在线资讯

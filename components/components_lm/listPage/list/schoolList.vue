@@ -1,7 +1,8 @@
 <template>
 	<view class="cl_app">
 		<view class="clSchName fx" @tap="clickSchool">
-			<image class="clImg" :src="item.schoolImage||require('../../../../static/image/default.png')"></image>
+			<image class="clImg" 
+				:src="item.schoolImage||require('../../../../static/image/default.png')"></image>
 			<view class="clName ellipsis">{{item.organizationName}}</view>
 			<!-- <view class="clBs">撒旦发射</view>
 			<view class="clBs">撒旦发射</view> 暂时有用 -->
@@ -16,10 +17,12 @@
 			<view v-else class="clzw">暂无课程</view>
 		</view>
 		<view class="clBot fx">
-			<view class="clLeft">
+			<view class="clLeft" @tap="clickSite(item.schoolAddress)">
 				<text class="iconfont">&#xe634;</text>
 				<text class="clt1">{{fontSize(item)}}</text>
-				<text class="clt1">距您5.01km</text>
+				<text class="clt1">
+				{{getLocaType==='1'?'正在获取定位':getLocaType==='2'?'距您'+distance(item)+'km':'获取定位失败'}}
+				</text>
 			</view>
 			<view class="clRight" @tap="clickSchool">
 				<text>进入学校</text>
@@ -33,13 +36,33 @@ export default {
 	props:['item'],
 	data() {
 		return {
-			currList:[],
+			currList:[], 
+			locationNum:0,   //距离
+			getLocaType:'1', //获取定位 1：进行中  2.获取成功  3获取失败
+			
+			lat:0,  //当前坐标
+			lon:0,
 		}
 	},
 	created(){
+		this.getLocation();
 		this.getCurrList(this.item.id);
 	},
 	methods: {
+		getLocation(){
+			uni.getLocation({success:success=>{
+				let {latitude,longitude} = success;
+				this.getLocaType = '2'
+				this.lat = latitude;
+				this.lon = longitude;
+			},fail:()=>{
+				this.getLocaType = '3'
+				this.message('获取定位失败');
+			}})
+			
+		},
+		
+		
 		//处理字的长度
 		fontSize(item){
 			let str = item.schoolAddress;
@@ -61,6 +84,31 @@ export default {
 		clickSchool(){
 			let id = this.item.id
 			this.push({url:'/pages/page_lm/detailPage/schoolDetail?id='+id})
+		},
+		
+		//当点击地址时
+		clickSite(site){
+			this.push({url:'/pages/page_lm/map/map?location='+site})
+		},
+	},
+	computed:{
+		distance(item){
+			let {lat,lon} = this;
+			
+			// let data = {
+			// 	address,   //详细地址
+			// 	city:'',   //城市名
+			// 	output:'json',  //输格式类型
+			// 	key:'8olmnvqZsoP5NDfBMROFmK419QykayO4'   //密钥
+			// }
+			// this.fetch({url:'',data,method:'get'},6).then(res=>{
+			// 	let {lng,lat} = res[1].data.result.location;
+			// 	this.latitude = lat;
+			// 	this.longitude = lng;
+			// 	this.bd09togcj02(lng,lat);   
+			// })
+			console.log(lat,lon,item.schoolAddress)
+			return 0;
 		}
 	}
 }

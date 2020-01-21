@@ -30,7 +30,7 @@ export default {
 		}
 	},
 	onLoad() {
-		this.once('updateUser','getUsre')
+		uni.$on('updateUser', this.getUsre);
 		this.getUsre();
 	},
 	methods: {

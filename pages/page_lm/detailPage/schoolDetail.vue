@@ -129,7 +129,7 @@ export default {
 		},
 		//点击地址时
 		clickLoca(str){
-			console.log(str)
+			this.push({url:'/pages/page_lm/map/map?location='+str})
 		},
 		
 		//当选择时

@@ -48,18 +48,21 @@ export default {
 			userInfo:null, 
 		}
 	},
-	onLoad() {
-		this.once('updateHead','getUsre')
+	onShow(){   //页面显示
 		this.getUsre();
+	},
+	onLoad() {
+		uni.$on('updateHead', this.getUsre);
 	},
 	methods: {
 		//获取用户对象
 		getUsre(){
 			let userInfo = this.getItemSync('userInfo');
-			if(userInfo) this.userInfo = userInfo
-			else{
-				uni.reLaunch({url:'/pages/page_lm/LoginRelated/verifyLogin'})
-			}
+			if(userInfo) this.userInfo = userInfo;
+			else this.push({
+				url:'/pages/page_lm/LoginRelated/verifyLogin',
+				animationType:'slide-in-bottom',
+			})
 		},
 		//跳转到修改头像
 		topUploadHead(){

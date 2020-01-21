@@ -36,15 +36,11 @@ const Api = {
 		port = port - 1;
 		let ipList = [
 			'http://112.74.18.182:9101/cnjy-search-web/',
-			// 'http://192.168.3.88:9101/',
 			'http://112.74.16.235:9102/cnjy-user-web/',
-			// 'http://192.168.3.88:9102/',
-			
 			'http://112.74.16.235:9103/cnjy-curriculum-web/',
 			'http://120.24.45.159:9104/cnjy-school-web/',
-			// 'http://192.168.3.88:9104/',
-			
 			'http://120.24.45.159:9105/cnjy-teacher-web/',
+			'http://api.map.baidu.com/geocoder'      //百度地图接口 获取经纬度
 		];
 		let url = param.url;
 		if (/^\//.test(url)) url = url.slice(1);

@@ -37,7 +37,9 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+							// "apple":{"urlschemewhitelist":["iosamap","baidumap"]}
+						},
             /* SDK配置 */
             "sdkConfigs" : {
                 "maps" : {}

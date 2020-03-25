@@ -128,7 +128,7 @@
 			};
 		},
 		mounted() {
-			this.getSchoolMessage(1);
+			// this.getSchoolMessage(1);
 		},
 		onShow(){
 			switch(this.n) {
@@ -276,7 +276,6 @@
 								break;
 							case 2:
 								this.dataList2[i].usedStatus = '2';
-								console.log(this.dataList2[i].usedStatus, 1111);
 								break;
 						}
 					}

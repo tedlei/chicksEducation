@@ -116,7 +116,7 @@ export default {
 					_then.locationNum = (res.distance/1000).toFixed(1);
 				},()=>{
 					_then.getLocaType = '3'
-				});
+				}); 
 			})
 		}
 	}

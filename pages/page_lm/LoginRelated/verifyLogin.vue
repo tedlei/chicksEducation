@@ -1,6 +1,6 @@
 <template>
 	<view class="vlog-app pfAllScreen fx">
-		<headPage @topBack="topBack" @topSave="tzRegPage" title=' ' :login="true"></headPage>
+		<headPage @topBack="topBack" @topSave="tzRegPage" :isLogin='true' title=' ' :login="true"></headPage>
 		<view class="vlogBg">
 			<image v-if="loginpattern==='code'" class="vlImg" src="../../../static/image/logo.png" mode=""></image>
 			<TopText v-else title="密码登陆"></TopText>

@@ -1,5 +1,5 @@
 const Api = {
-	install() {
+	install(){
 		this.prototype.fetch = Api.fetch;
 		this.prototype.deepCopy = Api.deepCopy;
 		this.prototype.parse = Api.parse;
@@ -15,14 +15,12 @@ const Api = {
 		this.prototype.getAdvertisingData = Api.getAdvertisingData;
 		this.prototype.getAdvertisingData = Api.getAdvertisingData;
 		this.prototype.getRandomData = Api.getRandomData;
-
+		
 		/*---------------------------------------------------*/
 		this.prototype.message = Api.message;
 		this.prototype.hideKey = Api.hideKey;
-		this.prototype.once = Api.once;
-		this.prototype.getRandomData = Api.getRandomData;
-
-
+		
+		
 		// vuex相关
 		this.prototype.updateStoreState = Api.updateStoreState;
 		this.prototype.getStoreGetter = Api.getStoreGetter;
@@ -31,46 +29,41 @@ const Api = {
 	 * 网络请求 默认 GET 
 	 * @param {Object} param
 	 */
-	fetch: (() => {
+	fetch(param, port,isImage){
+		if (typeof port === 'undefined') port = 1;
+		port = port - 1;
 		let ipList = [
 			'http://112.74.18.182:9101/cnjy-search-web/',
 			'http://112.74.16.235:9102/cnjy-user-web/',
 			'http://112.74.16.235:9103/cnjy-curriculum-web/',
 			'http://120.24.45.159:9104/cnjy-school-web/',
 			'http://120.24.45.159:9105/cnjy-teacher-web/',
+			'http://api.map.baidu.com/geocoder'      //百度地图接口 获取经纬度
 		];
-		return function(param, port, isImage) {
-			if (typeof port === 'undefined') port = 1;
-			port = port - 1;
-			
-			let url = param.url;
-			if (/^\//.test(url)) url = url.slice(1);
-			if (port > -1) {
-				url = ipList[port] + param.url
-			}
-
-			param.url = url;
-			if (param.method === 'POST') {
-				param.header = param.header || {
-					'content-type': 'application/json'
-				}
-			}
-			let promiseObj = uni.request(param);
-			if (!param.success) {
-				return promiseObj
-			}
+		let url = param.url;
+		if (/^\//.test(url)) url = url.slice(1);
+		if (port > -1) {
+			url = ipList[port] + param.url
 		}
-	})(),
+		param.url = url;
+		if (param.method === 'POST') {
+			param.header = param.header || {'content-type': 'application/json'}
+		}
+		let promiseObj = uni.request(param);
+		if (!param.success){
+			return promiseObj
+		}
+	},
 	// 深复制
-	deepCopy(obj) {
+	deepCopy(obj){
 		return JSON.parse(JSON.stringify(obj));
 	},
 	// 序列化
-	parse(obj) {
+	parse(obj){
 		return JSON.parse(obj);
 	},
-	stringify(obj) {
-		return JSON.stringify(obj);
+	stringify(obj){
+	    return JSON.stringify(obj);
 	},
 	/**
 	 * @param data {boolean} 是否返回为日期格式
@@ -80,8 +73,8 @@ const Api = {
 	 * @param sign2 {string}	时分秒拼接符号
 	 * @returns {string}
 	 */
-	getTimer(data = false, notHMS = false, notYMD = false, sign = '-', sign2 = ':') {
-		function double(val) {
+	getTimer(data = false, notHMS = false, notYMD = false, sign = '-', sign2 = ':'){
+		function double(val){
 			if (val < 10) val = '0' + val;
 			return val;
 		}
@@ -92,7 +85,7 @@ const Api = {
 			hours = double(nowTimer.getHours()),
 			minutes = double(nowTimer.getMinutes()),
 			seconds = double(nowTimer.getSeconds());
-		let ymd = '',
+		let ymd='',
 			hms = '';
 		if (data) {
 			ymd = year + '年' + month + '月' + date + '日';
@@ -101,10 +94,10 @@ const Api = {
 			ymd = year + sign + month + sign + date;
 			hms = hours + sign2 + minutes + sign2 + seconds
 		}
-
+	
 		if (notYMD) return hms;
 		if (notHMS) return ymd;
-
+	
 		return ymd + ' ' + hms;
 	},
 	/**
@@ -112,12 +105,12 @@ const Api = {
 	 * @param {String} key
 	 * @param {Function} callback
 	 */
-	getItem(key, callback = (data) => {}) {
+	getItem(key, callback = (data)=>{}){
 		uni.getStorage({
 			key,
 			success: (res) => {
 				let result = res.data;
-				if (/^(\[|\{)/.test(result)) {
+				if (/^(\[|\{)/.test(result)){
 					result = this.parse(result);
 				}
 				callback.call(this, result);
@@ -131,9 +124,9 @@ const Api = {
 	 * 同步获取本地存储数据
 	 * @param {String} key
 	 */
-	getItemSync(key) {
+	getItemSync(key){
 		let result = uni.getStorageSync(key);
-		if (/^(\[|\{)/.test(result)) {
+		if (/^(\[|\{)/.test(result)){
 			result = this.parse(result);
 		}
 		return result
@@ -144,7 +137,7 @@ const Api = {
 	 * @param {Any} value
 	 * @param {Function} callback
 	 */
-	setItem(key, value, callback = () => {}) {
+	setItem(key, value, callback = ()=>{}){
 		uni.setStorage({
 			key,
 			data: value,
@@ -156,8 +149,8 @@ const Api = {
 	 * @param {String} key
 	 * @param {Object} value
 	 */
-	setItemSync(key, value) {
-		if (typeof value === 'object') {
+	setItemSync(key, value){
+		if (typeof value === 'object'){
 			value = this.stringify(value);
 		}
 		uni.setStorageSync(key, value);
@@ -165,12 +158,12 @@ const Api = {
 	/**
 	 * 异步移除
 	 */
-	removeItem(key, callback = (res) => {}) {
+	removeItem(key, callback = (res)=>{}){
 		uni.removeStorage({
-			key,
-			success: (res) => {
-				callback.call(this, res);
-			}
+		    key,
+		    success: (res) => {
+		        callback.call(this, res);
+		    }
 		});
 	},
 	/**
@@ -179,9 +172,9 @@ const Api = {
 	 * @param data 		{Object|string} 
 	 * @param isBack 	{Boolean}
 	 */
-	push(param, data, isBack = true) {
+	push(param, data, isBack = true){
 		if (data) {
-			Object.keys(data).forEach((key, i) => {
+			Object.keys(data).forEach((key, i)=>{
 				if (!i) {
 					param.url += "?"
 					param.url += key + '=' + data[key]

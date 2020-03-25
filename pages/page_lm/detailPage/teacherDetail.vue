@@ -44,7 +44,7 @@ export default {
 		this.userInfo = ui
 		this.getTeacher(e.id);
 		if(ui){
-			this.once('updateOrderTeac','orderTeac');
+			uni.$on('updateOrderTeac', this.orderTeac);
 			this.setchIsAtten(e.id);
 			this.seachIsOrder(e.id);
 		}

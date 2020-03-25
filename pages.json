@@ -7,6 +7,24 @@
 			}
 		},
 		{
+			"path": "pages/page_lzj/find/find",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/page_lzj/message/message",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/page_lm/myPage/myPage",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/test/test",
 			"style": {
 				"enablePullDownRefresh": true
@@ -215,6 +233,12 @@
 					"style": {
 						"navigationStyle": "custom"
 					}
+				},
+				{ /*地图*/
+					"path": "map/map",
+					"style": {
+						"navigationStyle": "custom"
+					}
 				}
 			]
 		}
@@ -224,7 +248,7 @@
 		"navigationBarBackgroundColor": "#FD8109"
 	},
 	"condition": {
-		"current": 4,
+		"current": 0, 
 		"list": [
 			// {
 			// 	"name":"ss",
@@ -234,6 +258,11 @@
 			{
 				"name": "index",
 				"path": "pages/index/index",
+				"query": ""
+			},
+			{
+				"name": "index",
+				"path": "pages/page_lm/map/map",
 				"query": ""
 			},
 			{

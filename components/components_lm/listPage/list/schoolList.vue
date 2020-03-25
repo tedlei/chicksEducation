@@ -1,7 +1,8 @@
 <template>
 	<view class="cl_app">
 		<view class="clSchName fx" @tap="clickSchool">
-			<image class="clImg" :src="item.schoolImage||require('../../../../static/image/default.png')"></image>
+			<image class="clImg" 
+				:src="item.schoolImage||require('../../../../static/image/default.png')"></image>
 			<view class="clName ellipsis">{{item.organizationName}}</view>
 			<!-- <view class="clBs">撒旦发射</view>
 			<view class="clBs">撒旦发射</view> 暂时有用 -->
@@ -16,10 +17,12 @@
 			<view v-else class="clzw">暂无课程</view>
 		</view>
 		<view class="clBot fx">
-			<view class="clLeft">
+			<view class="clLeft" @tap="clickSite(item.schoolAddress)">
 				<text class="iconfont">&#xe634;</text>
 				<text class="clt1">{{fontSize(item)}}</text>
-				<text class="clt1">距您5.01km</text>
+				<text class="clt1">
+				{{getLocaType==='1'?'正在获取定位':getLocaType==='2'?'距您'+locationNum+'km':'获取定位失败'}}
+				</text>
 			</view>
 			<view class="clRight" @tap="clickSchool">
 				<text>进入学校</text>
@@ -33,13 +36,32 @@ export default {
 	props:['item'],
 	data() {
 		return {
-			currList:[],
+			currList:[], 
+			locationNum:0,   //距离
+			getLocaType:'1', //获取定位 1：进行中  2.获取成功  3获取失败
+			
+			// latd:0,  //当前坐标
+			// lond:0,
 		}
 	},
 	created(){
+		this.getLocation();
 		this.getCurrList(this.item.id);
 	},
 	methods: {
+		//获取定位
+		getLocation(){
+			uni.getLocation({success:success=>{
+				let {latitude,longitude} = success;
+				this.getLocaType = '2'
+				this.distance(latitude,longitude);
+			},fail:()=>{ 
+				this.getLocaType = '3' 
+				this.message('获取定位失败');
+			}})
+		},
+		
+		
 		//处理字的长度
 		fontSize(item){
 			let str = item.schoolAddress;
@@ -61,6 +83,41 @@ export default {
 		clickSchool(){
 			let id = this.item.id
 			this.push({url:'/pages/page_lm/detailPage/schoolDetail?id='+id})
+		},
+		
+		//当点击地址时
+		clickSite(site){
+			this.push({url:'/pages/page_lm/map/map?location='+site})
+		},
+		
+		//计算距离
+		distance(latd,lond){
+			let _then = this;
+			let item = _then.item;
+			if(latd===0&&lond===0)return;
+			let data = {
+				address:item.schoolAddress,   //详细地址
+				city:'',   //城市名
+				output:'json',  //输格式类型
+				key:'8olmnvqZsoP5NDfBMROFmK419QykayO4'   //密钥
+			}
+			_then.fetch({url:'',data,method:'get'},6).then(res=>{
+				let {lng,lat} = res[1].data.result.location;
+				let X_PI = 3.14159265358979324 * 3000.0 / 180.0;
+				let x = lng - 0.0065;
+				let y = lat - 0.006; 
+				let z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * X_PI);
+				let theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * X_PI);
+				lng = z * Math.cos(theta);
+				lat = z * Math.sin(theta);
+				var ptObj1 = new plus.maps.Point( lond, latd );
+				var ptObj2 = new plus.maps.Point( lng, lat );
+				void plus.maps.Map.calculateDistance( ptObj1, ptObj2,res=>{
+					_then.locationNum = (res.distance/1000).toFixed(1);
+				},()=>{
+					_then.getLocaType = '3'
+				}); 
+			})
 		}
 	}
 }

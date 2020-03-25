@@ -190,8 +190,8 @@
 			 */
 			getMessageList(index, num, el = null){
 				return new Promise(resolve=>{
-					let {user, schoolUser} = getApp().globalData.userInfo,
-						userId = '';
+					let {user, schoolUser} = getApp().globalData.userInfo;
+					let userId = '';
 					if (!user) uni.reLaunch({url:'/pages/page_lm/LoginRelated/verifyLogin'});
 					if (el === 'kefu') {
 						this.fetch({

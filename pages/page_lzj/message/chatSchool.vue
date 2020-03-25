@@ -1,24 +1,30 @@
 <template>
 	<view class="box fx">
-		<scroll-view scroll-y="true" :scroll-top="scrollTop"
+		<scroll-view scroll-y="true" :scroll-top="scrollTop" 
 			style="flex: 1;overflow: hidden; padding-bottom: 20rpx;" >
-			<view class="message" id="service_id">
+			<view class="message" id="school_id">
 				<view class="message-detail fx" v-for="(item, i) in dataList" :key="i">
 					<text class="timer">2019-6-29</text>
-					<view class="message-content fx" :class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
-						<image src="../../../static/image/tabBal/IndexSelect.png"></image>
+					<view class="message-content fx" 
+						:class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
+						<image src="../../../static/image/tabBal/IndexSelect.png" 
+							v-if="item.currentId !== userInfo.user.id"></image>
 						<view class="message-content-context">
 							<text>{{item.messageContent}}</text>
 						</view>
+						<image src="../../../static/image/tabBal/IndexSelect.png" 
+							v-if="item.currentId === userInfo.user.id"></image>
 					</view>
 				</view>
 			</view>
 		</scroll-view>
+
+
 		<!-- 发送内容 -->
 		<view class="send-message-placeholder"></view>
 		<view class="send-message fx">
 			<input type="text" v-model="input" placeholder="请输入内容" />
-			<text @click="send("#service_id")">发送</text>
+			<text @click="send('#school_id')">发送</text>
 		</view>
 	</view>
 </template>
@@ -31,12 +37,14 @@
 			uni.setNavigationBarTitle({
 				title: data.userName
 			})
+			let userInfo = getApp().globalData.userInfo;
+			// 获取消息详情列表
 			this.getMessageDetail(userInfo.user.id, data.elId, '0');
-			this.createSocket();
+			
+			// this.createSocket();
 		},
 		data() {
 			return {
-				input: '',
 				socket: null,
 				dataList: [{
 					messageContent: '聊天内容'
@@ -45,22 +53,18 @@
 		},
 		methods: {
 			createSocket() {
-				let socketTask = uni.connectSocket({
-				    url: 'http://192.168.3.88:9091',
-				    complete: ()=> {}
-				});
-				uni.onSocketOpen(function(res) {
-					console.log('WebSocket连接已打开！');
-					uni.sendSocketMessage({
-						data: {
-							messageContent: "发送内容"
-						}
-					})
-				});
-				this.socket = socketTask;
-			},
-			send() {
-				console.log(this.input, '发送内容');
+				// let socketTask = uni.connectSocket({
+				//     url: 'w://120.78.145.39:9108/',
+				//     complete: ()=> {}
+				// });
+
+				// socketTask.onOpen(function(res) {
+				// 	console.log('WebSocket连接已打开！');
+				// 	socketTask.onMessage((rej)=>{
+				// 		console.log("收到服务器内容：" + rej.data);
+				// 	})
+				// });
+				// this.socket = socketTask;
 			}
 		}
 	}
@@ -72,6 +76,7 @@
 		height: 100vh;
 
 		.message {
+			// flex: 1;
 			.message-detail {
 				align-items: center;
 				flex-direction: column;

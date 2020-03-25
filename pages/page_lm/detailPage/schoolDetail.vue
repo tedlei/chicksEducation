@@ -10,10 +10,12 @@
 						@tap="clickAttention(schoolId,isLoad)">{{schoolIsAttention?'&#xe63b;':'&#xe61f;'}}</text>
 				</view>
 				<view class="sd_ul">联系电话：400-12345678</view>
-				<view class="sd_location fx" @tap="clickLoca('重庆江北区观音桥')">
+				<view class="sd_location fx" @tap="clickLoca(schoolDetail.schoolAddress)">
 					<text class="iconfont">&#xe634;</text>
-					<view class="sd_text sd_flex1 ellipsis">重庆江北区观音桥</view>
-					<view class="sd_text">距您5.01km</view>
+					<view class="sd_text sd_flex1 ellipsis">{{schoolDetail.schoolAddress}}</view>
+					<view class="sd_text">
+							{{getLocaType==='1'?'正在获取定位':getLocaType==='2'?'距您'+locationNum+'km':'获取定位失败'}}
+					</view>
 				</view>
 				
 				<!-- 选择栏 -->
@@ -105,6 +107,9 @@ export default {
 			
 			schoolIsAttention:false,   //是否关注
 			isLoad:false,   //是否查询到课程
+			
+			locationNum:0,   //距离
+			getLocaType:'1', //获取定位 1：进行中  2.获取成功  3获取失败
 		}
 	},
 	onLoad(e) {
@@ -124,12 +129,51 @@ export default {
 			this.fetch({url,data:{userid},method:'post'},1).then((res)=>{
 				this.isLoad = true;
 				this.schoolDetail = res[1].data;
-				
+				this.getLocation();
 			})
 		},
+		
+		//获取定位
+		getLocation(){
+			uni.getLocation({success:success=>{
+				let {latitude,longitude} = success;
+				this.getLocaType = '2'
+				this.distance(latitude,longitude);
+			},fail:()=>{
+				this.getLocaType = '3'
+				this.message('获取定位失败');
+			}})
+		},
+		
+		//计算距离
+		distance(latd,lond){
+			let _then = this;
+			let item = _then.schoolDetail;
+			if(latd===0&&lond===0)return;
+			let data = {
+				address:item.schoolAddress,   //详细地址
+				city:'',   //城市名
+				output:'json',  //输格式类型
+				key:'8olmnvqZsoP5NDfBMROFmK419QykayO4'   //密钥
+			}
+			_then.fetch({url:'',data,method:'get'},6).then(res=>{
+				let {lng,lat} = res[1].data.result.location;
+				var ptObj1 = new plus.maps.Point( lond, latd );
+				var ptObj2 = new plus.maps.Point( lng, lat );
+				void plus.maps.Map.calculateDistance( ptObj1, ptObj2,res=>{
+					_then.getLocaType = '2'
+					_then.locationNum = (res.distance/1000).toFixed(1);
+				},()=>{
+					_then.getLocaType = '3'
+				});
+			})
+		},
+		
+		
+		
 		//点击地址时
 		clickLoca(str){
-			console.log(str)
+			this.push({url:'/pages/page_lm/map/map?location='+str})
 		},
 		
 		//当选择时

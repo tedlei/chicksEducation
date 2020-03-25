@@ -15,7 +15,9 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "Maps" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -37,12 +39,16 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {
-							// "apple":{"urlschemewhitelist":["iosamap","baidumap"]}
-						},
+            "ios" : {},
+            // "apple":{"urlschemewhitelist":["iosamap","baidumap"]}
             /* SDK配置 */
             "sdkConfigs" : {
-                "maps" : {}
+                "maps" : {
+                    "baidu" : {
+                        "appkey_ios" : "8olmnvqZsoP5NDfBMROFmK419QykayO4",
+                        "appkey_android" : "8olmnvqZsoP5NDfBMROFmK419QykayO4"
+                    }
+                }
             }
         }
     },

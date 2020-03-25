@@ -95,13 +95,16 @@ export default {
 		
 		//在线资讯
 		clickLeft(){
-			let {isLoadFinish,userInfo} = this
+			let {isLoadFinish,userInfo,currDetail} = this
 			if(!isLoadFinish)return 
 			if(!userInfo){
 				this.message('请登录')
 				return
 			}
-			console.log('在线咨询')
+			this.push({url:'/pages/page_lzj/message/chatSchool'},{
+				elid:currDetail.schoolId,
+				userName:currDetail.organizationName
+			})
 		},
 		
 		//课程预约

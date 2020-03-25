@@ -55,8 +55,8 @@ export default {
 				let {latitude,longitude} = success;
 				this.getLocaType = '2'
 				this.distance(latitude,longitude);
-			},fail:()=>{
-				this.getLocaType = '3'
+			},fail:()=>{ 
+				this.getLocaType = '3' 
 				this.message('获取定位失败');
 			}})
 		},
@@ -103,6 +103,13 @@ export default {
 			}
 			_then.fetch({url:'',data,method:'get'},6).then(res=>{
 				let {lng,lat} = res[1].data.result.location;
+				let X_PI = 3.14159265358979324 * 3000.0 / 180.0;
+				let x = lng - 0.0065;
+				let y = lat - 0.006; 
+				let z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * X_PI);
+				let theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * X_PI);
+				lng = z * Math.cos(theta);
+				lat = z * Math.sin(theta);
 				var ptObj1 = new plus.maps.Point( lond, latd );
 				var ptObj2 = new plus.maps.Point( lng, lat );
 				void plus.maps.Map.calculateDistance( ptObj1, ptObj2,res=>{

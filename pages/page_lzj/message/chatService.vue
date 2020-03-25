@@ -1,22 +1,24 @@
 <template>
 	<view class="box fx">
-		<view class="message">
-			<view class="message-detail fx" v-for="(item, i) in dataList" :key="i">
-				<text class="timer">2019-6-29</text>
-				<view class="message-content fx" :class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
-					<image src="../../../static/image/tabBal/IndexSelect.png"></image>
-					<view class="message-content-context">
-						<text>{{item.messageContent}}</text>
+		<scroll-view scroll-y="true" :scroll-top="scrollTop"
+			style="flex: 1;overflow: hidden; padding-bottom: 20rpx;" >
+			<view class="message" id="service_id">
+				<view class="message-detail fx" v-for="(item, i) in dataList" :key="i">
+					<text class="timer">2019-6-29</text>
+					<view class="message-content fx" :class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
+						<image src="../../../static/image/tabBal/IndexSelect.png"></image>
+						<view class="message-content-context">
+							<text>{{item.messageContent}}</text>
+						</view>
 					</view>
 				</view>
 			</view>
-		</view>
-
+		</scroll-view>
 		<!-- 发送内容 -->
 		<view class="send-message-placeholder"></view>
 		<view class="send-message fx">
 			<input type="text" v-model="input" placeholder="请输入内容" />
-			<text @click="send">发送</text>
+			<text @click="send("#service_id")">发送</text>
 		</view>
 	</view>
 </template>
@@ -70,8 +72,6 @@
 		height: 100vh;
 
 		.message {
-			flex: 1;
-
 			.message-detail {
 				align-items: center;
 				flex-direction: column;

@@ -5,7 +5,9 @@ module.exports = {
 			pageSize: 4,
 			dataList: [],
 			input: '',
-			userInfo: getApp().globalData.userInfo
+			userInfo: getApp().globalData.userInfo,
+			
+			scrollTop:0,  //滚动高度
 		}
 	},
 	methods: {
@@ -25,7 +27,8 @@ module.exports = {
 				}
 			}, 2)
 		},
-		send() {
+		send(viewId) {
+			
 			let input = this.input;
 			if (!input.trim().length) {
 				uni.showToast({
@@ -47,8 +50,21 @@ module.exports = {
 				"time": "2020-01-20 13:14:12",
 				"userId": "1210750415944052736"
 			}])
-			
 			this.input = '';
-		}
+			this.setHeight(viewId)
+		},
+		
+		//设置滑动高度
+		setHeight(viewId){
+			const query = wx.createSelectorQuery()
+			query.select(viewId).boundingClientRect()
+			query.selectViewport().scrollOffset()
+			query.exec(res=>{
+				this.scrollTop = res[0].height
+				this.$nextTick(function() {
+					this.scrollTop = res[0].height
+				});
+			})
+		},
 	}
 }

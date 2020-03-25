@@ -80,7 +80,12 @@
 					"path": "message/chatService"
 				},
 				{
-					"path": "message/chatSchool"
+					"path": "message/chatSchool",
+					"style": {
+						"app-plus": {
+							"nvueCompiler": "weex"
+						}
+					}
 				},
 				{ /* 发现页 */
 					"path": "find/find",

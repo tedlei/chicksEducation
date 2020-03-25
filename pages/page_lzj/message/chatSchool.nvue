@@ -1,6 +1,6 @@
 <template>
-	<view class="box fx">
-		<scroll-view class="message" :scroll-y="true" :scroll-into-view="lowerThreshold">
+	<view class="box" :style="{height: deviceHeight - 68 + 'px'}">
+		<scroll-view class="message" :style="{height: deviceHeight - 68 - 48 + 'px'}"  :scroll-y="true" :scroll-into-view="lowerThreshold">
 			<view class="message-detail fx" v-for="(item, i) in dataList" :key="i">
 				<text class="timer">{{item.time.slice(-8)}}</text>
 				<view class="message-content fx" :class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
@@ -27,16 +27,74 @@
 			uni.setNavigationBarTitle({
 				title: data.userName
 			})
+			this.deviceHeight = plus.screen.resolutionHeight
+			
 			let userInfo = getApp().globalData.userInfo;
 			// // 获取消息详情列表
-			this.getMessageDetail(userInfo.user.id, data.elId, '0');
+			// this.getMessageDetail(userInfo.user.id, data.elId, '0');
 
 			this.createSocket();
 		},
 		data() {
 			return {
 				socket: null,
-				dataList: []
+				dataList: [{
+					messageContent: '111111', // 消息内容
+					messageSource: "1", //
+					teacherName: "",
+					schoolId: "1209017944516874241",
+					userId: "1210750415944052736",
+					time: "2020-03-19 12:39:26",
+					Target: "user1209017944516874241",
+					self: "user1210750415944052736",
+					phone: "13983331251",
+					currentId: "1210750415944052736"
+				},{
+					messageContent: '111111', // 消息内容
+					messageSource: "1", //
+					teacherName: "",
+					schoolId: "1209017944516874241",
+					userId: "1210750415944052736",
+					time: "2020-03-19 12:39:26",
+					Target: "user1209017944516874241",
+					self: "user1210750415944052736",
+					phone: "13983331251",
+					currentId: "1210750415944052736"
+				},{
+					messageContent: '111111', // 消息内容
+					messageSource: "1", //
+					teacherName: "",
+					schoolId: "1209017944516874241",
+					userId: "1210750415944052736",
+					time: "2020-03-19 12:39:26",
+					Target: "user1209017944516874241",
+					self: "user1210750415944052736",
+					phone: "13983331251",
+					currentId: "1210750415944052736"
+				},{
+					messageContent: '111111', // 消息内容
+					messageSource: "1", //
+					teacherName: "",
+					schoolId: "1209017944516874241",
+					userId: "1210750415944052736",
+					time: "2020-03-19 12:39:26",
+					Target: "user1209017944516874241",
+					self: "user1210750415944052736",
+					phone: "13983331251",
+					currentId: "1210750415944052736"
+				},{
+					messageContent: '111111', // 消息内容
+					messageSource: "1", //
+					teacherName: "",
+					schoolId: "1209017944516874241",
+					userId: "1210750415944052736",
+					time: "2020-03-19 12:39:26",
+					Target: "user1209017944516874241",
+					self: "user1210750415944052736",
+					phone: "13983331251",
+					currentId: "1210750415944052736"
+				}],
+				deviceHeight: 0
 			}
 		},
 		methods: {
@@ -67,11 +125,7 @@
 <style lang="scss" scoped>
 	.box {
 		flex-direction: column;
-		height: 100vh;
-	}
-
-	.message {
-		flex: 1;
+		background-color: skyblue;
 	}
 
 	.message-detail {
@@ -82,7 +136,7 @@
 
 	.timer {
 		color: #999999;
-		font-size: 16rpx;
+		font-size: 14px;
 	}
 
 	.message-content {
@@ -118,8 +172,8 @@
 	}
 
 	.send-message-placeholder {
-		width: 100vw;
-		height: 48rpx;
+		width: 750rpx;
+		height: 48px;
 	}
 
 	.send-message {

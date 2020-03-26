@@ -1,42 +1,42 @@
 <template>
 	<view class="td_app fx pfAllScreen">
-		<HeadPage @topSkip="topSkip" title="进入学校"></HeadPage>
+		<hb title="教师详情" bgInherit='true'></hb> 
 		<scroll-view scroll-y="true" class="td_scro">
-			<topImage :image='teacherDetail&&teacherDetail.teacherImage'></topImage>
-			<view class="td_main" v-if="teacherDetail">
-				<view class="td_curr_name fx">
-					<view class="tdName ellipsis">{{teacherDetail.teacherName}}</view>
-					<text class="iconfont" :class="isAtten?'iconColor':''" 
-						@tap="clickAttention(teacherDetail.id)">{{isAtten?'&#xe63b;':'&#xe61f;'}}</text>
+			<view class="td_main fx">
+				<view class="td_image">
+					<image :src="teacherDetail&&teacherDetail.teacherImage" mode=""></image>
 				</view>
-				<view class="td_text">
-					<view class="td_t1 bold ellipsis">{{teacherDetail.organizationName}}</view>
-					<view class="td_t1 ellipsis">教学年龄：{{teacherDetail.teacherAge}}年</view>
-					<view class="td_t1 ellipsis">毕业院校：{{teacherDetail.teacherSchool}}</view>
-					<view class="td_t1 ellipsis">擅长科目：{{teacherDetail.teacherAdept}}</view>
-					<view class="td_t1 linh22">教师寄语：{{teacherDetail.teacherIntro}}</view>
-					<view class="td_t1 bold mar40 ellipsis">{{teacherDetail.organizationName}}</view>
-					<view style='margin-top: 20rpx;' v-html="teacherDetail.teacherMessage"></view>
+				<view class="td_right">
+					<view class="td_p1 td_title1">{{teacherDetail.teacherName}}</view>
+					<view class="td_p1 td_title2" @tap="topSkip">{{teacherDetail.organizationName}}</view>
+					<view class="td_p1 ellipsis">教学年龄：{{teacherDetail.teacherAge}}年</view>
+					<view class="td_p1 ellipsis">毕业院校：{{teacherDetail.teacherSchool}}</view>
+					<view class="td_p1 ellipsis">擅长科目：{{teacherDetail.teacherAdept}}</view>
 				</view>
 			</view>
+			<view class="td_jsjy">
+				<text class="td_aaa">教师寄语：</text>
+				{{teacherDetail.teacherIntro}}</view>
+			<view class="td_jxjl">教学经历</view>
+			<view style='margin-top: 20rpx;padding:0 30rpx;line-height:26px;' 
+				v-html="teacherDetail.teacherMessage"></view>
 		</scroll-view>
-		<bottomBtn @clickRight="clickRight" :isOrder="isOrder" type="teacher"
-			:rightTitle="isOrder?'已预约':'预约教师'"></bottomBtn>
+		<bottomBtn @clickRight="clickRight" @clickLeft="clickAttention" :isOrder="isOrder" type="teacher"
+			:rightTitle="isOrder?'已预约':'预约教师'" isShowBtn="isShowBtn" :isAtten="isAtten"></bottomBtn>
 	</view>
 </template>
 
 <script>
-import HeadPage from '../../../components/components_lm/detailPage/headPage.vue'
-import topImage from '../../../components/components_lm/detailPage/topImage.vue'
+import hb from '../../../components/components_lm/detailPage/headBack.vue'
 import bottomBtn from '../../../components/components_lm/detailPage/bottomBtn.vue'
 export default {
-	components:{HeadPage,topImage,bottomBtn},
+	components:{hb,bottomBtn},
 	data() {
 		return {
 			userInfo:null, //用户信息
 			teacherDetail:null,   //教师信息
-			isOrder:false,  //是否预约教师
-			isAtten:false,  //是否关注教师
+			isOrder:true,  //是否预约教师
+			isAtten:true,  //是否关注教师
 		}
 	},
 	onLoad(e) {
@@ -81,14 +81,16 @@ export default {
 		},
 		
 		//加关注
-		clickAttention(teacherid){
+		clickAttention(){
+			let teacherid = this.teacherDetail.id;
 			let ui = this.userInfo;
+			if(this.isAtten) return
 			if(!ui){
 				this.message('请登录')
 				return
 			}
 			let url = 'addTeacher/add.do'
-			this.fetch({url,data:{userid,teacherid},method:'post'},5).then(res=>{
+			this.fetch({url,data:{userid:ui.user.id,teacherid},method:'post'},5).then(res=>{
 				this.isAtten = res[1].data;
 			})
 		},
@@ -121,43 +123,61 @@ export default {
 		flex: 1;
 		overflow: hidden;
 		.td_main{
-			background-color: $col-fff;
-			border-top-left-radius: 10px;
-			border-top-right-radius: 10px;
-			.td_curr_name{
-				padding: 0 20px 0 15px;
-				height: 100rpx;
-				justify-content: space-between;
-				align-items: center;
-				.tdName{
-					width: 540rpx;
-					font-size: 22px;
-					color: $col-333;
-				}
-				.iconfont{
-					font-size: 28px;
-				}
-				.iconColor{
-					color: $col-main;
+			padding:28rpx 30rpx;
+			// align-items: center;
+			.td_image{
+				width: 272rpx;
+				height: 348rpx;
+				border:2rpx $col-e5 dashed;
+				background-color: $col-f5;
+				image{
+					width: 100%;
+					height: 100%;
 				}
 			}
-			.td_text{
-				padding:0 30rpx;
-				.td_t1{
-					margin-top: 26rpx;
-					color: $col-333;
+			.td_right{
+				flex: 1;
+				padding-left: 30rpx;
+				.td_p1{
+					width: 380rpx;
+					margin-top: 15px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 				}
-				.bold{
+				.td_title1{
 					margin-top: 0;
+					font-size: 18px;
+					color: $col-333;
 					font-weight: bold;
 				}
-				.linh22{
-					line-height: 46rpx;
+				.td_title2{
+					font-size: 16px;
+					color: $col-main;
+					font-weight: bold;
 				}
-				.mar40{
-					margin-top: 40rpx;
+				.ellipsis{
+					font-size: 16px;
+					color: $col-666;
 				}
 			}
+		}
+		.td_jsjy{
+			width: 100%;
+			padding: 0 30rpx;
+			line-height:26px;
+			color:$col-666;
+			.td_aaa{
+				color: $col-333;
+				font-weight: bold;
+			}
+		}
+		.td_jxjl{
+			padding:23px 30rpx;
+			padding-bottom: 0;
+			font-size: 18px; 
+			color:$col-333;
+			font-weight: bold;
 		}
 	}
 }

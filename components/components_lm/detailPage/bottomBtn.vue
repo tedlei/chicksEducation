@@ -2,6 +2,15 @@
 	<view class="bb_app fx">
 		<view class="bbLift active" 
 			v-if="type!=='teacher'" @tap="clickLeft">{{leftTitle}}</view>
+			
+			
+		<view class="bbLift active" :class="isAtten?'bgColor':''"
+			v-if="isShowBtn" @tap="clickLeft">关注</view>
+			
+			
+			
+			
+			
 		<view class="bbRight" :class="isOrder?'bgColor':'active'" 
 		  v-if="type!=='school'"	@tap="clickRight">{{rightTitle}}</view>
 	</view>
@@ -9,7 +18,7 @@
 
 <script>
 export default {
-	props:['isOrder','leftTitle','rightTitle','type'],
+	props:['isOrder','leftTitle','rightTitle','type','isShowBtn','isAtten'],
 	data() {
 		return {
 		}

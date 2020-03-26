@@ -42,5 +42,8 @@ export default {
 }
 .bgnone{
 	background-color: rgba(0,0,0,0);
+	.hb_btn,.hb_font{
+		color:$col-333;
+	}
 }
 </style>

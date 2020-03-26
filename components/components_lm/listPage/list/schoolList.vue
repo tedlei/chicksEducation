@@ -4,8 +4,6 @@
 			<image class="clImg" 
 				:src="item.schoolImage||require('../../../../static/image/default.png')"></image>
 			<view class="clName ellipsis">{{item.organizationName}}</view>
-			<!-- <view class="clBs">撒旦发射</view>
-			<view class="clBs">撒旦发射</view> 暂时有用 -->
 		</view>
 		<view class="clCurrList fx">
 			<template v-if="currList.length>0">

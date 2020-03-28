@@ -1,7 +1,7 @@
 <template>
-	<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper">
+	<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" class="swiper" :circular="true">
 		<swiper-item v-for="(item, index) in swiperImages" :key="index">
-			<image :src="item.pic"></image>
+			<navigator :url="item.url"><image :src="item.pic"></image></navigator>
 		</swiper-item>
 	</swiper>
 </template>
@@ -10,7 +10,8 @@
 	export default {
 		data() {
 			return {
-				swiperImages: []
+				swiperImages: [],
+				aL: [false, false, false, false, false]
 			}
 		},
 		created() {
@@ -28,7 +29,10 @@
 	.swiper{
 		width: 100vw;
 		image{
-			width: 100vw;
+			position: absolute;
+			left: 50%;
+			height: 100%;
+			transform: translateX(-50%);
 		}
 	}
 </style>

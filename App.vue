@@ -6,19 +6,17 @@
 	export default {
 		onLaunch: function() {
 			// #ifdef APP-PLUS
-			// packageUpdate();
-			
-			
+			// packageUpdate();       
 			// #endif
-		},
-		onShow: function() {
+		}, 
+		onShow: function() {    
 			console.log('App Show')
 		},
-		onHide: function() {
-			console.log('App Hide')
+		onHide: function() { 
+			console.log('App Hide')                
 		},
 		globalData: {
-			userInfo: (()=> {
+			userInfo: (()=> {    
 				let result = uni.getStorageSync('userInfo');
 				if (/^(\[|\{)/.test(result)) {
 					result = JSON.parse(result);
@@ -56,7 +54,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-	}
+	} 
 	/* #endif */
 	
 	.fxCenter{

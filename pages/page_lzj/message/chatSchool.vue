@@ -1,159 +1,92 @@
 <template>
-	<view class="box fx">
-		<scroll-view scroll-y="true" :scroll-top="scrollTop" 
-			style="flex: 1;overflow: hidden; padding-bottom: 20rpx;" >
-			<view class="message" id="school_id">
-				<view class="message-detail fx" v-for="(item, i) in dataList" :key="i">
-					<text class="timer">2019-6-29</text>
-					<view class="message-content fx" 
-						:class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
-						<image src="../../../static/image/tabBal/IndexSelect.png" 
-							v-if="item.currentId !== userInfo.user.id"></image>
-						<view class="message-content-context">
-							<text>{{item.messageContent}}</text>
-						</view>
-						<image src="../../../static/image/tabBal/IndexSelect.png" 
-							v-if="item.currentId === userInfo.user.id"></image>
-					</view>
-				</view>
-			</view>
-		</scroll-view>
-
-
-		<!-- 发送内容 -->
-		<view class="send-message-placeholder"></view>
-		<view class="send-message fx">
-			<input type="text" v-model="input" placeholder="请输入内容" />
-			<text @click="send('#school_id')">发送</text>
-		</view>
+	<view class="">
+		<uChat></uChat>
 	</view>
 </template>
 
 <script>
 	import chatCommon from './chatCommon.js'
+	import uChat from './chat.nvue'
+
 	export default {
 		mixins: [chatCommon],
+		components: {
+			uChat
+		},
 		onLoad(data) {
+			
 			uni.setNavigationBarTitle({
 				title: data.userName
 			})
-			let userInfo = getApp().globalData.userInfo;
-			// 获取消息详情列表
-			this.getMessageDetail(userInfo.user.id, data.elId, '0');
 			
-			// this.createSocket();
+			this.deviceHeight = plus.screen.resolutionHeight
+
+			
+			// // 获取消息详情列表 
+			// this.getMessageDetail(userInfo.user.id, data.elId, '0');
+
+			this.createSocket();
+
+			// 监听发送消息事件
+			uni.$on('sendMsg', this.sendMsg);
 		},
 		data() {
 			return {
 				socket: null,
 				dataList: [{
-					messageContent: '聊天内容'
-				}]
+					"currentId": "1210750415944052737",
+					"id": "1243707589200498688",
+					"messageContent": "你这个怎么预约",
+					"messageSource": "1",
+					"phone": "13983331251",
+					"schoolId": "1209017944516874241",
+					"self": "user1210750415944052736",
+					"target": "1209017944516874241",
+					"teacherName": "老弟",
+					"time": "2020-03-28 01:12:52",
+					"userId": "1210750415944052736"
+				}, {
+					"currentId": "1210750415944052736",
+					"id": "1243467185054076928",
+					"messageContent": "我是139",
+					"messageSource": "1",
+					"phone": "13983331251",
+					"schoolId": "1209017944516874241",
+					"self": "user1210750415944052736",
+					"target": "1209017944516874241",
+					"teacherName": "李老师",
+					"time": "2020-03-27 09:17:37",
+					"userId": "1210750415944052736"
+				}, {
+					"currentId": "1210750415944052737",
+					"id": "1243450275868495872",
+					"messageContent": "你号",
+					"messageSource": "1",
+					"phone": "13983331251",
+					"schoolId": "1209017944516874241",
+					"self": "user1210750415944052736",
+					"target": "1209017944516874241",
+					"teacherName": "李老师",
+					"time": "2020-03-27 08:10:24",
+					"userId": "1210750415944052736"
+				}, {
+					"currentId": "1210750415944052736",
+					"id": "1243421847748452352",
+					"messageContent": "nihao",
+					"messageSource": "1",
+					"phone": "13983331251",
+					"schoolId": "1209017944516874241",
+					"self": "user1210750415944052736",
+					"target": "1209017944516874241",
+					"teacherName": "李老师",
+					"time": "2020-03-27 06:17:27",
+					"userId": "1210750415944052736"
+				}],
+				deviceHeight: 0
 			}
 		},
-		methods: {
-			createSocket() {
-				// let socketTask = uni.connectSocket({
-				//     url: 'w://120.78.145.39:9108/',
-				//     complete: ()=> {}
-				// });
-
-				// socketTask.onOpen(function(res) {
-				// 	console.log('WebSocket连接已打开！');
-				// 	socketTask.onMessage((rej)=>{
-				// 		console.log("收到服务器内容：" + rej.data);
-				// 	})
-				// });
-				// this.socket = socketTask;
-			}
-		}
+		methods: {}
 	}
 </script>
 
-<style lang="scss" scoped>
-	.box {
-		flex-direction: column;
-		height: 100vh;
-
-		.message {
-			// flex: 1;
-			.message-detail {
-				align-items: center;
-				flex-direction: column;
-				padding-top: 24rpx;
-
-				.timer {
-					color: $col-999;
-					font-size: $uni-font-size-base;
-				}
-
-				.message-content {
-					width: 690rpx;
-
-					image {
-						width: 88rpx;
-						height: 88rpx;
-					}
-
-					.message-content-context {
-						max-width: 474rpx;
-						padding: 28rpx 34rpx;
-						margin-top: 20rpx;
-						background-color: $col-main;
-						border-radius: 16rpx;
-
-						text {
-							color: $col-fff;
-						}
-					}
-				}
-
-				.left {
-					.message-content-context {
-						margin-left: 20rpx;
-					}
-				}
-
-				.right {
-					justify-content: flex-end;
-
-					.message-content-context {
-						margin-right: 20rpx;
-					}
-				}
-			}
-		}
-
-		.send-message-placeholder {
-			width: 100vw;
-			height: 96rpx;
-		}
-
-		.send-message {
-			position: fixed;
-			bottom: 0;
-			left: 0;
-			justify-content: space-between;
-			width: 100vw;
-			padding: 14rpx 28rpx;
-			box-shadow: 0 1px 20px 0 $col-e5;
-
-			input {
-				width: 566rpx;
-				height: 68rpx;
-				border: 1px solid $col-e5;
-				text-indent: 1em;
-			}
-
-			text {
-				width: 100rpx;
-				height: 68rpx;
-				background-color: $uni-color-primary;
-				color: $col-fff;
-				text-align: center;
-				line-height: 68rpx;
-				border-radius: 10rpx;
-			}
-		}
-	}
-</style>
+<style lang="scss" scoped></style>

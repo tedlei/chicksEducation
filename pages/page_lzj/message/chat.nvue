@@ -1,0 +1,151 @@
+<template>
+	<view class="box" :style="{height: deviceHeight - 68 + 'px'}">
+		<scroll-view class="message" :style="{height: deviceHeight - 68 - 48 + 'px'}" :scroll-y="true" :scroll-into-view="lowerThreshold">
+			<view class="fx message-detail" v-for="(item, i) in chatMessageList" :key="i">
+				<text class="timer">{{item.time.slice(-8)}}</text>
+				<!-- 比较item.currentId(发送者id)与当前用户id是否相等 -->
+				<view class="fx message-content" :class="item.currentId !== userInfo.user.id ? 'left' : 'right'">
+					<image class="image" src="../../../static/image/tabBal/IndexSelect.png" v-if="item.currentId !== userInfo.user.id"></image>
+					<view class="message-content-context">
+						<text class="message-content-context-text">{{item.messageContent}}</text>
+					</view>
+					<image class="image" src="../../../static/image/tabBal/IndexSelect.png" v-if="item.currentId === userInfo.user.id"></image>
+				</view>
+			</view>
+			<view id="message-bottom"></view>
+		</scroll-view>
+
+		<!-- 发送内容 -->
+		<view class="fx send-message-placeholder">
+			<input @input="updateV" @confirm="sendMsg" type="text" :confirm-hold="true" confirm-type="send" class="send-input"
+			  :value="input" placeholder="请输入聊天内容" />
+			<text class="send-button" @click="sendMsg">发送</text>
+		</view>
+	</view>
+</template>
+
+<script>
+	import {mapState, mapMutations} from 'vuex'
+	
+	export default {
+		computed: {...mapState(['input', 'chatMessageList'])},
+		created() {
+			this.deviceHeight = plus.screen.resolutionHeight;
+		},
+		data() {
+			return {
+				userInfo: getApp().globalData.userInfo,
+				deviceHeight: 0,	// 设备高度
+				lowerThreshold: '',	// 发送消息后位于底部的元素的id
+				dataList: []
+			}
+		},
+		methods: {
+			...mapMutations(['updateInput']),
+			/**
+			 * 更新input值
+			 */
+			updateV(e){
+				this.updateInput(e.detail.value);
+			},
+			/**
+			 * 发送消息
+			 */
+			sendMsg(){
+				this.lowerThreshold = '';
+				uni.$emit('sendMsg', this.input);
+			}
+		},
+		updated() {
+			this.lowerThreshold = 'message-bottom'
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.fx{
+		display: flex;
+	}
+	.box {
+		flex-direction: column;
+	}
+
+	.message-detail {
+		align-items: center;
+		flex-direction: column;
+		padding-top: 24rpx;
+	}
+
+	.timer {
+		color: #999999;
+		font-size: 14px;
+	}
+
+	.message-content {
+		flex-direction: row;
+		width: 690rpx;
+	}
+
+	.image {
+		width: 88rpx;
+		height: 88rpx;
+	}
+
+	.message-content-context {
+		padding: 28rpx 34rpx;
+		margin-top: 20rpx;
+		background-color: #FD8109;
+		border-radius: 16rpx;
+	}
+
+	.message-content-context-text {
+		color: #ffffff;
+	}
+
+	.message-content-context {
+		margin-left: 20rpx;
+	}
+
+	.right {
+		justify-content: flex-end;
+	}
+
+	.message-content-context {
+		margin-right: 20rpx;
+	}
+
+	.send-message-placeholder {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 750rpx;
+		height: 48px;
+		padding-left: 30rpx;
+		padding-right: 30rpx;
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-top-color: #f5f5f5;
+	}
+
+	.send-input {
+		width: 540rpx;
+		height: 32px;
+		padding-left: 10rpx;
+		border-width: 1px;
+		border-style: solid;
+		border-color: #e5e5e5;
+	}
+
+	.send-button {
+		width: 120rpx;
+		height: 32px;
+		background-color: #007AFF;
+		color: #FFFFFF;
+		text-align: center;
+		line-height: 32px;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+	}
+</style>

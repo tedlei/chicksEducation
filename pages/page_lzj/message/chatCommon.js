@@ -1,25 +1,28 @@
-// import io from '../../../js_sdk/socket-io/weapp.socket.io.js';
-
+// import io from '../../../js_sdk/hyoga-uni-socket_io/uni-socket.io.js';
+import {mapState, mapMutations} from 'vuex'
 module.exports = {
+	computed: {...mapState(['chatMessageList'])},
 	data() {
-		return {
+		return { 
 			pageNum: 0,
 			pageSize: 4,
 			dataList: [],
-			input: '',
 			userInfo: getApp().globalData.userInfo,
 			socket: null,	// socket对象
-			lowerThreshold: '',	// 发送消息后位于底部的元素的id
 		}
 	},
 	methods: {
+		...mapMutations(['updateInput', 'updateChatMessageList']),
 		/**
 		 * 建立socket链接
 		 */
 		createSocket() {
-			// console.log(io, 99999999999999999999)
-			// let ws = io('http://120.78.145.39:9108/');
 			
+			// websocket连接
+			
+			
+			// let ws = io('http://192.168.3.88:9108/');
+			// console.log(ws, 999);
 			// // 连接成功
 			// ws.on('connect', () => {
 			// 	console.log('连接成功');
@@ -40,7 +43,7 @@ module.exports = {
 			uni.request({
 				url: 'http://112.74.16.235:9102/cnjy-user-web/userMessage/getMessageDetails.do',
 				method: 'post',
-				data: {
+				data: { 
 					userId, // 本人id
 					elId, // 聊天对象id
 					pageNum: this.pageNum.toString(), // 页数
@@ -51,27 +54,49 @@ module.exports = {
 					'content-type': 'application/json'
 				},
 				success: (res) => {
+					console.log(res, 77);
 					this.dataList = res.data.object;
 				}
 			})
 		},
-		send(e, el = 'send') {
-			this.lowerThreshold = ''
-			let input = this.input;
-			if (!input.trim().length) {
+		/**
+		 * 发送消息
+		 */
+		sendMsg(message) {
+			if (!message.trim().length) {
 				uni.showToast({
 					title: '消息不能为空!',
 					icon: "none"
 				})
 				return
 			}
-
-			if (el !== 'send') {
-				// 接受消息
-				console.log(123123)
-			} else this.sendMsg(input);
+			let dataList = this.chatMessageList;
+			dataList.push({
+					messageContent: message, // 消息内容
+					messageSource: "1", //
+					teacherName: "",
+					schoolId: "1209017944516874241",
+					userId: "1210750415944052736",
+					time: "2020-03-19 12:39:26",
+					Target: "user1209017944516874241",
+					self: "user1210750415944052736",
+					phone: "13983331251",
+					currentId: "1210750415944052736"
+				})
+				
+			this.updateChatMessageList(dataList);
+			this.updateInput('');
+		},
+		/**
+		 * 接收消息
+		 */
+		receiveMsg(){
 			
-			this.input = '';
 		}
+	},
+	// 页面销毁时清除input值
+	onUnload(){
+		console.log('销毁');
+		this.updateInput('');
 	}
 }
